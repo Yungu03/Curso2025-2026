@@ -1,0 +1,15 @@
+{
+  "@context": {
+    "ex": "http://example.org/iot/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "sensor": "ex:Sensor347",
+    "temperature": { "@id": "ex:hasTemperature", "@type": "xsd:integer" },
+    "timestamp": { "@id": "ex:atTime", "@type": "xsd:dateTime" },
+    "location": { "@id": "ex:locatedIn" }
+  },
+  "@id": "ex:Measurement8432",
+  "sensor": "ex:Sensor347",
+  "temperature": 29,
+  "timestamp": "2022-09-12T12:01:12",
+  "location": "ex:ClassRoom03"
+}
