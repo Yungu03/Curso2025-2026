@@ -1,0 +1,26 @@
+# 1) Contar estaciones
+PREFIX ex: <http://example.org/group23/>
+SELECT (COUNT(DISTINCT ?s) AS ?nStations)
+WHERE {
+  ?s a ex:Station .
+}
+
+# 2) Mostrar las primeras 10 mediciones (subject, time, result)
+PREFIX sosa: <http://www.w3.org/ns/sosa/>
+SELECT ?me ?time ?result ?station
+WHERE {
+  ?me a sosa:Observation ;
+      sosa:resultTime ?time ;
+      sosa:hasSimpleResult ?result ;
+      sosa:hasFeatureOfInterest ?station .
+}
+LIMIT 10
+
+# 3) Buscar mediciones inválidas (ej.: result no decimal)
+PREFIX sosa: <http://www.w3.org/ns/sosa/>
+SELECT ?me ?result
+WHERE {
+  ?me a sosa:Observation ;
+      sosa:hasSimpleResult ?result .
+  FILTER(datatype(?result) != xsd:decimal)
+}

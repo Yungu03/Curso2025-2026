@@ -1,0 +1,35 @@
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX geo: <http://www.w3.org/2003/01/geo/wgs84_pos#>
+PREFIX dct: <http://purl.org/dc/terms/>
+PREFIX ex: <http://example.com/ns/airquality#>
+
+#consulta 1
+SELECT ?estacion ?nombre
+WHERE {
+  ?estacion a ex:AirQualityStation ;
+            rdfs:label ?nombre .
+}
+LIMIT 5
+
+#consulta 2
+SELECT ?lectura ?valorNO2
+WHERE {
+  ?lectura a ex:AirQualityReading ;
+            ex:no2_value ?valorNO2 .
+      
+      FILTER(BOUND(?valorNO2))
+}
+LIMIT 10
+
+#consulta 3
+SELECT ?nombreEstacion ?valorNO2
+WHERE {
+  ?lectura a ex:AirQualityReading ;
+           ex:no2_value ?valorNO2 ;
+           ex:madeByStation ?estacion .
+  ?estacion rdfs:label ?nombreEstacion .
+  
+  FILTER(BOUND(?valorNO2))
+}
+LIMIT 10

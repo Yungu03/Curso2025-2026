@@ -1,0 +1,34 @@
+prefixes:
+  rr: http://www.w3.org/ns/r2rml#
+  xsd: http://www.w3.org/2001/XMLSchema#
+  rml: http://semweb.mmlab.be/ns/rml#
+  ql: http://semweb.mmlab.be/ns/ql#
+  rdf: http://www.w3.org/1999/02/22-rdf-syntax-ns#
+  vocab: http://group17.project/madrid-parks/ontology#
+  
+mappings:
+  TreeCountMapping:
+    sources:
+      - [csv/arbolado-clean.csv~csv]
+    s: http://group17.project/madrid-parks/treecount/$(park_uri)_$(species_uri)
+    po:
+      - [a, vocab:TreeCount]
+      - [vocab:inPark, http://group17.project/madrid-parks/park/$(park_uri)~iri]
+      - [vocab:ofSpecies, http://group17.project/madrid-parks/tree/$(species_uri)~iri]
+      - [vocab:numberOfTrees, $(UNIDADES 2024), xsd:integer]
+
+  ParkMapping:
+    sources:
+      - [csv/arbolado-clean.csv~csv]
+    s: http://group17.project/madrid-parks/park/$(park_uri)
+    po:
+      - [a, vocab:Park]
+      - [vocab:parkName, $(NOMBRE PARQUE)]
+
+  SpeciesMapping:
+    sources:
+      - [csv/arbolado-clean.csv~csv]
+    s: http://group17.project/madrid-parks/tree/$(species_uri)
+    po:
+      - [a, vocab:Species]
+      - [vocab:scientificName, $(ESPECIE)]

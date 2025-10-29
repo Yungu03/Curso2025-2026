@@ -1,0 +1,30 @@
+PREFIX ex: <http://group24.linkeddata.es/ontology/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+
+# 1. Ver todas las clases de instancias
+SELECT DISTINCT ?class WHERE {
+  ?s rdf:type ?class .
+}
+
+# 2. Promedio de árboles por distrito
+SELECT ?district (AVG(?trees) AS ?avgTrees)
+WHERE {
+  ?obs a ex:TreeObservation ;
+       ex:featureOfInterest ?district ;
+       ex:value ?trees .
+}
+GROUP BY ?district
+
+# 3. Máximo gasto ambiental registrado
+SELECT (MAX(?value) AS ?maxExpenditure)
+WHERE {
+  ?s a ex:ExpenditureRecord ;
+     ex:value ?value .
+}
+
+# 4. Media nacional de NO₂
+SELECT (AVG(?value) AS ?avgNO2)
+WHERE {
+  ?obs a ex:NO2Observation ;
+       ex:value ?value .
+}

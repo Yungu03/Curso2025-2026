@@ -1,0 +1,38 @@
+# 1) Cuántas zonas hay
+SELECT (COUNT(*) AS ?numZonas) WHERE {
+  ?z a <http://linkeddata.greenzonesmadrid.org/ontology/gz#GreenZone> .
+}
+
+# 2) Muestra 5 zonas con sus atributos principales
+SELECT ?z ?district ?file ?dest ?plot WHERE {
+  ?z a <http://linkeddata.greenzonesmadrid.org/ontology/gz#GreenZone> ;
+     <http://linkeddata.greenzonesmadrid.org/ontology/gz#district> ?district ;
+     <http://linkeddata.greenzonesmadrid.org/ontology/gz#fileNumber> ?file ;
+     <http://linkeddata.greenzonesmadrid.org/ontology/gz#destination> ?dest ;
+     <http://linkeddata.greenzonesmadrid.org/ontology/gz#plot> ?plot .
+}
+LIMIT 5
+
+# 3) Zonas del distrito CENTRO
+SELECT ?z ?file ?dest WHERE {
+  ?z a <http://linkeddata.greenzonesmadrid.org/ontology/gz#GreenZone> ;
+     <http://linkeddata.greenzonesmadrid.org/ontology/gz#district> "CENTRO" ;
+     <http://linkeddata.greenzonesmadrid.org/ontology/gz#fileNumber> ?file ;
+     <http://linkeddata.greenzonesmadrid.org/ontology/gz#destination> ?dest .
+}
+
+# 4) Zonas cuyo destino menciona 'BÁSICO'
+SELECT ?z ?file WHERE {
+  ?z a <http://linkeddata.greenzonesmadrid.org/ontology/gz#GreenZone> ;
+     <http://linkeddata.greenzonesmadrid.org/ontology/gz#destination> ?d ;
+     <http://linkeddata.greenzonesmadrid.org/ontology/gz#fileNumber> ?file .
+  FILTER(CONTAINS(LCASE(?d), "básico"))
+}
+
+# 5) Top de zonas por (texto) de superficie (siempre texto: m2)
+# Nota: si se normaliza a número, se recomienda mapear a xsd:decimal.
+SELECT ?z ?plot WHERE {
+  ?z a <http://linkeddata.greenzonesmadrid.org/ontology/gz#GreenZone> ;
+     <http://linkeddata.greenzonesmadrid.org/ontology/gz#plot> ?plot .
+}
+LIMIT 10

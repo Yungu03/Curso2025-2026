@@ -2,148 +2,129 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <title>Dataset Requirements Assessment (R1–R6)</title>
+  <title>Full R1–R6 Compliance — TMB Metro Datasets</title>
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <style>
-    :root{--ok:#1b8f3a;--warn:#b58900;--fail:#c62828;--muted:#666;}
-    body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;line-height:1.5;margin:2rem;max-width:1100px}
-    header h1{margin:0 0 .25rem}
-    header p{color:var(--muted);margin:.25rem 0 1.5rem}
-    .legend{display:flex;gap:1rem;margin:.5rem 0 1rem}
+    :root{
+      --ok:#1b8f3a;--warn:#b58900;--fail:#c62828;--muted:#999;
+      --bg:#0b0c0f;--card:#14161a;--line:#2a2d33;--text:#e7eaf0;
+    }
+    html,body{background:var(--bg);color:var(--text)}
+    body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;line-height:1.55;margin:2rem;max-width:1100px}
+    header h1{margin:0 0 .25rem;font-size:1.85rem}
+    header p{color:var(--muted);margin:.25rem 0 1.25rem}
+    .legend{display:flex;gap:1rem;margin:.25rem 0 1rem;flex-wrap:wrap}
     .dot{display:inline-block;width:.75rem;height:.75rem;border-radius:50%;margin-right:.4rem;vertical-align:middle}
     .ok{color:var(--ok)} .warn{color:var(--warn)} .fail{color:var(--fail)}
-    section{border:1px solid #e6e6e6;border-radius:12px;padding:1rem 1.25rem;margin:1rem 0}
-    h2{margin:.25rem 0 .75rem}
-    h3{margin:1rem 0 .25rem}
-    .req{display:grid;grid-template-columns:9rem 1fr;gap:.5rem 1rem;padding:.75rem;border:1px solid #eee;border-radius:10px;margin:.5rem 0}
+    section,article{border:1px solid var(--line);border-radius:14px;padding:1rem 1.25rem;margin:1rem 0;background:var(--card)}
+    h2{margin:.25rem 0 .75rem;font-size:1.25rem}
+    h3{margin:1rem 0 .35rem;font-size:1.1rem}
+    .grid{display:grid;grid-template-columns:1fr;gap:.65rem}
+    @media(min-width:840px){.grid{grid-template-columns:1fr 1fr}}
+    .req{display:grid;grid-template-columns:7.5rem 1fr;gap:.35rem 1rem;padding:.75rem;border:1px dashed var(--line);border-radius:12px;margin:.5rem 0;background:#0f1115}
     .req b{white-space:nowrap}
     .status{font-weight:700}
     .status.ok{color:var(--ok)}
     .status.warn{color:var(--warn)}
     .status.fail{color:var(--fail)}
-    footer{margin-top:2rem;color:var(--muted);font-size:.95rem}
+    .checks{margin:.35rem 0 .15rem;padding-left:0;list-style:none;display:grid;gap:.4rem}
+    .check{display:flex;gap:.5rem;align-items:flex-start}
+    .badge{display:inline-flex;align-items:center;gap:.4rem;font:600 .9rem/1.2 system-ui;padding:.2rem .5rem;border-radius:999px;border:1px solid var(--line);background:#0c0e12}
+    .badge.ok{border-color:rgba(27,143,58,.35);background:rgba(27,143,58,.12)}
+    .badge.warn{border-color:rgba(181,137,0,.35);background:rgba(181,137,0,.12)}
     .muted{color:var(--muted)}
-    a{color:inherit}
+    a{color:inherit;text-decoration:underline dotted}
+    code{background:#0b0d11;padding:.12rem .35rem;border:1px solid var(--line);border-radius:6px}
+    .kvs{display:grid;grid-template-columns:12rem 1fr;gap:.25rem 1rem;margin:.25rem 0 0}
+    footer{margin-top:1.25rem;color:var(--muted);font-size:.95rem}
   </style>
 </head>
 <body>
   <header>
-    <h1>Assessment of Selected Datasets vs. Requirements R1–R6</h1>
+    <h1>Full R1–R6 Compliance — TMB Metro Datasets</h1>
+    <p>Analyzed datasets from <b>TMB</b> (Transports Metropolitans de Barcelona): stations per line and metro lines.</p>
     <div class="legend">
-      <span><span class="dot ok" style="background:var(--ok)"></span>Meets</span>
-      <span><span class="dot warn" style="background:var(--warn)"></span>Partially meets / Discuss</span>
-      <span><span class="dot fail" style="background:var(--fail)"></span>Does not meet</span>
+      <span><span class="dot ok" style="background:var(--ok)"></span>Compliant</span>
+      <span><span class="dot warn" style="background:var(--warn)"></span>Partial / Review</span>
+      <span><span class="dot fail" style="background:var(--fail)"></span>Non‑compliant</span>
     </div>
   </header>
 
-  <section id="requirements">
-    <h2>Requirements Summary</h2>
+  <section>
+    <h2>Requirement definitions</h2>
     <ul>
-      <li><b>R1:</b> Data are in one of the selected smart city domains (<a href="https://ciudadesabiertas.es/vocabularios/" target="_blank" rel="noopener">Ciudades Abiertas catalog</a>).</li>
-      <li><b>R2:</b> Data are available as a CSV file.</li>
-      <li><b>R3:</b> Data have an open license so they can be published.</li>
-      <li><b>R4:</b> Data can be easily linked with generic real-world entities (e.g., locations).</li>
-      <li><b>R5 (optional):</b> Documentation exists for the data.</li>
-      <li><b>R6 (optional):</b> Data can come from multiple data sources.</li>
+      <li><b>R1</b> — Belongs to a Smart City domain (Mobility/Transport).</li>
+      <li><b>R2</b> — Data are available in <b>CSV</b> format.</li>
+      <li><b>R3</b> — Data are published under an open license (e.g., <i>CC BY 4.0</i> or equivalent open terms).</li>
+      <li><b>R4</b> — Data can be linked internally (keys/references) and externally (e.g., geographic coordinates).</li>
+      <li><b>R5</b> — Dataset documentation and field dictionary are publicly available.</li>
+      <li><b>R6</b> — Can be integrated with external sources (multi‑source integration).</li>
     </ul>
   </section>
 
   <section id="datasets">
-    <h2>Datasets Evaluated</h2>
+    <h2>TMB Datasets</h2>
+    <div class="grid">
 
-    <!-- DATASET 1 -->
-    <article>
-      <h3>Dataset 1 — <a href="https://datos.gob.es/en/catalogo/l01080193-transportes-de-la-ciudad-de-barcelona" target="_blank" rel="noopener">Transportes de la ciudad de Barcelona</a> <span class="muted">(Ayuntamiento de Barcelona)</span></h3>
-      <p><b>Description:</b> Public transports (metro, Renfe, FGC, funicular, cable car, tramcar, etc.) in Barcelona. Provides CSV and XML distributions; license CC BY 4.0.</p>
-      <div class="req">
-        <b>R1 (mandatory)</b>
-        <div><span class="status ok">Meets</span> — Falls under Smart City “Transporte” domain.</div>
+      <article>
+        <h3>Stations per Line (estacions_linia)</h3>
+        <div class="kvs">
+          <div>Dataset</div><div><a href="https://developer.tmb.cat/data/estacions#estacions_linia" target="_blank">developer.tmb.cat/data/estacions#estacions_linia</a></div>
+          <div>Key fields</div><div><code>id_estacio</code>, <code>id_linia</code>, order, direction</div>
+        </div>
+        <ul class="checks">
+          <li class="check"><span class="badge ok">R1 ✔</span> Transport domain.</li>
+          <li class="check"><span class="badge ok">R2 ✔</span> Available as CSV.</li>
+          <li class="check"><span class="badge ok">R3 ✔</span> Open license from the portal.</li>
+          <li class="check"><span class="badge ok">R4 ✔</span> Joinable by <code>id_estacio</code> and <code>id_linia</code>.</li>
+          <li class="check"><span class="badge ok">R5 ✔</span> Documentation and description provided.</li>
+          <li class="check"><span class="badge warn">R6 ◑</span> Links with “Stations” and “Lines”; other external integration optional.</li>
+        </ul>
+      </article>
 
-        <b>R2 (mandatory)</b>
-        <div><span class="status ok">Meets</span> — CSV distribution is available for download.</div>
+      <article>
+        <h3>Metro Lines (linies_metro)</h3>
+        <div class="kvs">
+          <div>Dataset</div><div><a href="https://developer.tmb.cat/data/linies#linies_metro" target="_blank">developer.tmb.cat/data/linies#linies_metro</a></div>
+          <div>Key fields</div><div><code>id_linia</code>, code, name, corporate color</div>
+        </div>
+        <ul class="checks">
+          <li class="check"><span class="badge ok">R1 ✔</span> Mobility/Transport domain.</li>
+          <li class="check"><span class="badge ok">R2 ✔</span> Available as CSV.</li>
+          <li class="check"><span class="badge ok">R3 ✔</span> Open license (portal).</li>
+          <li class="check"><span class="badge ok">R4 ✔</span> Key <code>id_linia</code> used across related tables.</li>
+          <li class="check"><span class="badge ok">R5 ✔</span> Field dictionary included.</li>
+          <li class="check"><span class="badge warn">R6 ◑</span> Possible cross‑integration with multimodal networks.</li>
+        </ul>
+      </article>
 
-        <b>R3 (mandatory)</b>
-        <div><span class="status ok">Meets</span> — Licensed under CC BY 4.0 (open & reusable with attribution).</div>
 
-        <b>R4 (mandatory)</b>
-        <div><span class="status ok">Meets</span> — Records include stop/line identifiers and location attributes, enabling linkage to places.</div>
-
-        <b>R5 (optional)</b>
-        <div><span class="status warn">Partially meets</span> — Catalog metadata exists, but detailed field-level documentation is limited.</div>
-
-        <b>R6 (optional)</b>
-        <div><span class="status warn">Partially meets</span> — Curated by the city portal; mainly a single source though it references multiple operators.</div>
-      </div>
-    </article>
-
-    <!-- DATASET 2 -->
-    <article>
-      <h3>Dataset 2 — <a href="https://data.renfe.com/dataset/estaciones-rodalies-barcelona/resource/e3969f12-aff2-468e-9b82-a65a6dd1a0d3" target="_blank" rel="noopener">Estaciones Rodalies Barcelona</a> <span class="muted">(RENFE)</span></h3>
-      <p><b>Description:</b> List of Rodalies stations in Barcelona with identifiers, names and geolocation; CSV and XLSX distributions; license CC BY 4.0.</p>
-      <div class="req">
-        <b>R1 (mandatory)</b>
-        <div><span class="status ok">Meets</span> — Public transport stations are part of the Smart City transportation domain.</div>
-
-        <b>R2 (mandatory)</b>
-        <div><span class="status ok">Meets</span> — CSV distribution provided by RENFE portal.</div>
-
-        <b>R3 (mandatory)</b>
-        <div><span class="status ok">Meets</span> — Licensed under CC BY 4.0.</div>
-
-        <b>R4 (mandatory)</b>
-        <div><span class="status ok">Meets</span> — Includes latitude and longitude fields for easy linkage to locations.</div>
-
-        <b>R5 (optional)</b>
-        <div><span class="status ok">Meets</span> — Includes a clear data dictionary describing fields.</div>
-
-        <b>R6 (optional)</b>
-        <div><span class="status warn">Partially meets</span> — Data is from RENFE, a single operator, not multiple sources.</div>
-      </div>
-    </article>
-
-    <!-- DATASET 3 -->
-    <article>
-      <h3>Dataset 3 — <a href="https://datos.gob.es/en/catalogo/l01080193-funiculares-en-la-ciudad-de-barcelona" target="_blank" rel="noopener">Funiculares en la ciudad de Barcelona</a> <span class="muted">(Ayuntamiento de Barcelona)</span></h3>
-      <p><b>Description:</b> Funicular assets for Barcelona; CSV and JSON distributions; license CC BY 4.0.</p>
-      <div class="req">
-        <b>R1 (mandatory)</b>
-        <div><span class="status ok">Meets</span> — Falls within transport domain.</div>
-
-        <b>R2 (mandatory)</b>
-        <div><span class="status ok">Meets</span> — CSV distribution available.</div>
-
-        <b>R3 (mandatory)</b>
-        <div><span class="status ok">Meets</span> — Licensed under CC BY 4.0.</div>
-
-        <b>R4 (mandatory)</b>
-        <div><span class="status ok">Meets</span> — Includes names and locations, allowing linkage to places.</div>
-
-        <b>R5 (optional)</b>
-        <div><span class="status warn">Partially meets</span> — Catalog metadata exists; limited additional documentation.</div>
-
-        <b>R6 (optional)</b>
-        <div><span class="status warn">Partially meets</span> — Municipal dataset; no indication of multiple sources.</div>
-      </div>
-    </article>
+    </div>
   </section>
 
+  <section id="links">
+    <h2>Entities in the selected datasets that can be linked with entities with entities in other datasets</h2>
+    <ul>
+      <li>Entidad</li>
+      <li>Operador</li>
+      <li>Línea</li>
+      <li>Estación/Parada</li>
+      <li>EstaciónEnLínea</li>
+      <li>Familia/Tipo de transporte</li>
+      <li>Correspondencia/Intercambiador</li>
+      <li>Dirección</li>
+    </ul>
+  </section>
   <section id="summary">
-    <h2>Compliance Summary</h2>
-    <ul>
-      <li><b>Dataset 1:</b> R1–R4 met / R5–R6 partially met.</li>
-      <li><b>Dataset 2:</b> R1–R4 met / R5 met / R6 partially met.</li>
-      <li><b>Dataset 3:</b> R1–R4 met / R5–R6 partially met.</li>
-      <li><b>Dataset 4:</b> R1–R4 met / R5–R6 met.</li>
-    </ul>
-  </section>
-
-  <section id="matches">
-    <h2>Entities linked across datasets</h2>
-    <ul>
-      <li><b>Rodalies stations (RENFE Barcelona):</b> <code>Dirección</code> ↔ 
-          <b>Funicular dataset:</b> <code>addresses_road_name + addresses_start_street_number</code> ↔ 
-          <b>Railway transport dataset (Barcelona):</b> <code>ADRECA</code></li>
-    </ul>
+    <h2>Global compliance summary</h2>
+    <div class="req">
+      <b>R1</b><div class="status ok">Compliant — Mobility/Transport domain.</div>
+      <b>R2</b><div class="status ok">Compliant — All datasets are provided in CSV format.</div>
+      <b>R3</b><div class="status ok">Compliant — Open license declared in each dataset page.</div>
+      <b>R4</b><div class="status ok">Compliant — Inter‑linkable keys and geospatial references.</div>
+      <b>R5</b><div class="status ok">Compliant — Documentation and field dictionaries available.</div>
+      <b>R6</b><div class="status warn">Partial — Single‑source (TMB) but integrable with other data providers.</div>
+    </div>
   </section>
 </body>
 </html>

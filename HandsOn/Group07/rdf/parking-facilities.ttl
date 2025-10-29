@@ -1,0 +1,26 @@
+@prefix mm: <http://movemadrid.org/def/base#> .
+@prefix schema: <https://schema.org/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+mm:CarParking/11483771
+    rdf:type mm:CarParking ;
+    schema:name "Aparcamiento disuasorio Aviación Española" ;
+    mm:carParkingDescription "Plazas:  para automóviles: 344 (de las cuales, 10 para coche eléctrico) para motocicletas: 25 para bicicletas: 10   Código del aparcamiento: 1024" ;
+    mm:carParkingAddressNumber "5" ;
+    schema:latitude "40.38323792632855"^^xsd:decimal ;
+    schema:longitude "-3.783621006318095"^^xsd:decimal ;
+    mm:carParkingLink <http://www.madrid.es/sites/v/index.jsp?vgnextchannel=bfa48ab43d6bb410VgnVCM100000171f5a0aRCRD&vgnextoid=1ec084bc6763c710VgnVCM1000001d4a900aRCRD> ;
+    mm:inDistrict mm:District/10 ;
+    mm:hasBarrio mm:Barrio/7 .
+
+mm:District/10
+    rdf:type mm:District ;
+    schema:name "LATINA" .
+
+mm:Barrio/7
+    rdf:type mm:Barrio ;
+    schema:name "LAS AGUILAS" ;
+    mm:barrioPostalCode "28024" .
+
+# ... (similar triples for all other parking facilities)

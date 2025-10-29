@@ -49,22 +49,22 @@
 <body>
   <div class="container">
     <header>
-      <h1>System Requirements – Urban Mobility</h1>
-      <p>Routing, interactive mapping, accessibility and standards-based data integration.</p>
+      <h1>System Requirements – Metro Interactive Map</h1>
+      <p>Interactive metro map with stations and lines information display.</p>
       <div class="badges">
-        <span class="badge">⚡ ≤ 3s search</span>
-        <span class="badge">🧭 Multi-criteria sorting</span>
-        <span class="badge">🔗 RDF & Linked Data</span>
-        <span class="badge">📄 CSV export</span>
+        <span class="badge">🚇 Metro Lines</span>
+        <span class="badge">📍 Station Details</span>
+        <span class="badge">🗺️ Interactive Map</span>
+        <span class="badge">ℹ️ Line Information</span>
       </div>
     </header>
 
     <nav aria-label="Table of contents">
       <h3>Contents</h3>
       <a href="#fr">Functional Requirements</a>
-      <a class="sub" href="#fr-routing">• Routing & Results</a>
-      <a class="sub" href="#fr-maps">• Maps & Geolocation</a>
-      <a class="sub" href="#fr-data">• Data & Standards</a>
+      <a class="sub" href="#fr-map">• Interactive Map</a>
+      <a class="sub" href="#fr-stations">• Station Information</a>
+      <a class="sub" href="#fr-lines">• Line Information</a>
       <a href="#nfr">Non-functional Requirements</a>
     </nav>
 
@@ -76,28 +76,27 @@
           <span class="chip">Version 1.0</span>
         </div>
 
-        <article id="fr-routing">
-          <h3>🔎 Routing & Results</h3>
+        <article id="fr-map">
+          <h3>🗺️ Interactive Map</h3>
           <ol class="requirements">
-            <li class="req"><strong>FR1:</strong> The system must allow the user to enter an origin and a destination.</li>
-            <li class="req"><strong>FR2:</strong> The system must return optimal combinations of transport (metro, tram, funicular, etc.).</li>
-            <li class="req"><strong>FR7:</strong> Provide route sorting by fewest transfers and fewest stops.</li>
+            <li class="req"><strong>FR1:</strong> The system must display metro lines on an interactive map.</li>
+            <li class="req"><strong>FR2:</strong> The system must show metro stations on the map.</li>
           </ol>
         </article>
 
-        <article id="fr-maps">
-          <h3>🗺️ Maps & Geolocation</h3>
+        <article id="fr-stations">
+          <h3>📍 Station Information</h3>
           <ol class="requirements">
-            <li class="req"><strong>FR3:</strong> Generate interactive maps displaying all stations.</li>
-            <li class="req"><strong>FR4:</strong> Highlight stations near the user using geolocation.</li>
+            <li class="req"><strong>FR3:</strong> When clicking on a station, the system must display the list of metro lines that pass through that station.</li>
+            <li class="req"><strong>FR4:</strong> When clicking on a station, the system must show detailed information about the stop.</li>
           </ol>
         </article>
 
-        <article id="fr-data">
-          <h3>📦 Data & Standards</h3>
+        <article id="fr-lines">
+          <h3>🗺️ Line Information</h3>
           <ol class="requirements">
-            <li class="req"><strong>FR5:</strong> Allow export of data in CSV format.</li>
-            <li class="req"><strong>FR6:</strong> Ensure compliance with RDF and Linked Data standards.</li>
+            <li class="req"><strong>FR5:</strong> When clicking on a metro line, the system must display the number of stops on that line.</li>
+            <li class="req"><strong>FR6:</strong> When clicking on a metro line, the system must show detailed information about the line.</li>
           </ol>
         </article>
       </section>
@@ -111,19 +110,15 @@
         <div class="grid-2">
           <div>
             <ol class="requirements">
-              <li class="req"><strong>NFR1 – Performance:</strong> Route search response time must not exceed 3 seconds.</li>
-              <li class="req"><strong>NFR2 – Usability:</strong> The interface must be intuitive and easy to use.</li>
-              <li class="req"><strong>NFR3 – Scalability:</strong> The system must be scalable to integrate new datasets (e.g., buses).</li>
-              <li class="req"><strong>NFR4 – Constraints:</strong> Multi-criteria sorting must also respect the 3-second response constraint.</li>
+              <li class="req"><strong>NFR1 – Performance:</strong> Map loading and interaction response time must not exceed 2 seconds.</li>
+              <li class="req"><strong>NFR2 – Usability:</strong> The interface must be intuitive with clear visual indicators for stations and lines.</li>
+              <li class="req"><strong>NFR3 – Scalability:</strong> The system must be scalable to add new metro lines and stations.</li>
+              <li class="req"><strong>NFR4 – Responsiveness:</strong> The map must be responsive and work on different screen sizes.</li>
             </ol>
           </div>
         </div>
       </section>
     </main>
-
-    <footer>
-      © Urban Mobility project · Requirements (HTML)
-    </footer>
   </div>
 
 </body>

@@ -1,0 +1,44 @@
+PREFIX ont: <http://example.org/madrid-air-quality/ontology/>
+PREFIX data: <http://example.org/madrid-air-quality/data/>
+
+# Check all classes used in the RDF
+SELECT DISTINCT ?type WHERE {
+  ?s a ?type .
+}
+LIMIT 50
+
+# Count how many instances of each class exist
+SELECT ?class (COUNT(?s) AS ?count) WHERE {
+  ?s a ?class .
+}
+GROUP BY ?class
+
+# Show a few Station instances and their sampling points
+SELECT ?station ?samplingPoint WHERE {
+  ?station a ont:Station ;
+           ont:hasSamplingPoint ?samplingPoint .
+}
+LIMIT 10
+
+# Check that pollutants are linked correctly
+SELECT ?pollutant ?code WHERE {
+  ?pollutant a ont:Pollutant ;
+             ont:pollutantCode ?code .
+}
+LIMIT 10
+
+# Verify measurements exist and have values + validation flags
+SELECT ?measurement ?value ?validation WHERE {
+  ?measurement a ont:Measurement ;
+               ont:hasValue ?value ;
+               ont:hasValidation ?validation .
+}
+LIMIT 10
+
+# Verify relationship chain: Station → SamplingPoint → Measurement → Pollutant
+SELECT ?station ?samplingPoint ?measurement ?pollutant WHERE {
+  ?station ont:hasSamplingPoint ?samplingPoint .
+  ?samplingPoint ont:hasMeasurement ?measurement .
+  ?samplingPoint ont:measuresPollutant ?pollutant .
+}
+LIMIT 10

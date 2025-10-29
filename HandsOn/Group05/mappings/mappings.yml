@@ -1,0 +1,57 @@
+prefixes:
+  rr: http://www.w3.org/ns/r2rml#
+  rml: http://semweb.mmlab.be/ns/rml#
+  rdf: http://www.w3.org/1999/02/22-rdf-syntax-ns#
+  rdfs: http://www.w3.org/2000/01/rdf-schema#
+  xsd: http://www.w3.org/2001/XMLSchema#
+  dct: http://purl.org/dc/terms/
+  geo: http://www.w3.org/2003/01/geo/wgs84_pos#
+  ex: http://example.com/ns/airquality#
+
+mappings:
+  Station:
+    sources:
+      - [csv/2018-06-Juny-qualitat-aire_BCN_nouds.csv~csv]
+    
+    s: ex:station/$(codi_eoi)
+    
+    po:
+      - [a, ex:AirQualityStation]
+      - [rdfs:label, $(nom_cabina)] 
+      - [ex:stationCode, $(codi_eoi)]
+      - [geo:lat, $(latitud), xsd:float]
+      - [geo:long, $(longitud), xsd:float]
+
+  Reading:
+    sources:
+      - [csv/2018-06-Juny-qualitat-aire_BCN_nouds.csv~csv]
+      
+    s: ex:reading/$(codi_eoi)/$(generat)
+    
+    po:
+      - [a, ex:AirQualityReading]
+      - [dct:issued, $(generat)]
+
+      - [ex:overallQuality, $(calidad_aire)] 
+
+      - [ex:o3_value, $(valor_o3), xsd:integer]
+
+      - [ex:o3_quality, $(calidad_o3)]
+
+      - [ex:no2_value, $(valor_no2), xsd:integer]
+
+      - [ex:no2_quality, $(calidad_no2)]
+
+      - [ex:pm10_value, $(valor_pm10), xsd:integer]
+
+      - [ex:pm10_quality, $(calidad_pm10)]
+      
+      - p: ex:madeByStation
+        o:
+          mapping: Station
+          condition:
+            function: equal
+            parameters:
+              - [str1, $(codi_eoi)]
+              - [str2, $(codi_eoi)]
+      

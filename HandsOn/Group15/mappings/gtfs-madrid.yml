@@ -1,0 +1,43 @@
+
+prefixes:
+  ex:   "http://group15.linked.opendata.es/transport/"
+  gtfs: "http://vocab.gtfs.org/terms#"
+  wgs:  "http://www.w3.org/2003/01/geo/wgs84_pos#"
+  schema: "http://schema.org/"
+mappings:
+  stops:
+    sources: ["csv/stops-updated.csv~csv"]
+    s: ex:stop/$(stop_id)
+    po:
+      - [a, gtfs:Stop]
+      - [schema:name, $(stop_name)]
+      - [wgs:lat, $(stop_lat)]
+      - [wgs:long, $(stop_lon)]
+  routes:
+    sources: ["csv/routes-updated.csv~csv"]
+    s: ex:route/$(route_id)
+    po:
+      - [a, gtfs:Route]
+      - [gtfs:shortName, $(route_short_name)]
+      - [gtfs:longName, $(route_long_name)]
+  stoptimes:
+    sources: ["csv/stop_times-updated.csv~csv"]
+    s: ex:stoptime/$(trip_id)-$(stop_id)-$(arrival_time)
+    po:
+      - [a, gtfs:StopTime]
+      - p: gtfs:stop
+        o:
+          mapping: stops
+          condition:
+            function: equal
+            parameters:
+              - [str1, $(stop_id)]
+              - [str2, $(stop_id)]
+      - p: gtfs:route
+        o:
+          mapping: routes
+          condition:
+            function: equal
+            parameters:
+              - [str1, $(route_id)]
+              - [str2, $(route_id)]

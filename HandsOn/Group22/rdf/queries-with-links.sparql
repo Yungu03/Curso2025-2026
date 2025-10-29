@@ -1,0 +1,100 @@
+# Exploración de datos RDF - accidentes-with-links.ttl
+# Namespace base: http://smartaccidents.es/ontology#
+
+PREFIX sa: <http://smartaccidents.es/ontology#>
+
+###############################################################
+# 1. Listar todos los accidentes y sus propiedades
+###############################################################
+SELECT ?accidente ?propiedad ?valor
+WHERE {
+  ?accidente ?propiedad ?valor .
+  FILTER(STRSTARTS(STR(?accidente), "http://smartaccidents.es/accidente/"))
+}
+LIMIT 50
+
+###############################################################
+# 2. Listar todos los predicados (propiedades) distintos
+###############################################################
+SELECT DISTINCT ?propiedad
+WHERE {
+  ?s ?propiedad ?o .
+  FILTER(STRSTARTS(STR(?s), "http://smartaccidents.es/accidente/"))
+}
+ORDER BY ?propiedad
+
+###############################################################
+# 3. Contar el número total de accidentes
+###############################################################
+SELECT (COUNT(DISTINCT ?accidente) AS ?totalAccidentes)
+WHERE {
+  ?accidente a ?tipo .
+  FILTER(STRSTARTS(STR(?accidente), "http://smartaccidents.es/accidente/"))
+}
+
+###############################################################
+# 4. Número de accidentes por distrito
+###############################################################
+SELECT ?distrito (COUNT(?accidente) AS ?numAccidentes)
+WHERE {
+  ?accidente sa:distrito ?distrito .
+}
+GROUP BY ?distrito
+ORDER BY DESC(?numAccidentes)
+
+###############################################################
+# 5. Accidentes con resultado positivo en alcohol o drogas
+###############################################################
+SELECT ?accidente ?positivaAlcohol ?positivaDroga
+WHERE {
+  ?accidente sa:positivaAlcohol ?positivaAlcohol ;
+             sa:positivaDroga ?positivaDroga .
+  FILTER(?positivaAlcohol = true || ?positivaDroga = true)
+}
+
+###############################################################
+# 6. Distribución de accidentes por rango de edad y sexo
+###############################################################
+SELECT ?rangoEdad ?sexo (COUNT(?accidente) AS ?numAccidentes)
+WHERE {
+  ?accidente sa:rangoEdad ?rangoEdad ;
+             sa:sexo ?sexo .
+}
+GROUP BY ?rangoEdad ?sexo
+ORDER BY ?rangoEdad
+
+###############################################################
+# 7. Primer y último accidente registrado (por fecha)
+###############################################################
+SELECT (MIN(?fecha) AS ?fechaMasAntigua) (MAX(?fecha) AS ?fechaMasReciente)
+WHERE {
+  ?accidente sa:fecha ?fecha .
+}
+
+###############################################################
+# 8. Listar ubicaciones con más accidentes
+###############################################################
+SELECT ?localizacion (COUNT(?accidente) AS ?numAccidentes)
+WHERE {
+  ?accidente sa:localizacion ?localizacion .
+}
+GROUP BY ?localizacion
+ORDER BY DESC(?numAccidentes)
+
+###############################################################
+# 9. Accidentes con lesividad grave
+###############################################################
+SELECT ?accidente ?lesividad
+WHERE {
+  ?accidente sa:lesividad ?lesividad .
+  FILTER(CONTAINS(LCASE(STR(?lesividad)), "ingreso"))
+}
+
+###############################################################
+# 10. Coordenadas de accidentes (para visualización geográfica)
+###############################################################
+SELECT ?accidente ?coordenadaX ?coordenadaY
+WHERE {
+  ?accidente sa:coordenadaX ?coordenadaX ;
+             sa:coordenadaY ?coordenadaY .
+}

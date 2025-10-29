@@ -1,0 +1,17 @@
+
+@prefix gtfs: <http://vocab.gtfs.org/terms#> .
+@prefix wgs:  <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix schema: <http://schema.org/> .
+
+<http://group15.linked.opendata.es/transport/stop/1001> a gtfs:Stop ;
+  schema:name "Plaza Mayor" ;
+  wgs:lat 40.415365 ;
+  wgs:long -3.707398 .
+
+<http://group15.linked.opendata.es/transport/route/25> a gtfs:Route ;
+  gtfs:shortName "25" ;
+  gtfs:longName "Plaza España - Casa de Campo" .
+
+<http://group15.linked.opendata.es/transport/stoptime/T123-1001-08:10:00> a gtfs:StopTime ;
+  gtfs:stop <http://group15.linked.opendata.es/transport/stop/1001> ;
+  gtfs:route <http://group15.linked.opendata.es/transport/route/25> .

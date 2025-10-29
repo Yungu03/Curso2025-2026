@@ -1,0 +1,16 @@
+
+# 1) Stops that are linked to a city
+SELECT ?stop ?city WHERE {
+  ?stop <http://example.org/gtfs/inCity> ?city .
+}
+
+# 2) Cities with external identity links (owl:sameAs)
+SELECT ?city ?same WHERE {
+  ?city a <http://schema.org/City> ;
+        <http://www.w3.org/2002/07/owl#sameAs> ?same .
+}
+
+# 3) Count of stops per city
+SELECT ?city (COUNT(?stop) AS ?nStops) WHERE {
+  ?stop <http://example.org/gtfs/inCity> ?city .
+} GROUP BY ?city

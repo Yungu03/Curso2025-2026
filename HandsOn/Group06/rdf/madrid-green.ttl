@@ -1,0 +1,70 @@
+@prefix ex: <https://raw.githubusercontent.com/paulinaloew/Curso2025-2026/master/HandsOn/Group06/def/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+# --- Districts ---
+<https://raw.githubusercontent.com/paulinaloew/Curso2025-2026/master/HandsOn/Group06/district/CENTRO>
+    a ex:District ;
+    rdfs:label "CENTRO" .
+
+<https://raw.githubusercontent.com/paulinaloew/Curso2025-2026/master/HandsOn/Group06/district/CHAMARTIN>
+    a ex:District ;
+    rdfs:label "CHAMARTÍN" .
+
+# --- Green zones ---
+<https://raw.githubusercontent.com/paulinaloew/Curso2025-2026/master/HandsOn/Group06/zone/1234>
+    a ex:GreenZone ;
+    ex:zoneId "1234" ;
+    ex:area "3567.8"^^xsd:decimal ;
+    ex:subcategory "Parque urbano" ;
+    ex:section "Norte" ;
+    ex:propertyType "Pública" ;
+    ex:intendedUse "Recreativa" ;
+    ex:address "Calle Mayor, 12" ;
+    ex:inDistrict <https://raw.githubusercontent.com/paulinaloew/Curso2025-2026/master/HandsOn/Group06/district/CENTRO> .
+
+<https://raw.githubusercontent.com/paulinaloew/Curso2025-2026/master/HandsOn/Group06/zone/5678>
+    a ex:GreenZone ;
+    ex:zoneId "5678" ;
+    ex:area "17890.0"^^xsd:decimal ;
+    ex:subcategory "Jardín histórico" ;
+    ex:section "Oeste" ;
+    ex:propertyType "Municipal" ;
+    ex:intendedUse "Cultural" ;
+    ex:address "Paseo del Prado, 1" ;
+    ex:inDistrict <https://raw.githubusercontent.com/paulinaloew/Curso2025-2026/master/HandsOn/Group06/district/CHAMARTIN> .
+
+# --- Species ---
+<https://raw.githubusercontent.com/paulinaloew/Curso2025-2026/master/HandsOn/Group06/species/Platanus%20x%20hispanica>
+    a ex:Species ;
+    rdfs:label "Platanus x hispanica" .
+
+<https://raw.githubusercontent.com/paulinaloew/Curso2025-2026/master/HandsOn/Group06/species/Phoenix%20canariensis>
+    a ex:Species ;
+    rdfs:label "Phoenix canariensis" .
+
+# --- Parks ---
+<https://raw.githubusercontent.com/paulinaloew/Curso2025-2026/master/HandsOn/Group06/park/Retiro>
+    a ex:Park ;
+    rdfs:label "Retiro" .
+
+<https://raw.githubusercontent.com/paulinaloew/Curso2025-2026/master/HandsOn/Group06/park/Casa%20de%20Campo>
+    a ex:Park ;
+    rdfs:label "Casa de Campo" .
+
+# --- Trees (aggregated by park × species) ---
+<https://raw.githubusercontent.com/paulinaloew/Curso2025-2026/master/HandsOn/Group06/tree/Retiro/Platanus%20x%20hispanica>
+    a ex:Tree ;
+    rdfs:label "Platanus x hispanica @ Retiro" ;
+    ex:treeCount "284"^^xsd:integer ;
+    ex:hasSpecies <https://raw.githubusercontent.com/paulinaloew/Curso2025-2026/master/HandsOn/Group06/species/Platanus%20x%20hispanica> ;
+    ex:inPark <https://raw.githubusercontent.com/paulinaloew/Curso2025-2026/master/HandsOn/Group06/park/Retiro> ;
+    ex:parkName "Retiro" .
+
+<https://raw.githubusercontent.com/paulinaloew/Curso2025-2026/master/HandsOn/Group06/tree/Casa%20de%20Campo/Phoenix%20canariensis>
+    a ex:Tree ;
+    rdfs:label "Phoenix canariensis @ Casa de Campo" ;
+    ex:treeCount "92"^^xsd:integer ;
+    ex:hasSpecies <https://raw.githubusercontent.com/paulinaloew/Curso2025-2026/master/HandsOn/Group06/species/Phoenix%20canariensis> ;
+    ex:inPark <https://raw.githubusercontent.com/paulinaloew/Curso2025-2026/master/HandsOn/Group06/park/Casa%20de%20Campo> ;
+    ex:parkName "Casa de Campo" .

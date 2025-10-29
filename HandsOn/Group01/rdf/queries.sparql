@@ -1,0 +1,128 @@
+PREFIX ns1: <https://data.example.org/transport/bcn/metro/ontology#>
+PREFIX resource: <https://data.example.org/transport/bcn/metro/resource/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX geo: <http://www.opengis.net/ont/geosparql#>
+
+# ========================================
+# QUERY 1: List all metro lines
+# ========================================
+SELECT ?line ?lineName WHERE {
+    ?line rdf:type ns1:MetroLine .
+    OPTIONAL { ?line ns1:lineName ?lineName }
+}
+ORDER BY ?line
+
+# ========================================
+# QUERY 2: Count stations per metro line
+# ========================================
+SELECT ?line ?lineName (COUNT(?station) AS ?stationCount) WHERE {
+    ?line rdf:type ns1:MetroLine .
+    OPTIONAL { ?line ns1:lineName ?lineName }
+    ?stationLine ns1:onLine ?line .
+    ?stationLine ns1:relatesTo ?station .
+}
+GROUP BY ?line ?lineName
+ORDER BY DESC(?stationCount)
+
+# ========================================
+# QUERY 3: Find all accessible stations
+# ========================================
+SELECT ?station ?stationName WHERE {
+    ?station rdf:type ns1:Station .
+    ?station ns1:hasAccessibility <https://data.example.org/transport/bcn/metro/resource/accessibilityType/Accessible> .
+    OPTIONAL { ?station ns1:stationName ?stationName }
+}
+ORDER BY ?stationName
+
+# ========================================
+# QUERY 4: Stations on Line 1 with their order
+# ========================================
+SELECT ?station ?stationName ?order WHERE {
+    ?stationLine ns1:onLine <https://data.example.org/transport/bcn/metro/resource/metroLine/L1> .
+    ?stationLine ns1:relatesTo ?station .
+    ?stationLine ns1:stationOrder ?order .
+    OPTIONAL { ?station ns1:stationName ?stationName }
+}
+ORDER BY ?order
+
+# ========================================
+# QUERY 5: Find lines with geometry data
+# ========================================
+SELECT ?line ?lineName ?geometry WHERE {
+    ?line rdf:type ns1:MetroLine .
+    ?line ns1:hasGeometry ?geometry .
+    OPTIONAL { ?line ns1:lineName ?lineName }
+}
+ORDER BY ?line
+
+# ========================================
+# QUERY 6: Count different accessibility types
+# ========================================
+SELECT ?accessibilityType (COUNT(?station) AS ?count) WHERE {
+    ?station rdf:type ns1:Station .
+    ?station ns1:hasAccessibility ?accessibilityType .
+}
+GROUP BY ?accessibilityType
+ORDER BY DESC(?count)
+
+# ========================================
+# QUERY 7: Find stations that serve multiple lines
+# ========================================
+SELECT ?station ?stationName (COUNT(?line) AS ?lineCount) WHERE {
+    ?station rdf:type ns1:Station .
+    ?stationLine ns1:relatesTo ?station .
+    ?stationLine ns1:onLine ?line .
+    OPTIONAL { ?station ns1:stationName ?stationName }
+}
+GROUP BY ?station ?stationName
+HAVING (COUNT(?line) > 1)
+ORDER BY DESC(?lineCount)
+
+# ========================================
+# QUERY 8: Get all station statuses
+# ========================================
+SELECT ?status (COUNT(?station) AS ?stationCount) WHERE {
+    ?station rdf:type ns1:Station .
+    ?station ns1:hasStatus ?status .
+}
+GROUP BY ?status
+ORDER BY DESC(?stationCount)
+
+# ========================================
+# QUERY 9: Find first and last stations of each line
+# ========================================
+SELECT ?line ?lineName ?firstStation ?firstStationName ?lastStation ?lastStationName WHERE {
+    ?line rdf:type ns1:MetroLine .
+    OPTIONAL { ?line ns1:lineName ?lineName }
+    
+    ?firstStationLine ns1:onLine ?line .
+    ?firstStationLine ns1:stationOrder 1 .
+    ?firstStationLine ns1:relatesTo ?firstStation .
+    OPTIONAL { ?firstStation ns1:stationName ?firstStationName }
+    
+    {
+        SELECT ?line (MAX(?order) AS ?maxOrder) WHERE {
+            ?stationLine ns1:onLine ?line .
+            ?stationLine ns1:stationOrder ?order .
+        }
+        GROUP BY ?line
+    }
+    ?lastStationLine ns1:onLine ?line .
+    ?lastStationLine ns1:stationOrder ?maxOrder .
+    ?lastStationLine ns1:relatesTo ?lastStation .
+    OPTIONAL { ?lastStation ns1:stationName ?lastStationName }
+}
+ORDER BY ?line
+
+# ========================================
+# QUERY 10: Stations with inauguration dates
+# ========================================
+SELECT ?station ?stationName ?inauguratedDate WHERE {
+    ?station rdf:type ns1:Station .
+    ?station ns1:inauguratedDate ?inauguratedDate .
+    OPTIONAL { ?station ns1:stationName ?stationName }
+}
+ORDER BY ?inauguratedDate
+LIMIT 20

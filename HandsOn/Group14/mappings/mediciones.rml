@@ -1,0 +1,41 @@
+@prefix rr: <http://www.w3.org/ns/r2rml#> .
+@prefix rml: <http://semweb.mmlab.be/ns/rml#> .
+@prefix ql: <http://semweb.mmlab.be/ns/ql#> .
+@prefix ex: <http://datos.madrid.es/Calidad_Aire/Medicion/> .
+@base <http://datos.madrid.es/Calidad_Aire/> .
+
+<#MedicionMapping>
+  rml:logicalSource [
+    rml:source "/calair-tiemporeal-updated.csv" ;
+    rml:referenceFormulation ql:CSV
+  ] ;
+
+  rr:subjectMap [
+    rr:template "http://datos.madrid.es/Calidad_Aire/Medicion/{CODIGO}-{ANO}-{MES}-{DIA}-{MAGNITUD}" ;
+    rr:class ex:Medicion
+  ] ;
+
+  rr:predicateObjectMap [
+    rr:predicate ex:estacion ;
+    rr:objectMap [ rr:template "http://datos.madrid.es/Calidad_Aire/Estacion/{CODIGO}" ]
+  ] ;
+  rr:predicateObjectMap [
+    rr:predicate ex:fecha ;
+    rr:objectMap [ rr:template "{ANO}-{MES}-{DIA}" ]
+  ] ;
+  rr:predicateObjectMap [
+    rr:predicate ex:magnitud ;
+    rr:objectMap [ rml:reference "MAGNITUD" ]
+  ] ;
+  rr:predicateObjectMap [
+    rr:predicate ex:valorH01 ;
+    rr:objectMap [ rml:reference "V01" ]
+  ] ;
+  rr:predicateObjectMap [
+    rr:predicate ex:valorH02 ;
+    rr:objectMap [ rml:reference "V02" ]
+  ] ;
+  rr:predicateObjectMap [
+    rr:predicate ex:valorH03 ;
+    rr:objectMap [ rml:reference "V03" ]
+  ] .

@@ -1,0 +1,54 @@
+@prefix rr:   <http://www.w3.org/ns/r2rml#> .
+@prefix rml:  <http://semweb.mmlab.be/ns/rml#> .
+@prefix ql:   <http://semweb.mmlab.be/ns/ql#> .
+@prefix fnml: <http://semweb.mmlab.be/ns/fnml#> .
+@prefix gz:   <http://linkeddata.greenzonesmadrid.org/ontology/gz#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+
+<#LogicalSource>
+  a rml:BaseSource ;
+  rml:source "data/zonas-verdes-updated.csv" ;
+  rml:referenceFormulation ql:CSV .
+
+<#GreenZoneTriplesMap>
+  a rr:TriplesMap ;
+  rml:logicalSource <#LogicalSource> ;
+
+  rr:subjectMap [
+    rr:template "{ZoneURI}" ;
+    rr:class gz:GreenZone
+  ] ;
+
+  # Datatype properties
+  rr:predicateObjectMap [
+    rr:predicate gz:district ;
+    rr:objectMap [ rml:reference "Distrito" ]
+  ] ;
+  rr:predicateObjectMap [
+    rr:predicate gz:subepigrafe ;
+    rr:objectMap [ rml:reference "Subepigrafe" ]
+  ] ;
+  rr:predicateObjectMap [
+    rr:predicate gz:apartado ;
+    rr:objectMap [ rml:reference "Apartado" ]
+  ] ;
+  rr:predicateObjectMap [
+    rr:predicate gz:fileNumber ;
+    rr:objectMap [ rml:reference "FileNumber" ]
+  ] ;
+  rr:predicateObjectMap [
+    rr:predicate gz:propertyNature ;
+    rr:objectMap [ rml:reference "PropertyNature" ]
+  ] ;
+  rr:predicateObjectMap [
+    rr:predicate gz:situationTarget ;
+    rr:objectMap [ rml:reference "SituationTarget" ]
+  ] ;
+  rr:predicateObjectMap [
+    rr:predicate gz:destination ;
+    rr:objectMap [ rml:reference "Destination" ]
+  ] ;
+  rr:predicateObjectMap [
+    rr:predicate gz:plot ;
+    rr:objectMap [ rml:reference "Plot" ]
+  ] .

@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Dataset Analysis</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 40px;
+      line-height: 1.6;
+      background-color: #fafafa;
+    }
+    h1, h2 {
+      color: #333;
+    }
+    section {
+      margin-bottom: 2em;
+    }
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      margin-top: 1em;
+    }
+    th, td {
+      border: 1px solid #ccc;
+      padding: 8px;
+      text-align: left;
+    }
+    code {
+      background-color: #eee;
+      padding: 2px 4px;
+      border-radius: 4px;
+    }
+    ul {
+      background-color: #fff;
+      padding: 10px 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 5px rgba(0,0,0,0.05);
+    }
+  </style>
+</head>
+<body>
+  <h1>Dataset Analysis</h1>
+
+  <section id="dataset-analysis">
+    <h2>1. Dataset Analysis</h2>
+    <p>
+      This section provides an overview of the selected dataset. It summarizes the initial
+      exploration performed using <strong>OpenRefine</strong>.
+    </p>
+
+    <ul>
+      <li><strong>Dataset title:</strong> Air quality. Real-time data </li>
+      <li><strong>Source:</strong> <a href="https://data.europa.eu/data/datasets/https-datos-madrid-es-egob-catalogo-212531-0-calidad-aire-tiempo-real?locale=en" target="_blank">
+    data.europa.eu – Ayuntamiento de Madrid </a> </li>
+      <li><strong>Format:</strong> CSV </li>
+      <li><strong>Number of rows:</strong> 126 </li>
+      <li><strong>Number of columns:</strong> 56 </li>
+    </ul>
+
+    <p>
+      The dataset provides hourly air quality measurements collected across multiple monitoring stations in Madrid.
+      Each record represents a specific pollutant measured at a given location and time, along with a corresponding validation flag.
+      This dataset was analyzed following the <a href="https://datos.madrid.es/FWProjects/egob/Catalogo/MedioAmbiente/Aire/Ficheros/Interprete_ficheros_%20calidad_%20del_%20aire_global.pdf" target="_blank"> official documentation of Madrid's open air quality data</a>.
+    </p>
+
+    <h3>Main columns include:</h3>
+    
+    <ul>
+      <li><strong>PROVINCIA, MUNICIPIO, ESTACION</strong> → identify the measurement location (province code, municipality code, station code. See official documentation, Annex I, for the mapping code → station name).</li>
+      <li><strong>MAGNITUD</strong> → pollutant code (see official documentation, Annex II, for the mapping code → pollutant name).</li>
+      <li><strong>PUNTO_MUESTREO</strong> → complete station code (province + municipality + station code followed by the pollutant code and the sampling technique code. See official documentation, Annex II, for the mapping code → sampling technique)</li>
+      <li><strong>ANO, MES, DIA</strong> → date of the measurement (year, month, day).</li>
+      <li><strong>H01–H24</strong> → hourly measurement values for the given pollutant (hours 01 to 24).</li>
+      <li><strong>V01–V24</strong> → validation flags corresponding to each hourly value.</li>
+    </ul>
+
+    <p>
+      The dataset includes real-time measurements for 11 different pollutants (magnitudes 1, 6, 7, 8, 9, 10, 12, 14, 20, 30, and 35) across 23 different monitoring stations in Madrid (all of the active ones except for the one located in Urb. Embajada (Barajas)).
+      Each pollutant value is recorded hourly (columns H01–H24, H24 representing the last hour of the day), with a corresponding validation flag (V01–V24). All the values are measured within the city of Madrid (columns province code 28 and municipality code 079).
+      Explanation for missing values is given in the last page of the official documentation.
+    </p>
+
+    <p>
+       The dataset covers 126 records, representing one full day of measurements (October 9th, 2025). 
+       Most hourly values range between 0 and 100 for pollutants. 
+       Missing or invalid values are denoted by <code>N</code> in the validation columns (V01–V24).
+    </p>
+
+  </section>
+
+  <section id="license">
+    <h2>2. Dataset License</h2>
+    <p>
+    The dataset was published by the <strong>Ayuntamiento de Madrid</strong> (Madrid City Council),
+    which acts as both the <em>publisher</em> and the <em>rightsholder</em> of the data.
+    It is distributed through the official Madrid open data portal, under the
+    <a href="https://datos.madrid.es/portal/site/egob/menuitem.3efdb29b813ad8241e830cc2a8a409a0/?vgnextoid=108804d4aab90410VgnVCM100000171f5a0aRCRD&vgnextchannel=b4c412b9ace9f310VgnVCM100000171f5a0aRCRD&vgnextfmt=default" target="_blank">
+      General Conditions for the Reuse of Information of the Ayuntamiento de Madrid
+    </a>,
+    in accordance with <strong>Law 37/2007</strong> on the Reuse of Public Sector Information.
+  </p>
+
+  <p>
+    These conditions authorize the reuse of the data — both for commercial and non-commercial purposes —
+    and grant a free, non-exclusive license to copy, distribute, modify, adapt, and transform the information,
+    provided that:
+  </p>
+
+  <ul>
+    <li>The source is cited as “Origen de los datos: Ayuntamiento de Madrid”.</li>
+    <li>The meaning of the information is not distorted.</li>
+    <li>The date of the last update (if available) is mentioned.</li>
+    <li>It is not implied that the Ayuntamiento de Madrid sponsors or endorses the reuse.</li>
+  </ul>
+
+  <p>
+    The Ayuntamiento de Madrid excludes any responsibility for the use made of its information,
+    as stated in the “Exclusión de responsabilidad” clause.
+  </p>
+
+  <h3>Proposed license for the generated dataset</h3>
+  <p>
+    The RDF dataset to be generated will be derived entirely from this public open data source.
+    Therefore, it may be published under the
+    <strong>Creative Commons Attribution 4.0 International (CC BY 4.0)</strong> license,
+    which is compatible with the reuse conditions established by the Ayuntamiento de Madrid.
+  </p>
+  </section>
+
+  <section id="naming-strategy">
+    <h2>3. Resource Naming Strategy</h2>
+    <p>
+      The resource naming strategy defines how URIs will be structured for both the ontology and the generated RDF data.
+    </p>
+    <h3>Base URI</h3>
+    <p>
+      All resources will be published under the following base namespace:
+    </p>
+    <pre><code>http://example.org/madrid-air-quality/</code></pre>
+
+    <h3>Namespaces</h3>
+  <ul>
+    <li><strong>Ontology:</strong> <code>http://example.org/madrid-air-quality/ontology/</code></li>
+    <li><strong>Data:</strong> <code>http://example.org/madrid-air-quality/data/</code></li>
+  </ul>
+
+  <h3>URI Patterns</h3>
+  <ul>
+    <li><strong>Stations:</strong> <code>http://example.org/madrid-air-quality/data/station/{stationID}</code></li>
+    <li><strong>Pollutants:</strong> <code>http://example.org/madrid-air-quality/data/pollutant/{pollutantCode}</code></li>
+    <li><strong>Measurements:</strong> <code>http://example.org/madrid-air-quality/data/measurement/{puntoMuestreoID}/{hour}</code></li>
+    <li><strong>Sampling points:</strong> <code>http://example.org/madrid-air-quality/data/sampling-point/{puntoMuestreoID}</code></li>
+    <li><strong>Ontology terms:</strong> <code>http://example.org/madrid-air-quality/ontology/{term}</code></li>
+  </ul>
+
+  <h3>Content Negotiation</h3>
+<p>
+  Each resource URI supports content negotiation. When accessed through a web browser, 
+  the HTML representation will be returned. When accessed by semantic web agents 
+  (using appropriate HTTP headers), RDF representations such as Turtle or JSON-LD 
+  will be provided.
+</p>
+
+  </section>
+</body>
+</html>

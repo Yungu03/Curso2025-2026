@@ -1,0 +1,214 @@
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix geo: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix vann: <http://purl.org/vocab/vann/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+dcterms:created a owl:AnnotationProperty .
+
+dcterms:creator a owl:AnnotationProperty .
+
+dcterms:description a owl:AnnotationProperty .
+
+dcterms:license a owl:AnnotationProperty .
+
+dcterms:title a owl:AnnotationProperty .
+
+vann:preferredNamespacePrefix a owl:AnnotationProperty .
+
+vann:preferredNamespaceUri a owl:AnnotationProperty .
+
+owl:versionInfo a owl:AnnotationProperty .
+
+<https://data.example.org/transport/bcn/metro/ontology> a owl:Ontology ;
+    dcterms:created "2025-10-13"^^xsd:date ;
+    dcterms:creator "Group 01" ;
+    dcterms:description "Ontology for modeling Barcelona metro lines and stations" ;
+    dcterms:license <https://creativecommons.org/licenses/by/4.0/> ;
+    dcterms:title "Barcelona Metro Interactive Map Ontology" ;
+    vann:preferredNamespacePrefix "metro" ;
+    vann:preferredNamespaceUri <https://data.example.org/transport/bcn/metro/ontology#> ;
+    owl:versionInfo "1.0" .
+
+<https://data.example.org/transport/bcn/metro/ontology#auxiliaryColor> a owl:DatatypeProperty ;
+    rdfs:label "auxiliary color" ;
+    rdfs:domain <https://data.example.org/transport/bcn/metro/ontology#MetroLine> ;
+    rdfs:range xsd:string .
+
+<https://data.example.org/transport/bcn/metro/ontology#belongsToFamily> a owl:ObjectProperty ;
+    rdfs:label "belongs to family" ;
+    rdfs:domain <https://data.example.org/transport/bcn/metro/ontology#MetroLine> ;
+    rdfs:range <https://data.example.org/transport/bcn/metro/ontology#TransportFamily> .
+
+<https://data.example.org/transport/bcn/metro/ontology#connectsTo> a owl:ObjectProperty ;
+    rdfs:label "connects to" ;
+    rdfs:domain <https://data.example.org/transport/bcn/metro/ontology#Station> ;
+    rdfs:range <https://data.example.org/transport/bcn/metro/ontology#Station> .
+
+<https://data.example.org/transport/bcn/metro/ontology#destinationStation> a owl:DatatypeProperty ;
+    rdfs:label "destination station" ;
+    rdfs:domain <https://data.example.org/transport/bcn/metro/ontology#MetroLine> ;
+    rdfs:range xsd:string .
+
+<https://data.example.org/transport/bcn/metro/ontology#familyOrder> a owl:DatatypeProperty ;
+    rdfs:label "family order" ;
+    rdfs:domain <https://data.example.org/transport/bcn/metro/ontology#TransportFamily> ;
+    rdfs:range xsd:integer .
+
+<https://data.example.org/transport/bcn/metro/ontology#hasAccessibility> a owl:ObjectProperty ;
+    rdfs:label "has accessibility" ;
+    rdfs:domain <https://data.example.org/transport/bcn/metro/ontology#Station> ;
+    rdfs:range <https://data.example.org/transport/bcn/metro/ontology#AccessibilityType> .
+
+<https://data.example.org/transport/bcn/metro/ontology#hasGeometry> a owl:DatatypeProperty ;
+    rdfs:label "has geometry" ;
+    rdfs:range geo:wktLiteral .
+
+<https://data.example.org/transport/bcn/metro/ontology#hasServiceType> a owl:ObjectProperty ;
+    rdfs:label "has service type" ;
+    rdfs:domain <https://data.example.org/transport/bcn/metro/ontology#MetroLine> ;
+    rdfs:range <https://data.example.org/transport/bcn/metro/ontology#ServiceType> .
+
+<https://data.example.org/transport/bcn/metro/ontology#hasStation> a owl:ObjectProperty ;
+    rdfs:label "has station" ;
+    rdfs:domain <https://data.example.org/transport/bcn/metro/ontology#MetroLine> ;
+    rdfs:range <https://data.example.org/transport/bcn/metro/ontology#Station> .
+
+<https://data.example.org/transport/bcn/metro/ontology#hasStationLineRelation> a owl:ObjectProperty ;
+    rdfs:label "has station line relation" ;
+    rdfs:domain <https://data.example.org/transport/bcn/metro/ontology#MetroLine> ;
+    rdfs:range <https://data.example.org/transport/bcn/metro/ontology#StationLine> .
+
+<https://data.example.org/transport/bcn/metro/ontology#hasStatus> a owl:ObjectProperty ;
+    rdfs:label "has status" ;
+    rdfs:domain <https://data.example.org/transport/bcn/metro/ontology#Station> ;
+    rdfs:range <https://data.example.org/transport/bcn/metro/ontology#StationStatus> .
+
+<https://data.example.org/transport/bcn/metro/ontology#inauguratedDate> a owl:DatatypeProperty ;
+    rdfs:label "inaugurated date" ;
+    rdfs:domain <https://data.example.org/transport/bcn/metro/ontology#Station> ;
+    rdfs:range xsd:date .
+
+<https://data.example.org/transport/bcn/metro/ontology#lastUpdated> a owl:DatatypeProperty ;
+    rdfs:label "last updated" ;
+    rdfs:range xsd:date .
+
+<https://data.example.org/transport/bcn/metro/ontology#latitude> a owl:DatatypeProperty ;
+    rdfs:label "latitude" ;
+    rdfs:range xsd:decimal ;
+    rdfs:subPropertyOf geo:lat .
+
+<https://data.example.org/transport/bcn/metro/ontology#lineCode> a owl:DatatypeProperty ;
+    rdfs:label "line code" ;
+    rdfs:domain <https://data.example.org/transport/bcn/metro/ontology#MetroLine> ;
+    rdfs:range xsd:integer .
+
+<https://data.example.org/transport/bcn/metro/ontology#lineColor> a owl:DatatypeProperty ;
+    rdfs:label "line color" ;
+    rdfs:domain <https://data.example.org/transport/bcn/metro/ontology#MetroLine> ;
+    rdfs:range xsd:string .
+
+<https://data.example.org/transport/bcn/metro/ontology#lineDescription> a owl:DatatypeProperty ;
+    rdfs:label "line description" ;
+    rdfs:domain <https://data.example.org/transport/bcn/metro/ontology#MetroLine> ;
+    rdfs:range xsd:string .
+
+<https://data.example.org/transport/bcn/metro/ontology#lineId> a owl:DatatypeProperty ;
+    rdfs:label "line ID" ;
+    rdfs:domain <https://data.example.org/transport/bcn/metro/ontology#MetroLine> ;
+    rdfs:range xsd:integer .
+
+<https://data.example.org/transport/bcn/metro/ontology#lineName> a owl:DatatypeProperty ;
+    rdfs:label "line name" ;
+    rdfs:domain <https://data.example.org/transport/bcn/metro/ontology#MetroLine> ;
+    rdfs:range xsd:string .
+
+<https://data.example.org/transport/bcn/metro/ontology#lineOrder> a owl:DatatypeProperty ;
+    rdfs:label "line order" ;
+    rdfs:domain <https://data.example.org/transport/bcn/metro/ontology#MetroLine> ;
+    rdfs:range xsd:integer .
+
+<https://data.example.org/transport/bcn/metro/ontology#longitude> a owl:DatatypeProperty ;
+    rdfs:label "longitude" ;
+    rdfs:range xsd:decimal ;
+    rdfs:subPropertyOf geo:long .
+
+<https://data.example.org/transport/bcn/metro/ontology#onLine> a owl:ObjectProperty ;
+    rdfs:label "on line" ;
+    rdfs:domain <https://data.example.org/transport/bcn/metro/ontology#StationLine> ;
+    rdfs:range <https://data.example.org/transport/bcn/metro/ontology#MetroLine> .
+
+<https://data.example.org/transport/bcn/metro/ontology#operatedBy> a owl:ObjectProperty ;
+    rdfs:label "operated by" ;
+    rdfs:domain <https://data.example.org/transport/bcn/metro/ontology#MetroLine> ;
+    rdfs:range <https://data.example.org/transport/bcn/metro/ontology#Operator> .
+
+<https://data.example.org/transport/bcn/metro/ontology#originStation> a owl:DatatypeProperty ;
+    rdfs:label "origin station" ;
+    rdfs:domain <https://data.example.org/transport/bcn/metro/ontology#MetroLine> ;
+    rdfs:range xsd:string .
+
+<https://data.example.org/transport/bcn/metro/ontology#pictogram> a owl:DatatypeProperty ;
+    rdfs:label "pictogram" ;
+    rdfs:range xsd:string .
+
+<https://data.example.org/transport/bcn/metro/ontology#relatesTo> a owl:ObjectProperty ;
+    rdfs:label "relates to" ;
+    rdfs:domain <https://data.example.org/transport/bcn/metro/ontology#StationLine> ;
+    rdfs:range <https://data.example.org/transport/bcn/metro/ontology#Station> .
+
+<https://data.example.org/transport/bcn/metro/ontology#servesLine> a owl:ObjectProperty ;
+    rdfs:label "serves line" ;
+    rdfs:domain <https://data.example.org/transport/bcn/metro/ontology#Station> ;
+    rdfs:range <https://data.example.org/transport/bcn/metro/ontology#MetroLine> ;
+    owl:inverseOf <https://data.example.org/transport/bcn/metro/ontology#hasStation> .
+
+<https://data.example.org/transport/bcn/metro/ontology#stationCode> a owl:DatatypeProperty ;
+    rdfs:label "station code" ;
+    rdfs:domain <https://data.example.org/transport/bcn/metro/ontology#Station> ;
+    rdfs:range xsd:integer .
+
+<https://data.example.org/transport/bcn/metro/ontology#stationId> a owl:DatatypeProperty ;
+    rdfs:label "station ID" ;
+    rdfs:domain <https://data.example.org/transport/bcn/metro/ontology#Station> ;
+    rdfs:range xsd:integer .
+
+<https://data.example.org/transport/bcn/metro/ontology#stationName> a owl:DatatypeProperty ;
+    rdfs:label "station name" ;
+    rdfs:domain <https://data.example.org/transport/bcn/metro/ontology#Station> ;
+    rdfs:range xsd:string .
+
+<https://data.example.org/transport/bcn/metro/ontology#stationOrder> a owl:DatatypeProperty ;
+    rdfs:label "station order" ;
+    rdfs:domain <https://data.example.org/transport/bcn/metro/ontology#StationLine> ;
+    rdfs:range xsd:integer .
+
+<https://data.example.org/transport/bcn/metro/ontology#textColor> a owl:DatatypeProperty ;
+    rdfs:label "text color" ;
+    rdfs:domain <https://data.example.org/transport/bcn/metro/ontology#MetroLine> ;
+    rdfs:range xsd:string .
+
+<https://data.example.org/transport/bcn/metro/ontology#AccessibilityType> a owl:Class ;
+    rdfs:label "Accessibility Type" .
+
+<https://data.example.org/transport/bcn/metro/ontology#MetroLine> a owl:Class ;
+    rdfs:label "Metro Line" .
+
+<https://data.example.org/transport/bcn/metro/ontology#Operator> a owl:Class ;
+    rdfs:label "Transport Operator" .
+
+<https://data.example.org/transport/bcn/metro/ontology#ServiceType> a owl:Class ;
+    rdfs:label "Service Type" .
+
+<https://data.example.org/transport/bcn/metro/ontology#Station> a owl:Class ;
+    rdfs:label "Station" .
+
+<https://data.example.org/transport/bcn/metro/ontology#StationLine> a owl:Class ;
+    rdfs:label "Station Line Relationship" .
+
+<https://data.example.org/transport/bcn/metro/ontology#StationStatus> a owl:Class ;
+    rdfs:label "Station Status" .
+
+<https://data.example.org/transport/bcn/metro/ontology#TransportFamily> a owl:Class ;
+    rdfs:label "Transport Family" .

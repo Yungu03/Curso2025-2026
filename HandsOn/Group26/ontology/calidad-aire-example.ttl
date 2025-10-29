@@ -1,0 +1,46 @@
+@prefix : <http://example.org/madrid-air-quality/ontology/> .
+@prefix ont: <http://example.org/madrid-air-quality/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix data: <http://example.org/madrid-air-quality/data/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix dbpedia: <https://dbpedia.org/resource/> .
+@base <http://example.org/madrid-air-quality/ontology/> .
+
+#################################################################
+#    Individuals
+#################################################################
+
+###  http://dbpedia.org/resource/Nitrogen_dioxide
+<http://dbpedia.org/resource/Nitrogen_dioxide> rdf:type owl:NamedIndividual .
+
+
+###  http://example.org/madrid-air-quality/data/Measurement001
+data:Measurement001 rdf:type owl:NamedIndividual ,
+                             ont:Measurement ;
+                    ont:hasValidation "V" ;
+                    ont:hasValue 42.3 ;
+                    ont:measurementHour "09" .
+
+
+###  http://example.org/madrid-air-quality/data/NO2
+data:NO2 rdf:type owl:NamedIndividual ,
+                  ont:Pollutant ;
+         ont:pollutantSameAs <http://dbpedia.org/resource/Nitrogen_dioxide> ;
+         ont:pollutantCode "8" .
+
+
+###  http://example.org/madrid-air-quality/data/SamplingPoint001
+data:SamplingPoint001 rdf:type owl:NamedIndividual ,
+                               ont:SamplingPoint ;
+                      ont:hasMeasurement data:Measurement001 ;
+                      ont:measuresPollutant data:NO2 .
+
+
+###  http://example.org/madrid-air-quality/data/Station001
+data:Station001 rdf:type owl:NamedIndividual ,
+                         ont:Station ;
+                ont:hasSamplingPoint data:SamplingPoint001 ;
+                ont:stationLabel "Plaza del Carmen" .

@@ -1,0 +1,64 @@
+{
+  "@context": {
+    "@vocab": "https://schema.org/",
+    "ex": "http://example.org/ontology#",
+    "age": "ex:age",
+    "subjects": "ex:attendsCourse"
+  },
+  "@type": "Person",
+  "name": "Laura Gilgado Romero",
+  "homeLocation": {
+    "@type": "Place",
+    "name": "Mérida"
+  },
+  "age": 21,
+  "alumniOf": {
+    "@type": "CollegeOrUniversity",
+    "name": "Universidad Politécnica de Madrid"
+  },
+  "parent": [
+    { "@type": "Person", "name": "Gabriel" },
+    { "@type": "Person", "name": "María Teresa" }
+  ],
+  "subjects": [
+    {
+      "@type": "Course",
+      "name": "Semantic web, linked data and knowledge graphs",
+      "hasCourseInstance": {
+        "@type": "CourseInstance",
+        "instructor": [
+          { "@type": "Person", "name": "Óscar Corcho" },
+          { "@type": "Person", "name": "Raúl García" },
+          { "@type": "Person", "name": "Daniel Garijo" }
+        ],
+        "description": "Esta asignatura proporciona la base teórica y práctica sobre los fundamentos metodológicos y tecnológicos implicados en la generación y publicación de vocabularios y datos en la web de datos enlazados, así como en forma de grafos de conocimientos."
+      }
+    },
+    {
+      "@type": "Course",
+      "name": "English for professional and academic communication",
+      "hasCourseInstance": {
+        "@type": "CourseInstance",
+        "instructor": [
+          { "@type": "Person", "name": "Hanane Benali" },
+          { "@type": "Person", "name": "Elena Montiel" },
+          { "@type": "Person", "name": "Jelena Bobkina" },
+          { "@type": "Person", "name": "Patricia Martín" }
+        ],
+        "description": "This course makes students aware of the importance of effective communication skills in academic or professional settings, with a strong focus on contemporary issues related to computer engineering, and to help them develop those skills to communicate effectively in both settings."
+      }
+    },
+    {
+      "@type": "Course",
+      "name": "Gestión de procesos de tecnologías de la información",
+      "hasCourseInstance": {
+        "@type": "CourseInstance",
+        "instructor": [
+          { "@type": "Person", "name": "Ricardo Colomo" },
+          { "@type": "Person", "name": "Edmundo Tovar" }
+        ],
+        "description": "Esta asignatura trata los elementos de una organización, las normas para el mercado digital y el gobierno y gestión de las TI."
+      }
+    }
+  ]
+}

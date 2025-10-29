@@ -1,0 +1,26 @@
+PREFIX schema: <http://schema.org/>
+PREFIX dct:    <http://purl.org/dc/terms/>
+PREFIX wgs:    <http://www.w3.org/2003/01/geo/wgs84_pos#>
+PREFIX rdfs:   <http://www.w3.org/2000/01/rdf-schema#>
+
+# Número de estaciones
+SELECT (COUNT(*) AS ?n) WHERE { ?s a schema:Place . }
+
+# Listado básico
+SELECT ?s ?id ?name ?lat ?lon WHERE {
+  ?s a schema:Place ;
+     dct:identifier ?id ;
+     schema:name ?name ;
+     wgs:lat ?lat ;
+     wgs:long ?lon .
+}
+ORDER BY ?id
+
+# Estaciones dentro de una bbox aproximada (centro de Madrid)
+SELECT ?s ?name ?lat ?lon WHERE {
+  ?s a schema:Place ;
+     schema:name ?name ;
+     wgs:lat ?lat ; wgs:long ?lon .
+  FILTER (?lat > 40.34 && ?lat < 40.48 && ?lon > -3.74 && ?lon < -3.60)
+}
+ORDER BY ?name

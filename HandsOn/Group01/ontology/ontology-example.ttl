@@ -1,0 +1,203 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix geo: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix metro: <https://data.example.org/transport/bcn/metro/ontology#> .
+@prefix metroRes: <https://data.example.org/transport/bcn/metro/resource/> .
+
+# ================================================
+# METRO LINES INSTANCES
+# ================================================
+
+metroRes:metroLine/L1 a metro:MetroLine ;
+    metro:lineId 4 ;
+    metro:lineCode 1 ;
+    metro:lineName "L1" ;
+    metro:lineDescription "Hospital de Bellvitge - Fondo" ;
+    metro:originStation "Hospital de Bellvitge" ;
+    metro:destinationStation "Fondo" ;
+    metro:lineColor "CE1126" ;
+    metro:auxiliaryColor "CE1126" ;
+    metro:textColor "FFFFFF" ;
+    metro:lineOrder 1 ;
+    metro:pictogram "L1" ;
+    metro:operatedBy metroRes:operator/tmb ;
+    metro:belongsToFamily metroRes:family/metro ;
+    metro:lastUpdated "2025-10-05"^^xsd:date ;
+    metro:hasGeometry "MULTILINESTRING ((2.09846442731691 41.34213331882447, 2.1004703874388646 41.34162017819767, ...))"^^geo:wktLiteral .
+
+metroRes:metroLine/L2 a metro:MetroLine ;
+    metro:lineId 6 ;
+    metro:lineCode 2 ;
+    metro:lineName "L2" ;
+    metro:lineDescription "Paral·lel - Badalona Pompeu Fabra" ;
+    metro:originStation "Paral·lel" ;
+    metro:destinationStation "Badalona Pompeu Fabra" ;
+    metro:lineColor "93248F" ;
+    metro:auxiliaryColor "93248F" ;
+    metro:textColor "FFFFFF" ;
+    metro:lineOrder 2 ;
+    metro:pictogram "L2" ;
+    metro:operatedBy metroRes:operator/tmb ;
+    metro:belongsToFamily metroRes:family/metro ;
+    metro:lastUpdated "2025-10-05"^^xsd:date ;
+    metro:hasGeometry "MULTILINESTRING ((2.1714048423079237 41.37497593185556, 2.1684530181057347 41.37500849378258, ...))"^^geo:wktLiteral .
+
+metroRes:metroLine/L3 a metro:MetroLine ;
+    metro:lineId 2 ;
+    metro:lineCode 3 ;
+    metro:lineName "L3" ;
+    metro:lineDescription "Zona Universitària - Trinitat Nova" ;
+    metro:originStation "Zona Universitària" ;
+    metro:destinationStation "Trinitat Nova" ;
+    metro:lineColor "1EB53A" ;
+    metro:auxiliaryColor "1EB53A" ;
+    metro:textColor "FFFFFF" ;
+    metro:lineOrder 3 ;
+    metro:pictogram "L3" ;
+    metro:operatedBy metroRes:operator/tmb ;
+    metro:belongsToFamily metroRes:family/metro ;
+    metro:lastUpdated "2025-10-05"^^xsd:date ;
+    metro:hasGeometry "MULTILINESTRING ((2.106468797612073 41.382924708232224, 2.1263201471984057 41.38795038743853, ...))"^^geo:wktLiteral .
+
+metroRes:metroLine/L4 a metro:MetroLine ;
+    metro:lineId 5 ;
+    metro:lineCode 4 ;
+    metro:lineName "L4" ;
+    metro:lineDescription "La Pau - Trinitat Nova" ;
+    metro:originStation "La Pau" ;
+    metro:destinationStation "Trinitat Nova" ;
+    metro:lineColor "F7A30E" ;
+    metro:auxiliaryColor "F7A30E" ;
+    metro:textColor "000000" ;
+    metro:lineOrder 4 ;
+    metro:pictogram "L4" ;
+    metro:operatedBy metroRes:operator/tmb ;
+    metro:belongsToFamily metroRes:family/metro ;
+    metro:lastUpdated "2025-10-05"^^xsd:date ;
+    metro:hasGeometry "MULTILINESTRING ((2.2019398708835394 41.42610612975611, 2.2070868262655132 41.42224902668498, ...))"^^geo:wktLiteral .
+
+# ================================================
+# STATIONS INSTANCES (Examples from L1 line)
+# ================================================
+
+metroRes:station/hospitalDeBellvitge a metro:Station ;
+    metro:stationId 81 ;
+    metro:stationCode 111 ;
+    metro:stationName "Hospital de Bellvitge" ;
+    metro:inauguratedDate "1989-10-18"^^xsd:date ;
+    metro:hasAccessibility metroRes:accessibility/accessible ;
+    metro:hasStatus metroRes:status/operational ;
+    metro:pictogram "L1" ;
+    metro:latitude 41.344677306491334 ;
+    metro:longitude 2.107241921905464 ;
+    metro:hasGeometry "POINT (2.107241921905464 41.344677306491334)"^^geo:wktLiteral ;
+    metro:lastUpdated "2025-10-05"^^xsd:date .
+
+metroRes:station/bellvitge a metro:Station ;
+    metro:stationId 33 ;
+    metro:stationCode 112 ;
+    metro:stationName "Bellvitge" ;
+    metro:inauguratedDate "1989-10-18"^^xsd:date ;
+    metro:hasAccessibility metroRes:accessibility/accessible ;
+    metro:hasStatus metroRes:status/operational ;
+    metro:pictogram "L1" ;
+    metro:latitude 41.35097554129953 ;
+    metro:longitude 2.1109169952642675 ;
+    metro:hasGeometry "POINT (2.1109169952642675 41.35097554129953)"^^geo:wktLiteral ;
+    metro:lastUpdated "2025-10-05"^^xsd:date .
+
+metroRes:station/avCarrilet a metro:Station ;
+    metro:stationId 34 ;
+    metro:stationCode 113 ;
+    metro:stationName "Av. Carrilet" ;
+    metro:inauguratedDate "1987-04-24"^^xsd:date ;
+    metro:hasAccessibility metroRes:accessibility/accessible ;
+    metro:hasStatus metroRes:status/operational ;
+    metro:pictogram "L1" ;
+    metro:latitude 41.35855331385863 ;
+    metro:longitude 2.102631528901838 ;
+    metro:hasGeometry "POINT (2.102631528901838 41.35855331385863)"^^geo:wktLiteral ;
+    metro:lastUpdated "2025-10-05"^^xsd:date .
+
+# ================================================
+# STATION-LINE RELATIONSHIPS (Examples)
+# ================================================
+
+metroRes:stationLine/hospitalDeBellvitge_L1 a metro:StationLine ;
+    metro:relatesTo metroRes:station/hospitalDeBellvitge ;
+    metro:onLine metroRes:metroLine/L1 ;
+    metro:stationOrder 1 ;
+    metro:pictogram "L1" ;
+    metro:lineColor "CE1126" ;
+    metro:lastUpdated "2025-10-05"^^xsd:date .
+
+metroRes:stationLine/bellvitge_L1 a metro:StationLine ;
+    metro:relatesTo metroRes:station/bellvitge ;
+    metro:onLine metroRes:metroLine/L1 ;
+    metro:stationOrder 2 ;
+    metro:pictogram "L1" ;
+    metro:lineColor "CE1126" ;
+    metro:lastUpdated "2025-10-05"^^xsd:date .
+
+metroRes:stationLine/avCarrilet_L1 a metro:StationLine ;
+    metro:relatesTo metroRes:station/avCarrilet ;
+    metro:onLine metroRes:metroLine/L1 ;
+    metro:stationOrder 3 ;
+    metro:pictogram "L1" ;
+    metro:lineColor "CE1126" ;
+    metro:lastUpdated "2025-10-05"^^xsd:date .
+
+# ================================================
+# SUPPORTING INSTANCES
+# ================================================
+
+## Transport Family
+metroRes:family/metro a metro:TransportFamily ;
+    rdfs:label "Metro" ;
+    metro:familyOrder 1 .
+
+## Operator
+metroRes:operator/tmb a metro:Operator ;
+    rdfs:label "Metro" ;
+    rdfs:comment "Transports Metropolitans de Barcelona" .
+
+## Accessibility Types
+metroRes:accessibility/accessible a metro:AccessibilityType ;
+    rdfs:label "Accessible" .
+
+metroRes:accessibility/notAccessible a metro:AccessibilityType ;
+    rdfs:label "Not Accessible" .
+
+## Status Types
+metroRes:status/operational a metro:StationStatus ;
+    rdfs:label "Operatiu" .
+
+metroRes:status/underConstruction a metro:StationStatus ;
+    rdfs:label "Under Construction" .
+
+metroRes:status/closed a metro:StationStatus ;
+    rdfs:label "Closed" .
+
+# ================================================
+# LINE-STATION RELATIONSHIPS
+# ================================================
+
+## L1 Line relationships
+metroRes:metroLine/L1 metro:hasStation metroRes:station/hospitalDeBellvitge ;
+    metro:hasStation metroRes:station/bellvitge ;
+    metro:hasStation metroRes:station/avCarrilet ;
+    metro:hasStationLineRelation metroRes:stationLine/hospitalDeBellvitge_L1 ;
+    metro:hasStationLineRelation metroRes:stationLine/bellvitge_L1 ;
+    metro:hasStationLineRelation metroRes:stationLine/avCarrilet_L1 .
+
+## Station relationships
+metroRes:station/hospitalDeBellvitge metro:servesLine metroRes:metroLine/L1 ;
+    metro:connectsTo metroRes:station/bellvitge .
+
+metroRes:station/bellvitge metro:servesLine metroRes:metroLine/L1 ;
+    metro:connectsTo metroRes:station/hospitalDeBellvitge ;
+    metro:connectsTo metroRes:station/avCarrilet .
+
+metroRes:station/avCarrilet metro:servesLine metroRes:metroLine/L1 ;
+    metro:connectsTo metroRes:station/bellvitge .

@@ -1,0 +1,81 @@
+
+@prefix rr:   <http://www.w3.org/ns/r2rml#> .
+@prefix rml:  <http://semweb.mmlab.be/ns/rml#> .
+@prefix ql:   <http://semweb.mmlab.be/ns/ql#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+@prefix gtfs: <http://vocab.gtfs.org/terms#> .
+@prefix wgs:  <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix schema: <http://schema.org/> .
+
+########### TriplesMap: Stops ###########
+<#TM_Stops>
+  a rr:TriplesMap ;
+  rml:logicalSource [
+    rml:source "csv/stops-updated.csv" ;
+    rml:referenceFormulation ql:CSV ;
+    rml:delimiter ","
+  ] ;
+  rr:subjectMap [
+    rr:template "http://group15.linked.opendata.es/transport/stop/{stop_id}" ;
+    rr:class gtfs:Stop
+  ] ;
+  rr:predicateObjectMap [
+    rr:predicate schema:name ;
+    rr:objectMap [ rml:reference "stop_name" ]
+  ] ;
+  rr:predicateObjectMap [
+    rr:predicate wgs:lat ;
+    rr:objectMap [ rml:reference "stop_lat" ; rr:datatype xsd:decimal ]
+  ] ;
+  rr:predicateObjectMap [
+    rr:predicate wgs:long ;
+    rr:objectMap [ rml:reference "stop_lon" ; rr:datatype xsd:decimal ]
+  ] .
+
+########### TriplesMap: Routes ###########
+<#TM_Routes>
+  a rr:TriplesMap ;
+  rml:logicalSource [
+    rml:source "csv/routes-updated.csv" ;
+    rml:referenceFormulation ql:CSV ;
+    rml:delimiter ","
+  ] ;
+  rr:subjectMap [
+    rr:template "http://group15.linked.opendata.es/transport/route/{route_id}" ;
+    rr:class gtfs:Route
+  ] ;
+  rr:predicateObjectMap [
+    rr:predicate gtfs:shortName ;
+    rr:objectMap [ rml:reference "route_short_name" ]
+  ] ;
+  rr:predicateObjectMap [
+    rr:predicate gtfs:longName ;
+    rr:objectMap [ rml:reference "route_long_name" ]
+  ] .
+
+########### TriplesMap: StopTimes (joins route-stop) ###########
+<#TM_StopTimes>
+  a rr:TriplesMap ;
+  rml:logicalSource [
+    rml:source "csv/stop_times-updated.csv" ;
+    rml:referenceFormulation ql:CSV ;
+    rml:delimiter ","
+  ] ;
+  rr:subjectMap [
+    rr:template "http://group15.linked.opendata.es/transport/stoptime/{trip_id}-{stop_id}-{arrival_time}" ;
+    rr:class gtfs:StopTime
+  ] ;
+  rr:predicateObjectMap [
+    rr:predicate gtfs:stop ;
+    rr:objectMap [
+      rr:parentTriplesMap <#TM_Stops> ;
+      rr:joinCondition [ rr:child "stop_id" ; rr:parent "stop_id" ]
+    ]
+  ] ;
+  rr:predicateObjectMap [
+    rr:predicate gtfs:route ;
+    rr:objectMap [
+      rr:parentTriplesMap <#TM_Routes> ;
+      rr:joinCondition [ rr:child "route_id" ; rr:parent "route_id" ]
+    ]
+  ] .

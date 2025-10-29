@@ -1,0 +1,87 @@
+PREFIX trafico: <https://datos.madrid.es/ontology#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX ex: <https://smartaccidents.es/resource/>
+
+
+
+# Verificar que existen instancias de Accidente
+
+SELECT (COUNT(?accidente) AS ?numAccidentes)
+WHERE {
+  ?accidente a trafico:Accidente .
+}
+
+
+
+# 5 accidentes con su fecha, hora y distrito
+
+SELECT ?accidente ?fecha ?hora ?distrito
+WHERE {
+  ?accidente a trafico:Accidente ;
+             trafico:fecha ?fecha ;
+             trafico:hora ?hora ;
+             trafico:ubicadoEn ?distrito .
+}
+LIMIT 5
+
+
+
+# Verificar relaciones con personas y vehiculos
+
+SELECT ?accidente (COUNT(DISTINCT ?persona) AS ?numPersonas) (COUNT(DISTINCT ?vehiculo) AS ?numVehiculos)
+WHERE {
+  ?accidente a trafico:Accidente ;
+             trafico:tienePersona ?persona ;
+             trafico:tieneVehiculo ?vehiculo .
+}
+GROUP BY ?accidente
+LIMIT 5
+
+
+
+# Verificar que las personas tienen rango de edad y sexo
+
+SELECT ?persona ?rangoEdad ?sexo
+WHERE {
+  ?persona a trafico:Persona ;
+           trafico:rangoEdad ?rangoEdad ;
+           trafico:sexo ?sexo .
+}
+LIMIT 5
+
+
+
+# Personas positivas en alcohol o drogas
+
+SELECT ?persona ?positivaAlcohol ?positivaDroga
+WHERE {
+  ?persona a trafico:Persona .
+  OPTIONAL { ?persona trafico:positivaAlcohol ?positivaAlcohol . }
+  OPTIONAL { ?persona trafico:positivaDroga ?positivaDroga . }
+  FILTER(?positivaAlcohol = true || ?positivaDroga = true)
+}
+
+
+
+# Accidentes por distrito
+
+SELECT ?distrito (COUNT(?accidente) AS ?totalAccidentes)
+WHERE {
+  ?accidente a trafico:Accidente ;
+             trafico:ubicadoEn ?distrito .
+}
+GROUP BY ?distrito
+ORDER BY DESC(?totalAccidentes)
+
+
+
+# Tipos de vehículo implicados
+
+SELECT ?tipoVehiculo (COUNT(?vehiculo) AS ?total)
+WHERE {
+  ?vehiculo a trafico:Vehiculo ;
+             trafico:tipoVehiculo ?tipoVehiculo .
+}
+GROUP BY ?tipoVehiculo
+ORDER BY DESC(?total)

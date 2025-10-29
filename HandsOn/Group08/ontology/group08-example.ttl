@@ -1,33 +1,45 @@
-@prefix : <http://group08.linkeddata.es/ontology/BCNData#> .
-@prefix res: <http://group08.linkeddata.es/resource/> .
+@prefix ex: <http://example.org/resource/> .
+@prefix : <http://www.semanticweb.org/group08/ontology#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-### Air quality example
-res:station/08019004 a :Station ;
-  :locatedIn "Eixample" ;
-  :lat 41.390 ;
-  :lon 2.163 .
+#################################################################
+# Example instantiation based on the refined CSVs
+#################################################################
 
-res:observation/08019004-2025-08-10T12:00Z a :Observation ;
-  :measuredAt res:station/08019004 ;
-  :hasValue "24.5"^^xsd:decimal ;
-  :hasUnit "µg/m³" ;
-  :timestamp "2025-08-10T12:00:00Z"^^xsd:dateTime .
+# --- Air Quality Observation Example ---
+ex:aq_obs_4_NO2_2025-08-01T12 rdf:type :AirQualityObservation ;
+  :hasID "AQ_4_NO2_20250801T12" ;
+  :hasContaminantCode 8 ;
+  :hasContaminantValue 35.2 ;
+  :hasValidationFlag true ;
+  :hasObservationDateTime "2025-08-01T12:00:00"^^xsd:dateTime ;
+  :locatedIn ex:Barcelona .
 
-### Traffic + weather example
-res:trafficSection/4321 a :TrafficSection ;
-  :locatedIn "Sants-Montjuïc" ;
-  :hasWeather res:weather/now ;
-  :lat 41.373 ;
-  :lon 2.154 .
+# --- Traffic Section Example ---
+ex:traffic_1_20250801T120000 rdf:type :TrafficSection ;
+  :hasID "T_1_20250801T120000" ;
+  :hasCurrentTravelTime 310 ;
+  :hasPredictedTravelTime 300 ;
+  :hasCongestionFactor 1.03 ;
+  :hasTrafficState "congested" ;
+  :hasTrafficTendency "worsening" ;
+  :hasObservationDateTime "2025-08-01T12:00:00"^^xsd:dateTime ;
+  :locatedIn ex:Barcelona .
 
-res:weather/now a :WeatherCondition ;
-  :hasValue "Rain" ;
-  :timestamp "2025-08-10T14:00:00Z"^^xsd:dateTime .
+# --- Bike Parking Example ---
+ex:bikeParking_75990063447 rdf:type :BikeParking ;
+  :hasName "Aparcament SABA Travessera de Gràcia 17-21" ;
+  :hasStreetNumber 17 ;
+  :hasZipCode 8021 ;
+  :hasContactType "Telèfon" ;
+  :hasContactValue "662418060" ;
+  :locatedIn ex:Barcelona .
 
-### Bike parking example
-res:bikeParking/001 a :BikeParking ;
-  :locatedIn "Gràcia" ;
-  :lat 41.404 ;
-  :lon 2.158 ;
-  :capacity 20 .
+# --- Shared Location ---
+ex:Barcelona rdf:type :Location ;
+  :hasMunicipality "Barcelona" ;
+  :hasDistrict "Eixample" ;
+  :hasZipCode 8013 ;
+  geo:lat 41.3943 ;
+  geo:long 2.18198 .
+

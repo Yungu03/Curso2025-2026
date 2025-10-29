@@ -1,0 +1,67 @@
+@prefix rr: <http://www.w3.org/ns/r2rml#> .
+@prefix rml: <http://semweb.mmlab.be/ns/rml#> .
+@prefix ql: <http://semweb.mmlab.be/ns/ql#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix ex: <http://group24.linkeddata.es/ontology/> .
+
+# TriplesMap para distritos (recursos enlazables)
+<http://group24.linkeddata.es/mapping/DistrictMap>
+  a rr:TriplesMap ;
+  rml:logicalSource [
+    rml:source "csv/01-ArboladoEspeciesZonasVerdesDistritosCalles-2024-csv-updated.csv" ;
+    rml:referenceFormulation ql:CSV
+  ] ;
+  rr:subjectMap [
+    rr:template "http://group24.linkeddata.es/resource/district/{Num_Distrito}" ;
+    rr:class ex:District
+  ] ;
+  rr:predicateObjectMap [
+    rr:predicate ex:label ;
+    rr:objectMap [ rml:reference "Nombre_distrito" ]
+  ] .
+
+# TriplesMap para observaciones de arbolado (una por especie y distrito)
+<http://group24.linkeddata.es/mapping/TreeObservationMap>
+  a rr:TriplesMap ;
+  rml:logicalSource [
+    rml:source "csv/01-ArboladoEspeciesZonasVerdesDistritosCalles-2024-csv-updated.csv" ;
+    rml:referenceFormulation ql:CSV
+  ] ;
+
+  rr:subjectMap [
+    rr:template "http://group24.linkeddata.es/resource/treeobs/{Num_Distrito}/{Nombre_Especie}" ;
+    rr:class ex:TreeObservation
+  ] ;
+
+  # featureOfInterest -> recurso Distrito
+  rr:predicateObjectMap [
+    rr:predicate ex:featureOfInterest ;
+    rr:objectMap [
+      rr:template "http://group24.linkeddata.es/resource/district/{Num_Distrito}" ;
+      rr:termType rr:IRI
+    ]
+  ] ;
+
+  # especie observada
+  rr:predicateObjectMap [
+    rr:predicate ex:treeSpecies ;
+    rr:objectMap [ rml:reference "Nombre_Especie" ]
+  ] ;
+
+  # valor (número de árboles)
+  rr:predicateObjectMap [
+    rr:predicate ex:value ;
+    rr:objectMap [ rml:reference "Num_Unidades_2024" ; rr:datatype xsd:integer ]
+  ] ;
+
+  # año constante = 2024 (no viene en CSV)
+  rr:predicateObjectMap [
+    rr:predicate ex:year ;
+    rr:objectMap [ rr:constant "2024"^^xsd:gYear ]
+  ] ;
+
+  # dataset
+  rr:predicateObjectMap [
+    rr:predicate ex:inDataset ;
+    rr:object <http://group24.linkeddata.es/dataset/trees-madrid-2024>
+  ] .

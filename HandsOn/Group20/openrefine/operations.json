@@ -301,469 +301,84 @@
         "value": ""
       }
     ],
-    "description": "Crear la columna geoData en el índice 13 mediante la obtención de URLs basadas en la columna lat utilizando la expresión grel:\"https://nominatim.openstreetmap.org/reverse?format=json&lat=\" + value + \"&lon=\" + cells['long'].value + \"&addressdetails=1\""
+    "description": "Crear la columna geoData ..."
   },
+  { "op": "core/column-addition", "engineConfig": { "facets": [], "mode": "row-based" }, "baseColumnName": "geoData", "expression": "grel:if(isBlank(value), \"\", parseJson(value).address.postcode)", "onError": "set-to-blank", "newColumnName": "postalCode", "columnInsertIndex": 14, "description": "Crear postalCode" },
+  { "op": "core/column-move", "columnName": "postalCode", "index": 13, "description": "Mover postalCode" },
+  { "op": "core/column-move", "columnName": "postalCode", "index": 12, "description": "Mover postalCode" },
+  { "op": "core/column-move", "columnName": "postalCode", "index": 11, "description": "Mover postalCode" },
+  { "op": "core/column-move", "columnName": "postalCode", "index": 10, "description": "Mover postalCode" },
+  { "op": "core/column-move", "columnName": "postalCode", "index": 9, "description": "Mover postalCode" },
+  { "op": "core/column-move", "columnName": "postalCode", "index": 8, "description": "Mover postalCode" },
+  { "op": "core/column-move", "columnName": "postalCode", "index": 7, "description": "Mover postalCode" },
+  { "op": "core/column-move", "columnName": "postalCode", "index": 6, "description": "Mover postalCode" },
+  { "op": "core/column-move", "columnName": "postalCode", "index": 5, "description": "Mover postalCode" },
+  { "op": "core/column-removal", "columnName": "areaCode", "description": "Eliminar areaCode" },
+  { "op": "core/column-rename", "oldColumnName": "postalCode", "newColumnName": "areaCode", "description": "Renombrar postalCode a areaCode" },
   {
-    "op": "core/column-addition",
+    "op": "core/mass-edit",
     "engineConfig": {
-      "facets": [],
+      "facets": [
+        {
+          "type": "list",
+          "name": "emtParking",
+          "expression": "value",
+          "columnName": "emtParking",
+          "invert": false,
+          "omitBlank": false,
+          "omitError": false,
+          "selection": [
+            { "v": { "v": "False", "l": "False" } }
+          ],
+          "selectBlank": false,
+          "selectError": false
+        }
+      ],
       "mode": "row-based"
     },
-    "baseColumnName": "geoData",
-    "expression": "grel:if(isBlank(value), \"\", parseJson(value).address.postcode)",
-    "onError": "set-to-blank",
-    "newColumnName": "postalCode",
-    "columnInsertIndex": 14,
-    "description": "Crear la columna postalCode en el índice 14 basada en la columna geoData usando la expresión grel:if(isBlank(value), \"\", parseJson(value).address.postcode)"
+    "columnName": "emtParking",
+    "expression": "value",
+    "edits": [
+      { "from": ["False"], "fromBlank": false, "fromError": false, "to": "false" }
+    ],
+    "description": "Editar celdas en masa en columna emtParking"
   },
   {
-    "op": "core/column-move",
-    "columnName": "postalCode",
-    "index": 13,
-    "description": "Mueve la columna postalCode a la posición 13"
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [
+        {
+          "type": "list",
+          "name": "emtParking",
+          "expression": "value",
+          "columnName": "emtParking",
+          "invert": false,
+          "omitBlank": false,
+          "omitError": false,
+          "selection": [
+            { "v": { "v": "True", "l": "True" } }
+          ],
+          "selectBlank": false,
+          "selectError": false
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "emtParking",
+    "expression": "value",
+    "edits": [
+      { "from": ["True"], "fromBlank": false, "fromError": false, "to": "true" }
+    ],
+    "description": "Editar celdas en masa en columna emtParking"
   },
   {
-    "op": "core/column-move",
-    "columnName": "postalCode",
-    "index": 12,
-    "description": "Mueve la columna postalCode a la posición 12"
-  },
-  {
-    "op": "core/column-move",
-    "columnName": "postalCode",
-    "index": 11,
-    "description": "Mueve la columna postalCode a la posición 11"
-  },
-  {
-    "op": "core/column-move",
-    "columnName": "postalCode",
-    "index": 10,
-    "description": "Mueve la columna postalCode a la posición 10"
-  },
-  {
-    "op": "core/column-move",
-    "columnName": "postalCode",
-    "index": 9,
-    "description": "Mueve la columna postalCode a la posición 9"
-  },
-  {
-    "op": "core/column-move",
-    "columnName": "postalCode",
-    "index": 8,
-    "description": "Mueve la columna postalCode a la posición 8"
-  },
-  {
-    "op": "core/column-move",
-    "columnName": "postalCode",
-    "index": 7,
-    "description": "Mueve la columna postalCode a la posición 7"
-  },
-  {
-    "op": "core/column-move",
-    "columnName": "postalCode",
-    "index": 6,
-    "description": "Mueve la columna postalCode a la posición 6"
-  },
-  {
-    "op": "core/column-move",
-    "columnName": "postalCode",
-    "index": 5,
-    "description": "Mueve la columna postalCode a la posición 5"
-  },
-  {
-    "op": "core/column-removal",
+    "op": "core/text-transform",
+    "engineConfig": { "facets": [], "mode": "row-based" },
     "columnName": "areaCode",
-    "description": "Eliminar columna areaCode"
-  },
-  {
-    "op": "core/column-rename",
-    "oldColumnName": "postalCode",
-    "newColumnName": "areaCode",
-    "description": "Renombra la columna postalCode a areaCode"
-  },
-  {
-    "op": "core/recon",
-    "engineConfig": {
-      "facets": [],
-      "mode": "row-based"
-    },
-    "columnName": "zrea",
-    "config": {
-      "mode": "standard-service",
-      "service": "https://wikidata.reconci.link/en/api",
-      "identifierSpace": "http://www.wikidata.org/entity/",
-      "schemaSpace": "http://www.wikidata.org/prop/direct/",
-      "type": {
-        "id": "Q2074737",
-        "name": "municipality of Spain"
-      },
-      "autoMatch": true,
-      "batchSize": 10,
-      "columnDetails": [],
-      "limit": 0
-    },
-    "description": "Reconcile cells in column zrea to type Q2074737"
-  },
-  {
-    "op": "core/recon-judge-similar-cells",
-    "engineConfig": {
-      "facets": [],
-      "mode": "row-based"
-    },
-    "columnName": "zrea",
-    "similarValue": "Madrid",
-    "judgment": "matched",
-    "match": {
-      "id": "Q2807",
-      "name": "Madrid",
-      "types": [
-        "Q2074737",
-        "Q1200957",
-        "Q200250"
-      ],
-      "score": 100
-    },
-    "shareNewTopics": false,
-    "description": "Emparejar el elemento Madrid (Q2807) para las celdas que contienen \"Madrid\" en la columna zrea"
-  },
-  {
-    "op": "core/recon",
-    "engineConfig": {
-      "facets": [],
-      "mode": "row-based"
-    },
-    "columnName": "country",
-    "config": {
-      "mode": "standard-service",
-      "service": "https://wikidata.reconci.link/en/api",
-      "identifierSpace": "http://www.wikidata.org/entity/",
-      "schemaSpace": "http://www.wikidata.org/prop/direct/",
-      "autoMatch": true,
-      "batchSize": 10,
-      "columnDetails": [],
-      "limit": 0
-    },
-    "description": "Reconcile cells in column country to type null"
-  },
-  {
-    "op": "core/recon-judge-similar-cells",
-    "engineConfig": {
-      "facets": [],
-      "mode": "row-based"
-    },
-    "columnName": "country",
-    "similarValue": "España",
-    "judgment": "matched",
-    "match": {
-      "id": "Q29",
-      "name": "Spain",
-      "types": [
-        "Q3624078",
-        "Q1250464",
-        "Q6256",
-        "Q51576574",
-        "Q179671"
-      ],
-      "score": 100
-    },
-    "shareNewTopics": false,
-    "description": "Emparejar el elemento Spain (Q29) para las celdas que contienen \"España\" en la columna country"
-  },
-  {
-    "op": "core/recon",
-    "engineConfig": {
-      "facets": [],
-      "mode": "row-based"
-    },
-    "columnName": "state",
-    "config": {
-      "mode": "standard-service",
-      "service": "https://wikidata.reconci.link/en/api",
-      "identifierSpace": "http://www.wikidata.org/entity/",
-      "schemaSpace": "http://www.wikidata.org/prop/direct/",
-      "autoMatch": true,
-      "batchSize": 10,
-      "columnDetails": [],
-      "limit": 0
-    },
-    "description": "Reconcile cells in column state to type null"
-  },
-  {
-    "op": "core/recon-judge-similar-cells",
-    "engineConfig": {
-      "facets": [],
-      "mode": "row-based"
-    },
-    "columnName": "state",
-    "similarValue": "España",
-    "judgment": "matched",
-    "match": {
-      "id": "Q29",
-      "name": "Spain",
-      "types": [
-        "Q3624078",
-        "Q1250464",
-        "Q6256",
-        "Q51576574",
-        "Q179671"
-      ],
-      "score": 100
-    },
-    "shareNewTopics": false,
-    "description": "Emparejar el elemento Spain (Q29) para las celdas que contienen \"España\" en la columna state"
-  },
-  {
-    "op": "core/recon",
-    "engineConfig": {
-      "facets": [],
-      "mode": "row-based"
-    },
-    "columnName": "town",
-    "config": {
-      "mode": "standard-service",
-      "service": "https://wikidata.reconci.link/en/api",
-      "identifierSpace": "http://www.wikidata.org/entity/",
-      "schemaSpace": "http://www.wikidata.org/prop/direct/",
-      "autoMatch": true,
-      "batchSize": 10,
-      "columnDetails": [],
-      "limit": 0
-    },
-    "description": "Reconcile cells in column town to type null"
-  },
-  {
-    "op": "core/recon-judge-similar-cells",
-    "engineConfig": {
-      "facets": [],
-      "mode": "row-based"
-    },
-    "columnName": "town",
-    "similarValue": "Madrid",
-    "judgment": "matched",
-    "match": {
-      "id": "Q2807",
-      "name": "Madrid",
-      "types": [
-        "Q2074737",
-        "Q1200957",
-        "Q200250"
-      ],
-      "score": 100
-    },
-    "shareNewTopics": false,
-    "description": "Emparejar el elemento Madrid (Q2807) para las celdas que contienen \"Madrid\" en la columna town"
-  },
-  {
-    "op": "core/recon",
-    "engineConfig": {
-      "facets": [],
-      "mode": "row-based"
-    },
-    "columnName": "zrea",
-    "config": {
-      "mode": "standard-service",
-      "service": "https://wikidata.reconci.link/en/api",
-      "identifierSpace": "http://www.wikidata.org/entity/",
-      "schemaSpace": "http://www.wikidata.org/prop/direct/",
-      "autoMatch": true,
-      "batchSize": 10,
-      "columnDetails": [],
-      "limit": 0
-    },
-    "description": "Reconcile cells in column zrea to type null"
-  },
-  {
-    "op": "core/recon-judge-similar-cells",
-    "engineConfig": {
-      "facets": [],
-      "mode": "row-based"
-    },
-    "columnName": "zrea",
-    "similarValue": "Madrid",
-    "judgment": "matched",
-    "match": {
-      "id": "Q5756",
-      "name": "Community of Madrid",
-      "types": [
-        "Q10742",
-        "Q43229",
-        "Q406957"
-      ],
-      "score": 100
-    },
-    "shareNewTopics": false,
-    "description": "Emparejar el elemento Community of Madrid (Q5756) para las celdas que contienen \"Madrid\" en la columna zrea"
-  },
-  {
-    "op": "core/column-addition",
-    "engineConfig": {
-      "facets": [],
-      "mode": "row-based"
-    },
-    "baseColumnName": "name",
-    "expression": "grel:\"https://www.google.com/search?q=\" + escape(value, \"url\") + \"+parking+Madrid+email\"",
-    "onError": "set-to-blank",
-    "newColumnName": "enlace busqueda",
-    "columnInsertIndex": 3,
-    "description": "Crear la columna enlace busqueda en el índice 3 basada en la columna name usando la expresión grel:\"https://www.google.com/search?q=\" + escape(value, \"url\") + \"+parking+Madrid+email\""
-  },
-  {
-    "op": "core/column-addition",
-    "engineConfig": {
-      "facets": [],
-      "mode": "row-based"
-    },
-    "baseColumnName": "enlace busqueda",
-    "expression": "grel:value",
-    "onError": "set-to-blank",
-    "newColumnName": "telefono",
-    "columnInsertIndex": 4,
-    "description": "Crear la columna telefono en el índice 4 basada en la columna enlace busqueda usando la expresión grel:value"
-  },
-  {
-    "op": "core/column-move",
-    "columnName": "email",
-    "index": 10,
-    "description": "Mueve la columna email a la posición 10"
-  },
-  {
-    "op": "core/column-move",
-    "columnName": "email",
-    "index": 9,
-    "description": "Mueve la columna email a la posición 9"
-  },
-  {
-    "op": "core/column-move",
-    "columnName": "email",
-    "index": 8,
-    "description": "Mueve la columna email a la posición 8"
-  },
-  {
-    "op": "core/column-move",
-    "columnName": "email",
-    "index": 7,
-    "description": "Mueve la columna email a la posición 7"
-  },
-  {
-    "op": "core/column-move",
-    "columnName": "email",
-    "index": 6,
-    "description": "Mueve la columna email a la posición 6"
-  },
-  {
-    "op": "core/column-move",
-    "columnName": "email",
-    "index": 5,
-    "description": "Mueve la columna email a la posición 5"
-  },
-  {
-    "op": "core/column-move",
-    "columnName": "email",
-    "index": 4,
-    "description": "Mueve la columna email a la posición 4"
-  },
-  {
-    "op": "core/column-rename",
-    "oldColumnName": "enlace busqueda",
-    "newColumnName": "enlace busqueda mail",
-    "description": "Renombra la columna enlace busqueda a enlace busqueda mail"
-  },
-  {
-    "op": "core/column-addition",
-    "engineConfig": {
-      "facets": [],
-      "mode": "row-based"
-    },
-    "baseColumnName": "name",
-    "expression": "grel:\"https://www.google.com/search?q=\" + escape(value, \"url\") + \"+parking+Madrid+teléfono\"",
-    "onError": "set-to-blank",
-    "newColumnName": "enlace busqueda movil",
-    "columnInsertIndex": 3,
-    "description": "Crear la columna enlace busqueda movil en el índice 3 basada en la columna name usando la expresión grel:\"https://www.google.com/search?q=\" + escape(value, \"url\") + \"+parking+Madrid+teléfono\""
-  },
-  {
-    "op": "core/column-removal",
-    "columnName": "enlace busqueda movil",
-    "description": "Eliminar columna enlace busqueda movil"
-  },
-  {
-    "op": "core/column-removal",
-    "columnName": "enlace busqueda mail",
-    "description": "Eliminar columna enlace busqueda mail"
-  },
-  {
-    "op": "core/column-removal",
-    "columnName": "telefono",
-    "description": "Eliminar columna telefono"
-  },
-  {
-    "op": "core/column-removal",
-    "columnName": "geoData",
-    "description": "Eliminar columna geoData"
-  },
-  {
-    "op": "core/text-transform",
-    "engineConfig": {
-      "facets": [],
-      "mode": "row-based"
-    },
-    "columnName": "address",
-    "expression": "value.toTitlecase()",
+    "expression": "grel:if(cells['id'].value=='69','28003',value)",
     "onError": "keep-original",
     "repeat": false,
-    "repeatCount": 10,
-    "description": "Transforma el texto de las celdas en la columna address usando la expresión value.toTitlecase()"
-  },
-  {
-    "op": "core/text-transform",
-    "engineConfig": {
-      "facets": [],
-      "mode": "row-based"
-    },
-    "columnName": "name",
-    "expression": "value.toTitlecase()",
-    "onError": "keep-original",
-    "repeat": false,
-    "repeatCount": 10,
-    "description": "Transforma el texto de las celdas en la columna name usando la expresión value.toTitlecase()"
-  },
-  {
-    "op": "core/text-transform",
-    "engineConfig": {
-      "facets": [],
-      "mode": "row-based"
-    },
-    "columnName": "address",
-    "expression": "grel:value.replace(\"C/\",\"Calle\")",
-    "onError": "keep-original",
-    "repeat": false,
-    "repeatCount": 10,
-    "description": "Transforma el texto de las celdas en la columna address usando la expresión grel:value.replace(\"C/\",\"Calle\")"
-  },
-  {
-    "op": "core/text-transform",
-    "engineConfig": {
-      "facets": [],
-      "mode": "row-based"
-    },
-    "columnName": "address",
-    "expression": "grel:value.replace(\"Avda.\",\"Avenida\")",
-    "onError": "keep-original",
-    "repeat": false,
-    "repeatCount": 10,
-    "description": "Transforma el texto de las celdas en la columna address usando la expresión grel:value.replace(\"Avda.\",\"Avenida\")"
-  },
-  {
-    "op": "core/text-transform",
-    "engineConfig": {
-      "facets": [],
-      "mode": "row-based"
-    },
-    "columnName": "address",
-    "expression": "grel:value.replace(\"Pza.\", \"Plaza\")",
-    "onError": "keep-original",
-    "repeat": false,
-    "repeatCount": 10,
-    "description": "Transforma el texto de las celdas en la columna address usando la expresión grel:value.replace(\"Pza.\", \"Plaza\")"
+    "repeatCount": 1,
+    "description": "Fijar areaCode=28003 cuando id==69"
   }
 ]

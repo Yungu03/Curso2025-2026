@@ -1,0 +1,85 @@
+base: "https://raw.githubusercontent.com/paulinaloew/Curso2025-2026/master/HandsOn/Group06/"
+prefixes:
+  ex: "https://raw.githubusercontent.com/paulinaloew/Curso2025-2026/master/HandsOn/Group06/def/"
+  rdf: "http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+  rdfs: "http://www.w3.org/2000/01/rdf-schema#"
+  xsd: "http://www.w3.org/2001/XMLSchema#"
+
+sources:
+  trees:
+    access: "../csv/arbolado_parques_madrid_2024-updated.csv"
+    referenceFormulation: csv
+  zones:
+    access: "../csv/Zonas-Verdes-2024-updated.csv"
+    referenceFormulation: csv
+
+mappings:
+
+  District:
+    sources: zones
+    s: district/$(district)
+    po:
+      - [a, ex:District]
+      - [rdfs:label, $(district)]
+
+  Zone:
+    sources: zones
+    s: zone/$(file_number)
+    po:
+      - [a, ex:GreenZone]
+      - [ex:zoneId, $(file_number)]
+      - [ex:area, $(area_m2), xsd:decimal]
+      - [ex:subcategory, $(subcategory)]
+      - [ex:section, $(section)]
+      - [ex:propertyType, $(property_type)]
+      - [ex:intendedUse, $(land_use)]
+      - [ex:address, $(location)]
+      - p: ex:inDistrict
+        o:
+          mapping: District
+          condition:
+            function: equal
+            parameters:
+              - [str1, $(district)]
+              - [str2, $(district)]
+
+  Species:
+    sources: trees
+    s: species/$(species_name)
+    po:
+      - [a, ex:Species]
+      - [rdfs:label, $(species_name)]
+
+  Park:
+    sources: trees
+    s: park/$(park_name)
+    po:
+      - [a, ex:Park]
+      - [rdfs:label, $(park_name)]
+
+  Tree:
+    sources: trees
+    s: tree/$(park_name)/$(species_name)
+    po:
+      - [a, ex:Tree]
+      - p: rdfs:label
+        o:
+          value: "{species_name} @ {park_name}"
+      - [ex:treeCount, $(units_2024), xsd:integer]
+      - p: ex:hasSpecies
+        o:
+          mapping: Species
+          condition:
+            function: equal
+            parameters:
+              - [str1, $(species_name)]
+              - [str2, $(species_name)]
+      - p: ex:inPark
+        o:
+          mapping: Park
+          condition:
+            function: equal
+            parameters:
+              - [str1, $(park_name)]
+              - [str2, $(park_name)]
+      - [ex:parkName, $(park_name)]

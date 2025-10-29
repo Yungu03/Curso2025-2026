@@ -1,0 +1,29 @@
+{
+  "@context": {
+    "ex": "https://example.org/iot/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+
+    "includes":   { "@id": "ex:includes",       "@type": "@id" },
+    "hasOwner":   { "@id": "ex:hasOwner",       "@type": "@id" },
+    "hasName":    "ex:hasName",
+    "hasMeasurement": { "@id": "ex:hasMeasurement", "@type": "@id" },
+    "hasTemperature": { "@id": "ex:hasTemperature", "@type": "xsd:integer" },
+    "atTime":         { "@id": "ex:atTime",         "@type": "xsd:dateTime" }
+  },
+
+  "@graph": [
+    { "@id": "ex:Class01",
+      "includes": ["ex:Sensor029", "ex:Computer101"] },
+
+    { "@id": "ex:Sensor029",
+      "hasOwner": "ex:User10A",
+      "hasMeasurement": "ex:Measurement8401" },
+
+    { "@id": "ex:User10A",
+      "hasName": "Pedro" },
+
+    { "@id": "ex:Measurement8401",
+      "hasTemperature": 29,
+      "atTime": "2010-06-12T12:00:12" }
+  ]
+}

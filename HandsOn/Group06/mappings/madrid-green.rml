@@ -1,0 +1,145 @@
+@prefix rr:    <http://www.w3.org/ns/r2rml#> .
+@prefix rml:   <http://semweb.mmlab.be/ns/rml#> .
+@prefix ql:    <http://semweb.mmlab.be/ns/ql#> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+
+@prefix ex: <https://raw.githubusercontent.com/paulinaloew/Curso2025-2026/master/HandsOn/Group06/def/> .
+@base       <https://raw.githubusercontent.com/paulinaloew/Curso2025-2026/master/HandsOn/Group06/> .
+
+# Logical sources
+<#LS_Trees>
+  rml:source               "../csv/arbolado_parques_madrid_2024-updated.csv" ;
+  rml:referenceFormulation ql:CSV .
+
+<#LS_Zones>
+  rml:source               "../csv/Zonas-Verdes-2024-updated.csv" ;
+  rml:referenceFormulation ql:CSV .
+
+# Triples Map: District
+<#TM_District> a rr:TriplesMap ;
+  rml:logicalSource <#LS_Zones> ;
+  rr:subjectMap [
+    rr:template "district/{district}" ;
+    rr:class ex:District ;
+    rr:termType rr:IRI
+  ] ;
+  rr:predicateObjectMap [
+    rr:predicate rdfs:label ;
+    rr:objectMap [ rml:reference "district" ]
+  ] .
+
+# Triples Map: Green Zone
+<#TM_Zone> a rr:TriplesMap ;
+  rml:logicalSource <#LS_Zones> ;
+  rr:subjectMap [
+    rr:template "zone/{file_number}" ;
+    rr:class ex:GreenZone ;
+    rr:termType rr:IRI
+  ] ;
+  rr:predicateObjectMap [
+    rr:predicate ex:zoneId ;
+    rr:objectMap [ rml:reference "file_number" ; rr:datatype xsd:string ]
+  ] ;
+  rr:predicateObjectMap [
+    rr:predicate ex:area ;
+    rr:objectMap [ rml:reference "area_m2" ; rr:datatype xsd:decimal ]
+  ] ;
+  rr:predicateObjectMap [
+    rr:predicate ex:subcategory ;
+    rr:objectMap [ rml:reference "subcategory" ]
+  ] ;
+  rr:predicateObjectMap [
+    rr:predicate ex:section ;
+    rr:objectMap [ rml:reference "section" ]
+  ] ;
+  rr:predicateObjectMap [
+    rr:predicate ex:propertyType ;
+    rr:objectMap [ rml:reference "property_type" ]
+  ] ;
+  rr:predicateObjectMap [
+    rr:predicate ex:intendedUse ;
+    rr:objectMap [ rml:reference "land_use" ]
+  ] ;
+  rr:predicateObjectMap [
+    rr:predicate ex:address ;
+    rr:objectMap [ rml:reference "location" ]
+  ] ;
+  rr:predicateObjectMap [
+    rr:predicate ex:inDistrict ;
+    rr:objectMap [
+      rr:parentTriplesMap <#TM_District> ;
+      rr:joinCondition [
+        rr:child  "district" ;
+        rr:parent "district"
+      ]
+    ]
+  ] .
+
+# Triples Map: Species
+<#TM_Species> a rr:TriplesMap ;
+  rml:logicalSource <#LS_Trees> ;
+  rr:subjectMap [
+    rr:template "species/{species_name}" ;
+    rr:class ex:Species ;
+    rr:termType rr:IRI
+  ] ;
+  rr:predicateObjectMap [
+    rr:predicate rdfs:label ;
+    rr:objectMap [ rml:reference "species_name" ]
+  ] .
+
+# Triples Map: Park
+<#TM_Park> a rr:TriplesMap ;
+  rml:logicalSource <#LS_Trees> ;
+  rr:subjectMap [
+    rr:template "park/{park_name}" ;
+    rr:class ex:Park ;
+    rr:termType rr:IRI
+  ] ;
+  rr:predicateObjectMap [
+    rr:predicate rdfs:label ;
+    rr:objectMap [ rml:reference "park_name" ]
+  ] .
+
+# Triples Map: Tree
+<#TM_Tree> a rr:TriplesMap ;
+  rml:logicalSource <#LS_Trees> ;
+  rr:subjectMap [
+    rr:template "tree/{park_name}/{species_name}" ;
+    rr:class ex:Tree ;
+    rr:termType rr:IRI
+  ] ;
+  rr:predicateObjectMap [
+    rr:predicate rdfs:label ;
+    rr:objectMap [ rr:template "{species_name} @ {park_name}" ]
+  ] ;
+  rr:predicateObjectMap [
+    rr:predicate ex:treeCount ;
+    rr:objectMap [ rml:reference "units_2024" ; rr:datatype xsd:integer ]
+  ] ;
+  rr:predicateObjectMap [
+    rr:predicate ex:hasSpecies ;
+    rr:objectMap [
+      rr:parentTriplesMap <#TM_Species> ;
+      rr:joinCondition [
+        rr:child  "species_name" ;
+        rr:parent "species_name"
+      ]
+    ]
+  ] ;
+  rr:predicateObjectMap [
+    rr:predicate ex:inPark ;
+    rr:objectMap [
+      rr:parentTriplesMap <#TM_Park> ;
+      rr:joinCondition [
+        rr:child  "park_name" ;
+        rr:parent "park_name"
+      ]
+    ]
+  ] ;
+  rr:predicateObjectMap [
+    rr:predicate ex:parkName ;
+    rr:objectMap [ rml:reference "park_name" ]
+  ] .

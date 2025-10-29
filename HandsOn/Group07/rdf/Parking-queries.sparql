@@ -1,0 +1,55 @@
+# Query 1: Count all parking facilities
+PREFIX mm: <http://movemadrid.org/def/base#>
+SELECT (COUNT(?parking) as ?totalParkings)
+WHERE {
+    ?parking a mm:CarParking .
+}
+
+# Query 2: List all districts and count of parkings in each
+PREFIX mm: <http://movemadrid.org/def/base#>
+PREFIX schema: <https://schema.org/>
+SELECT ?districtName (COUNT(?parking) as ?parkingCount)
+WHERE {
+    ?parking a mm:CarParking ;
+             mm:inDistrict ?district .
+    ?district schema:name ?districtName .
+}
+GROUP BY ?districtName
+ORDER BY DESC(?parkingCount)
+
+# Query 3: Find parking facilities with coordinates in specific area
+PREFIX mm: <http://movemadrid.org/def/base#>
+PREFIX schema: <https://schema.org/>
+SELECT ?name ?lat ?long
+WHERE {
+    ?parking a mm:CarParking ;
+             schema:name ?name ;
+             schema:latitude ?lat ;
+             schema:longitude ?long .
+    FILTER (?lat > 40.4 && ?lat < 40.5 && ?long > -3.7 && ?long < -3.6)
+}
+
+# Query 4: List parking facilities with contact information
+PREFIX mm: <http://movemadrid.org/def/base#>
+PREFIX schema: <https://schema.org/>
+SELECT ?name ?phone ?email
+WHERE {
+    ?parking a mm:CarParking ;
+             schema:name ?name ;
+             mm:carParkingPhone ?phone ;
+             mm:carParkingEmail ?email .
+    FILTER (BOUND(?phone) || BOUND(?email))
+}
+
+# Query 5: Verify data integrity - check for parkings without coordinates
+PREFIX mm: <http://movemadrid.org/def/base#>
+PREFIX schema: <https://schema.org/>
+
+SELECT ?parking ?name
+WHERE {
+    ?parking a mm:CarParking ;
+             schema:name ?name .
+    OPTIONAL { ?parking schema:latitude ?lat . }
+    OPTIONAL { ?parking schema:longitude ?long . }
+    FILTER (!BOUND(?lat) || !BOUND(?long))
+}

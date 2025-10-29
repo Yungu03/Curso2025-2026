@@ -1,0 +1,51 @@
+{
+  "@context": {
+    "ex": "http://example.org#",
+    "name": "ex:name",
+    "hometown": "ex:hometown",
+    "age": "ex:age",
+    "almaMater": "ex:almaMater",
+    "parents": "ex:parents",
+    "subjects": "ex:subjects",
+    "teachers": "ex:teachers",
+    "description": "ex:description"
+  },
+  "@id": "ex:JuanmaNovoa",
+  "name": "Juanma Novoa",
+  "hometown": "Málaga",
+  "age": 23,
+  "almaMater": "Universidad Politécnica de Madrid (UPM)",
+  "parents": ["Paco", "Paca"],
+  "subjects": [
+    {
+      "@id": "ex:SemanticWeb",
+      "name": "Semantic Web",
+      "teachers": ["Óscar Corcho"],
+      "description": "Introducción a los principios de la Web Semántica, RDF y ontologías."
+    },
+    {
+      "@id": "ex:PDL",
+      "name": "PDL (Procesadores de Lenguajes)",
+      "teachers": ["Equipo docente del área de lenguajes y compiladores"],
+      "description": "Análisis léxico y sintáctico, desarrollo de compiladores y traductores."
+    },
+    {
+      "@id": "ex:GPTI",
+      "name": "GPTI (Gestión de Procesos de la Información)",
+      "teachers": ["Ricardo Colomo"],
+      "description": "Estudio de metodologías y herramientas para la gestión de la información corporativa."
+    },
+    {
+      "@id": "ex:IngSoftware2",
+      "name": "Ingeniería del Software II",
+      "teachers": ["Sebastián Feliu"],
+      "description": "Diseño avanzado de software, metodologías ágiles y control de versiones."
+    },
+    {
+      "@id": "ex:Biocomputing",
+      "name": "Biocomputing",
+      "teachers": ["Equipo interdisciplinar de bioinformática"],
+      "description": "Aplicaciones computacionales en biología y análisis de datos genómicos."
+    }
+  ]
+}

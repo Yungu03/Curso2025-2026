@@ -1,0 +1,41 @@
+[
+  {
+    "op": "core/column-addition",
+    "description": "Add city_label (constant 'Madrid') for linking",
+    "engineConfig": {
+      "mode": "row-based",
+      "facets": []
+    },
+    "newColumnName": "city_label",
+    "columnInsertIndex": 4,
+    "baseColumnName": "stop_lon",
+    "expression": "value",
+    "onError": "set-to-blank"
+  },
+  {
+    "op": "core/column-addition",
+    "description": "Add city_wikidata URI",
+    "engineConfig": {
+      "mode": "row-based",
+      "facets": []
+    },
+    "newColumnName": "city_wikidata",
+    "columnInsertIndex": 5,
+    "baseColumnName": "city_label",
+    "expression": "if(value=='Madrid','http://www.wikidata.org/entity/Q2807','')",
+    "onError": "set-to-blank"
+  },
+  {
+    "op": "core/column-addition",
+    "description": "Add city_dbpedia URI",
+    "engineConfig": {
+      "mode": "row-based",
+      "facets": []
+    },
+    "newColumnName": "city_dbpedia",
+    "columnInsertIndex": 6,
+    "baseColumnName": "city_label",
+    "expression": "if(value=='Madrid','http://dbpedia.org/resource/Madrid','')",
+    "onError": "set-to-blank"
+  }
+]

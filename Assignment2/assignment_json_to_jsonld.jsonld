@@ -1,0 +1,36 @@
+{
+  "@context": {
+    "@vocab": "https://schema.org/",
+    "hometown": "schema:homeLocation",
+    "almaMater": "schema:alumniOf",
+    "parents": "schema:parent",
+    "mother": "schema:mother",
+    "father": "schema:father",
+    "subjects": "schema:hasCourse",
+    "teachers": "schema:teacher",
+    "description": "schema:description",
+    "age": { "@id": "schema:age", "@type": "xsd:integer" }
+  },
+  "@type": "Person",
+  "name": "Laura Nguyen",
+  "hometown": "Düsseldorf",
+  "age": 21,
+  "almaMater": {
+    "@type": "CollegeOrUniversity",
+    "name": "Heinrich-Heine-Universität Düsseldorf"
+  },
+  "parents": [
+    { "@type": "Person", "name": "Thi Bich Nguyen", "gender": "Female" },
+    { "@type": "Person", "name": "Tien Ha Nguyen", "gender": "Male" }
+  ],
+  "subjects": [
+    {
+      "@type": "Course",
+      "name": "Semantic Web",
+      "teachers": [
+        { "@type": "Person", "name": "Dr. Raúl García Castro" }
+      ],
+      "description": "Introduction to linked data and semantic web technologies."
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "@context": {
+    "@vocab": "http://example.org/ontology#",
+    "xsd": "http://www.w3.org/2001/XMLSchema#"
+  },
+  "@id": "http://example.org/resource/ZhenJiang",
+  "@type": "Person",
+  "fullName": "Zhen Jiang",
+  "hometown": "Madrid",
+  "age": {
+    "@value": 21,
+    "@type": "xsd:integer"
+  },
+  "almaMater": "Universidad Politécnica de Madrid",
+  "parents": {
+    "father": "Hong",
+    "mother": "Qin"
+  },
+  "subjects": [
+    {
+      "@type": "Subject",
+      "name": "Semantic Web, Linked Data and Knowledge Graphs",
+      "teachers": "Oscar Corcho Garcia",
+      "description": "Course about creating, publishing and linking data on the Web using RDF, OWL and SPARQL."
+    }
+  ]
+}

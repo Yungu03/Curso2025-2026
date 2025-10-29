@@ -1,0 +1,3 @@
+trip_id,arrival_time,departure_time,stop_id,stop_sequence,city_label
+T1,08:00:00,08:00:00,S1,1,Madrid
+T1,08:05:00,08:05:00,S2,2,Madrid

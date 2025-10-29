@@ -1,0 +1,97 @@
+prefixes:
+  rr: http://www.w3.org/ns/r2rml#
+  xsd: http://www.w3.org/2001/XMLSchema#
+  rml: http://semweb.mmlab.be/ns/rml#
+  ql: http://semweb.mmlab.be/ns/ql#
+  rdf: http://www.w3.org/1999/02/22-rdf-syntax-ns#
+  vocab: http://example.org/vocab#
+  schema: http://schema.org/
+
+mappings:
+  triplesmap1:
+    sources:
+      - [CALIDAD-AIRE-HORARIOS20250813-updated.csv~csv]
+    s: http://example.org/resource/CalidadAire/$(ESTACION)/$(MAGNITUD)/$(Fecha)
+    po:
+      - [a, vocab:MedicionAire]
+      - [vocab:provincia, $(PROVINCIA)]
+      - [vocab:municipio, $(MUNICIPIO)]
+      - [vocab:estacion, $(ESTACION)]
+      - [vocab:magnitud, $(MAGNITUD)]
+      - [vocab:fecha, $(Fecha), xsd:date]
+      - [vocab:H01, $(H01), xsd:float]
+      - [vocab:H02, $(H02), xsd:float]
+      - [vocab:H03, $(H03), xsd:float]
+      - [vocab:H04, $(H04), xsd:float]
+      - [vocab:H05, $(H05), xsd:float]
+      - [vocab:H06, $(H06), xsd:float]
+      - [vocab:H07, $(H07), xsd:float]
+      - [vocab:H08, $(H08), xsd:float]
+      - [vocab:H09, $(H09), xsd:float]
+      - [vocab:H10, $(H10), xsd:float]
+      - [vocab:H11, $(H11), xsd:float]
+      - [vocab:H12, $(H12), xsd:float]
+      - [vocab:H13, $(H13), xsd:float]
+      - [vocab:H14, $(H14), xsd:float]
+      - [vocab:H15, $(H15), xsd:float]
+      - [vocab:H16, $(H16), xsd:float]
+      - [vocab:H17, $(H17), xsd:float]
+      - [vocab:H18, $(H18), xsd:float]
+      - [vocab:H19, $(H19), xsd:float]
+      - [vocab:H20, $(H20), xsd:float]
+      - [vocab:H21, $(H21), xsd:float]
+      - [vocab:H22, $(H22), xsd:float]
+      - [vocab:H23, $(H23), xsd:float]
+      - [vocab:H24, $(H24), xsd:float]
+      - p: vocab:relacionMeteorologica
+        o:
+          mapping: triplesmap2
+
+  triplesmap2:
+    sources:
+      - [METEOROLOGIA-HORARIOS20250813-updated.csv~csv]
+    s: http://example.org/resource/Meteo/$(ESTACION)/$(MAGNITUD)/$(Fecha)
+    po:
+      - [a, vocab:MedicionMeteorologica]
+      - [vocab:provincia, $(PROVINCIA)]
+      - [vocab:municipio, $(MUNICIPIO)]
+      - [vocab:variable, $(MAGNITUD)]
+      - [vocab:fecha, $(Fecha), xsd:date]
+      - [vocab:H01, $(H01), xsd:float]
+      - [vocab:H02, $(H02), xsd:float]
+      - [vocab:H03, $(H03), xsd:float]
+      - [vocab:H04, $(H04), xsd:float]
+      - [vocab:H05, $(H05), xsd:float]
+      - [vocab:H06, $(H06), xsd:float]
+      - [vocab:H07, $(H07), xsd:float]
+      - [vocab:H08, $(H08), xsd:float]
+      - [vocab:H09, $(H09), xsd:float]
+      - [vocab:H10, $(H10), xsd:float]
+      - [vocab:H11, $(H11), xsd:float]
+      - [vocab:H12, $(H12), xsd:float]
+      - [vocab:H13, $(H13), xsd:float]
+      - [vocab:H14, $(H14), xsd:float]
+      - [vocab:H15, $(H15), xsd:float]
+      - [vocab:H16, $(H16), xsd:float]
+      - [vocab:H17, $(H17), xsd:float]
+      - [vocab:H18, $(H18), xsd:float]
+      - [vocab:H19, $(H19), xsd:float]
+      - [vocab:H20, $(H20), xsd:float]
+      - [vocab:H21, $(H21), xsd:float]
+      - [vocab:H22, $(H22), xsd:float]
+      - [vocab:H23, $(H23), xsd:float]
+      - [vocab:H24, $(H24), xsd:float]
+      - p: vocab:relacionOzono
+        o:
+          mapping: triplesmap3
+
+  triplesmap3:
+    sources:
+      - [JUEGO-DATOS-activacion-protocolo-O3-updated.csv~csv]
+    s: http://example.org/resource/EpisodioOzono/$(FECHA INICIO)
+    po:
+      - [a, vocab:EpisodioOzono]
+      - [vocab:fechaInicio, $(FECHA INICIO), xsd:date]
+      - [vocab:fechaFin, $(FECHA FIN), xsd:date]
+      - [vocab:episodio, $(EPISODIO OZONO)]
+      - [vocab:medidaPoblacion, $(MEDIDA POBLACION)]

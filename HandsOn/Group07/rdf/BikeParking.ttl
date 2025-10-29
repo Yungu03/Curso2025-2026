@@ -1,0 +1,57 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix geo: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix schema: <https://schema.org/> .
+@prefix mm: <http://movemadrid.org/def/base#> .
+
+# Example 1
+
+<http://movemadrid.org/def/base#BikeParking/101532>
+    a schema:Place, mm:BikeParking ;
+    geo:lat "40.43652188"^^xsd:decimal ;
+    geo:long "-3.65079129"^^xsd:decimal ;
+    mm:auxiliaryDescription "JARDIN" ;
+    mm:inDistrict <http://movemadrid.org/def/base#District/15> ;
+    mm:hasBarrio <http://movemadrid.org/def/base#Barrio/154> ;
+    schema:address <http://movemadrid.org/def/base#Address/101532> .
+
+<http://movemadrid.org/def/base#Address/101532>
+    a schema:PostalAddress ;
+    schema:streetAddress "CALLE JOSE DEL HIERRO, 3"@es ;
+    schema:postalCode "28027" ;
+    schema:addressLocality "Madrid" .
+
+<http://movemadrid.org/def/base#District/15>
+    a mm:District ;
+    schema:name "Ciudad Lineal" .
+
+<http://movemadrid.org/def/base#Barrio/154>
+    a mm:Barrio ;
+    schema:name "Concepción" ;
+    mm:barrioPostalCode "28027" .
+
+# Example 2
+
+<http://movemadrid.org/def/base#BikeParking/109146>
+    a schema:Place, mm:BikeParking ;
+    geo:lat "40.45998256"^^xsd:decimal ;
+    geo:long "-3.64292662"^^xsd:decimal ;
+    mm:auxiliaryDescription "FRENTE FACHADA" ;
+    mm:inDistrict <http://movemadrid.org/def/base#District/16> ;
+    mm:hasBarrio <http://movemadrid.org/def/base#Barrio/163> ;
+    schema:address <http://movemadrid.org/def/base#Address/109146> .
+
+<http://movemadrid.org/def/base#Address/109146>
+    a schema:PostalAddress ;
+    schema:streetAddress "CALLE ANDORRA, 30"@es ;
+    schema:postalCode "28043" ;
+    schema:addressLocality "Madrid" .
+
+<http://movemadrid.org/def/base#District/16>
+    a mm:District ;
+    schema:name "Hortaleza" .
+
+<http://movemadrid.org/def/base#Barrio/163>
+    a mm:Barrio ;
+    schema:name "Canillas" ;
+    mm:barrioPostalCode "28043" .

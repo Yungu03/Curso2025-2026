@@ -28,3 +28,41 @@
 - URIs follow slash strategy and persistence policy.
 - Data sets have linkability by location properties.
 - License requires atribution and can be redistributed and comerciated
+
+# Group15 — Hands-on 4: RML mappings
+
+Run with RMLMapper (example):
+```
+java -jar rmlmapper.jar -m mappings/gtfs-madrid.rml.ttl -o rdf/out.ttl
+```
+Expected CSVs (from HandsOn3) under `csv/`: `stops-updated.csv`, `routes-updated.csv`, `stop_times-updated.csv`.
+
+# Group15 — Hands-on 5: Data Linking
+
+This folder contains the deliverables for **Session 10: Data Linking**.  
+Dataset family: **GTFS Madrid (stops/routes/stop_times)**.
+
+## What we linked
+- We link each `Stop` to the **City of Madrid** via `ex:inCity`.
+- We assert external identity links for that city:  
+  `owl:sameAs` → Wikidata **Q2807** and DBpedia **dbr:Madrid**.
+
+## How to regenerate RDF
+We used RML-style mappings (CSV logical sources). To materialize them you can use any RML engine (e.g., RMLMapper):
+
+```bash
+java -jar rmlmapper.jar   -m mappings/gtfs-with-links.rml.ttl   -o rdf/out.nt -s ntriples
+```
+
+or Turtle:
+
+```bash
+java -jar rmlmapper.jar   -m mappings/gtfs-with-links.rml.ttl   -o rdf/out.ttl -s turtle
+```
+
+## Files
+- `csv/*-with-links.csv` — CSVs enriched for linking
+- `openrefine/stops-with-links.json` — recipe of operations applied
+- `mappings/gtfs-with-links.rml.ttl` — RML mappings including `owl:sameAs`
+- `rdf/gtfs-with-links.ttl` — sample output for the provided CSV
+- `rdf/queries-with-links.sparql` — verification queries

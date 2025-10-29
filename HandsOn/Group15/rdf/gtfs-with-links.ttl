@@ -1,0 +1,23 @@
+
+@prefix ex:  <http://example.org/gtfs/> .
+@prefix gtfs: <http://vocab.gtfs.org/terms#> .
+@prefix schema: <http://schema.org/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+ex:city/Madrid a schema:City ;
+  rdfs:label "Madrid" ;
+  owl:sameAs <http://www.wikidata.org/entity/Q2807> , <http://dbpedia.org/resource/Madrid> .
+
+ex:stop/S1 a gtfs:Stop ;
+  gtfs:stopName "Puerta del Sol" ;
+  schema:latitude "40.4169"^^xsd:decimal ;
+  schema:longitude "-3.7035"^^xsd:decimal ;
+  ex:inCity ex:city/Madrid .
+
+ex:stop/S2 a gtfs:Stop ;
+  gtfs:stopName "Atocha" ;
+  schema:latitude "40.4066"^^xsd:decimal ;
+  schema:longitude "-3.6890"^^xsd:decimal ;
+  ex:inCity ex:city/Madrid .

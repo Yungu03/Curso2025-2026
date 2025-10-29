@@ -1,0 +1,23 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2865
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww11520\viewh8400\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 @prefix ex: <https://example.org/iot/> .\
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .\
+\
+ex:Class01\
+    ex:includes ex:Sensor029 , ex:Computer101 .\
+\
+ex:Sensor029\
+    ex:hasOwner ex:User10A ;\
+    ex:hasMeasurement ex:Measurement8401 .\
+\
+ex:User10A\
+    ex:hasName "Pedro" .\
+\
+ex:Measurement8401\
+    ex:hasTemperature "29"^^xsd:integer ;\
+    ex:atTime "2010-06-12T12:00:12"^^xsd:dateTime .}

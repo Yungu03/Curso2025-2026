@@ -1,0 +1,92 @@
+PREFIX ex:  <http://datos.madrid.es/Calidad_Aire/Estacion/>
+PREFIX med: <http://datos.madrid.es/Calidad_Aire/Medicion/>
+PREFIX geo: <http://www.w3.org/2003/01/geo/wgs84_pos#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+# 1) Listar estaciones
+SELECT ?estacion
+WHERE {
+  ?estacion a ex:Estacion .
+}
+LIMIT 50
+
+# 2) Estaciones con nombre y coordenadas
+SELECT ?estacion ?nombre ?latitud ?longitud
+WHERE {
+  ?estacion a ex:Estacion ;
+             rdfs:label ?nombre ;
+             geo:lat ?latitud ;
+             geo:long ?longitud .
+}
+ORDER BY ?estacion
+
+# 3) Nombres de estaciones duplicados
+SELECT ?nombre (COUNT(?estacion) AS ?n)
+WHERE {
+  ?estacion a ex:Estacion ;
+             rdfs:label ?nombre .
+}
+GROUP BY ?nombre
+HAVING (?n > 1)
+
+# 4) Mediciones con algunos valores horarios
+SELECT ?medicion ?estacion ?fecha ?magnitud ?valorH01 ?valorH02 ?valorH03
+WHERE {
+  ?medicion a med:Medicion ;
+            med:estacion ?estacion ;
+            med:fecha ?fecha ;
+            med:magnitud ?magnitud .
+  OPTIONAL { ?medicion med:valorH01 ?valorH01 }
+  OPTIONAL { ?medicion med:valorH02 ?valorH02 }
+  OPTIONAL { ?medicion med:valorH03 ?valorH03 }
+}
+LIMIT 20
+
+# 5) Número de mediciones por estación
+SELECT ?estacion (COUNT(?medicion) AS ?numMediciones)
+WHERE {
+  ?medicion a med:Medicion ;
+            med:estacion ?estacion .
+}
+GROUP BY ?estacion
+ORDER BY DESC(?numMediciones)
+
+# 6) Fechas distintas de medición
+SELECT DISTINCT ?fecha
+WHERE {
+  ?medicion a med:Medicion ;
+            med:fecha ?fecha .
+}
+ORDER BY ?fecha
+
+# 7) Propiedades distintas usadas en el grafo
+SELECT DISTINCT ?propiedad
+WHERE {
+  ?s ?propiedad ?o .
+}
+ORDER BY ?propiedad
+
+# 8) Estadísticas básicas de tamaño del grafo
+SELECT (COUNT(DISTINCT ?s) AS ?numSujetos)
+       (COUNT(DISTINCT ?p) AS ?numPredicados)
+       (COUNT(DISTINCT ?o) AS ?numObjetos)
+WHERE {
+  ?s ?p ?o .
+}
+
+# 9) Mediciones con propiedades vacías
+SELECT ?medicion ?propiedad
+WHERE {
+  ?medicion ?propiedad "" .
+}
+
+# 10) Mediciones con latitud/longitud de su estación
+SELECT ?medicion ?estacion ?lat ?long
+WHERE {
+  ?medicion a med:Medicion ;
+            med:estacion ?estacion .
+  ?estacion geo:lat ?lat ;
+            geo:long ?long .
+}
+LIMIT 20

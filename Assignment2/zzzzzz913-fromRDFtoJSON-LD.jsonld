@@ -1,0 +1,41 @@
+{
+  "@context": {
+    "@vocab": "http://example.org/ontology#",
+    "res": "http://example.org/resource/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#"
+  },
+  "@graph": [
+    {
+      "@id": "res:ClassRoom03",
+      "@type": "ClassRoom",
+      "contains": ["res:Sensor347", "res:Table322"]
+    },
+    {
+      "@id": "res:Sensor347",
+      "@type": "Sensor",
+      "hasMeasurement": "res:Measurement8432"
+    },
+    {
+      "@id": "res:Measurement8432",
+      "@type": "Measurement",
+      "hasTemperature": {
+        "@value": 29,
+        "@type": "xsd:integer"
+      },
+      "atTime": {
+        "@value": "2022-09-12T12:01:12",
+        "@type": "xsd:dateTime"
+      }
+    },
+    {
+      "@id": "res:Table322",
+      "@type": "Table",
+      "hasOwner": "res:ETSIInformaticos"
+    },
+    {
+      "@id": "res:ETSIInformaticos",
+      "@type": "Organization",
+      "hasName": "ETSI Informáticos"
+    }
+  ]
+}

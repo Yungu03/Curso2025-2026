@@ -1,0 +1,82 @@
+{
+  "@context": {
+    "schema": "http://schema.org/",
+    "ex": "http://example.org/studentdata/",
+    "full_name": "schema:name",
+    "hometown": "schema:birthPlace",
+    "age": "schema:age",
+    "alma_mater": {
+      "@id": "schema:alumniOf",
+      "@type": "@id"
+    },
+    "parents_names": "schema:parent",
+    "current_subjects": "ex:studies",
+    "name": "schema:name",
+    "teachers": "schema:teaches",
+    "brief_description": "schema:description"
+  },
+  "@id": "ex:MarioHomedesF",
+  "@type": "schema:Person",
+  "full_name": "Mario Homedes Fernández",
+  "hometown": "Alcobendas",
+  "age": 22,
+  "alma_mater": {
+    "@id": "ex:UPM",
+    "name": "UPM"
+  },
+  "parents_names": [
+    "Yolanda",
+    "Julián"
+  ],
+  "current_subjects": [
+    {
+      "@type": "ex:Course",
+      "name": "Web Semántica",
+      "teachers": [
+        "Oscar Corcho",
+        "Daniel Garijo",
+        "Raúl García"
+      ],
+      "brief_description": "El objetivo de esta asignatura es proporcionar la base teórica y práctica sobre los fundamentos metodológicos y tecnológicos implicados en la generación y publicación de vocabularios y datos en la Web de datos enlazados, así como en forma de grafos de conocimientos. En concreto, se presentarán: los conceptos de Web Semántica, Web de datos enlazados y grafos de conocimientos, así como de datos abiertos, lenguajes de representación de datos en la Web, metodología y tecnologías de soporte a la generación y publicación de datos enlazados, ontologías y vocabularios utilizados, fuentes de datos representativas, como DBpedia, Geonames, Wikidata, etc., y aplicaciones que hacen uso de datos enlazados y de grafos de conocimientos."
+    },
+    {
+      "@type": "ex:Course",
+      "name": "Estructura de Computadores",
+      "teachers": [
+        "Santiago Rodriguez"
+      ],
+      "brief_description": "La asignatura describe la arquitectura von Neumann, presentando una arquitectura de un computador elemental, sus modos de direccionamiento y juego de instrucciones y la forma de representación de los datos y la operación con los mismos. Por otra parte, se detalla la forma de funcionamiento de los dispositivos periféricos que habitualmente se conectan al sistema de Entrada/Salida de un computador, haciendo hincapié en sus prestaciones y capacidad de almacenamiento."
+    },
+    {
+      "@type": "ex:Course",
+      "name": "PDL",
+      "teachers": [
+        "Aurora Pérez",
+        "Juan Pedro Caraça",
+        "Jose Luis Fuertes"
+      ],
+      "brief_description": "Aprender a Diseñar e Implementar Procesadores de Lenguajes."
+    },
+    {
+      "@type": "ex:Course",
+      "name": "Reconocimiento de Formas",
+      "teachers": [
+        "Luis Baumela",
+        "Roberto Valle"
+      ],
+      "brief_description": "Introducción a los problemas relacionados con la clasificación."
+    },
+    {
+      "@type": "ex:Course",
+      "name": "Sistemas Operativos",
+      "teachers": [
+        "Francisco Rosales",
+        "Antonio Latorre",
+        "Pablo Toharia",
+        "María Pérez",
+        "Fernándo Pérez"
+      ],
+      "brief_description": "El objetivo de la asignatura es la comprensión de los conceptos básicos de los sistemas operativos y la familiarización con la interfaz de programación de los mismos. La asignatura se centra en la funcionalidad que suministran los sistemas operativos sin profundizar en su estructura y funcionamiento internos."
+    }
+  ]
+}

@@ -1,0 +1,192 @@
+<https://facultadinformatica-linkeddata.github.io/Curso2025-2026/HandsOn/Group03/id/station/mad-air-04> <http://purl.org/dc/terms/identifier> "4" .
+<https://facultadinformatica-linkeddata.github.io/Curso2025-2026/HandsOn/Group03/id/station/mad-air-04> <http://schema.org/foundingDate> "1998-01-12T00:00:00Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<https://facultadinformatica-linkeddata.github.io/Curso2025-2026/HandsOn/Group03/id/station/mad-air-04> <http://schema.org/name> "Plaza de España" .
+<https://facultadinformatica-linkeddata.github.io/Curso2025-2026/HandsOn/Group03/id/station/mad-air-04> <http://schema.org/streetAddress> "Plaza de España" .
+<https://facultadinformatica-linkeddata.github.io/Curso2025-2026/HandsOn/Group03/id/station/mad-air-04> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/Place> .
+<https://facultadinformatica-linkeddata.github.io/Curso2025-2026/HandsOn/Group03/id/station/mad-air-04> <http://www.w3.org/2000/01/rdf-schema#label> "Plaza de España"@es .
+<https://facultadinformatica-linkeddata.github.io/Curso2025-2026/HandsOn/Group03/id/station/mad-air-04> <http://www.w3.org/2003/01/geo/wgs84_pos#lat> "40.4238823"^^<http://www.w3.org/2001/XMLSchema#decimal> .
+<https://facultadinformatica-linkeddata.github.io/Curso2025-2026/HandsOn/Group03/id/station/mad-air-04> <http://www.w3.org/2003/01/geo/wgs84_pos#long> "-3.7122567"^^<http://www.w3.org/2001/XMLSchema#decimal> .
+<https://facultadinformatica-linkeddata.github.io/Curso2025-2026/HandsOn/Group03/id/station/mad-air-08> <http://purl.org/dc/terms/identifier> "8" .
+<https://facultadinformatica-linkeddata.github.io/Curso2025-2026/HandsOn/Group03/id/station/mad-air-08> <http://schema.org/foundingDate> "1998-01-12T00:00:00Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<https://facultadinformatica-linkeddata.github.io/Curso2025-2026/HandsOn/Group03/id/station/mad-air-08> <http://schema.org/name> "Escuelas Aguirre" .
+<https://facultadinformatica-linkeddata.github.io/Curso2025-2026/HandsOn/Group03/id/station/mad-air-08> <http://schema.org/streetAddress> "Entre C/ Alcalá y C/ O’ Donell" .
+<https://facultadinformatica-linkeddata.github.io/Curso2025-2026/HandsOn/Group03/id/station/mad-air-08> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/Place> .
+<https://facultadinformatica-linkeddata.github.io/Curso2025-2026/HandsOn/Group03/id/station/mad-air-08> <http://www.w3.org/2000/01/rdf-schema#label> "Escuelas Aguirre"@es .
+<https://facultadinformatica-linkeddata.github.io/Curso2025-2026/HandsOn/Group03/id/station/mad-air-08> <http://www.w3.org/2003/01/geo/wgs84_pos#lat> "40.4215533"^^<http://www.w3.org/2001/XMLSchema#decimal> .
+<https://facultadinformatica-linkeddata.github.io/Curso2025-2026/HandsOn/Group03/id/station/mad-air-08> <http://www.w3.org/2003/01/geo/wgs84_pos#long> "-3.6823158"^^<http://www.w3.org/2001/XMLSchema#decimal> .
+<https://facultadinformatica-linkeddata.github.io/Curso2025-2026/HandsOn/Group03/id/station/mad-air-11> <http://purl.org/dc/terms/identifier> "11" .
+<https://facultadinformatica-linkeddata.github.io/Curso2025-2026/HandsOn/Group03/id/station/mad-air-11> <http://schema.org/foundingDate> "1998-01-12T00:00:00Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<https://facultadinformatica-linkeddata.github.io/Curso2025-2026/HandsOn/Group03/id/station/mad-air-11> <http://schema.org/name> "Ramón y Cajal" .
+<https://facultadinformatica-linkeddata.github.io/Curso2025-2026/HandsOn/Group03/id/station/mad-air-11> <http://schema.org/streetAddress> "Avda. Ramón y Cajal  esq. C/ Príncipe de Vergara" .
+<https://facultadinformatica-linkeddata.github.io/Curso2025-2026/HandsOn/Group03/id/station/mad-air-11> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/Place> .
+<https://facultadinformatica-linkeddata.github.io/Curso2025-2026/HandsOn/Group03/id/station/mad-air-11> <http://www.w3.org/2000/01/rdf-schema#label> "Ramón y Cajal"@es .
+<https://facultadinformatica-linkeddata.github.io/Curso2025-2026/HandsOn/Group03/id/station/mad-air-11> <http://www.w3.org/2003/01/geo/wgs84_pos#lat> "40.4514734"^^<http://www.w3.org/2001/XMLSchema#decimal> .
+<https://facultadinformatica-linkeddata.github.io/Curso2025-2026/HandsOn/Group03/id/station/mad-air-11> <http://www.w3.org/2003/01/geo/wgs84_pos#long> "-3.6773491"^^<http://www.w3.org/2001/XMLSchema#decimal> .
+<https://facultadinformatica-linkeddata.github.io/Curso2025-2026/HandsOn/Group03/id/station/mad-air-16> <http://purl.org/dc/terms/identifier> "16" .
+<https://facultadinformatica-linkeddata.github.io/Curso2025-2026/HandsOn/Group03/id/station/mad-air-16> <http://schema.org/foundingDate> "1998-01-12T00:00:00Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<https://facultadinformatica-linkeddata.github.io/Curso2025-2026/HandsOn/Group03/id/station/mad-air-16> <http://schema.org/name> "Arturo Soria" .
+<https://facultadinformatica-linkeddata.github.io/Curso2025-2026/HandsOn/Group03/id/station/mad-air-16> <http://schema.org/streetAddress> "C/ Arturo Soria  esq. C/  Vizconde de los Asilos" .
+<https://facultadinformatica-linkeddata.github.io/Curso2025-2026/HandsOn/Group03/id/station/mad-air-16> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/Place> .
+<https://facultadinformatica-linkeddata.github.io/Curso2025-2026/HandsOn/Group03/id/station/mad-air-16> <http://www.w3.org/2000/01/rdf-schema#label> "Arturo Soria"@es .
+<https://facultadinformatica-linkeddata.github.io/Curso2025-2026/HandsOn/Group03/id/station/mad-air-16> <http://www.w3.org/2003/01/geo/wgs84_pos#lat> "40.4400457"^^<http://www.w3.org/2001/XMLSchema#decimal> .
+<https://facultadinformatica-linkeddata.github.io/Curso2025-2026/HandsOn/Group03/id/station/mad-air-16> <http://www.w3.org/2003/01/geo/wgs84_pos#long> "-3.6392422"^^<http://www.w3.org/2001/XMLSchema#decimal> .
+<https://facultadinformatica-linkeddata.github.io/Curso2025-2026/HandsOn/Group03/id/station/mad-air-17> <http://purl.org/dc/terms/identifier> "17" .
+<https://facultadinformatica-linkeddata.github.io/Curso2025-2026/HandsOn/Group03/id/station/mad-air-17> <http://schema.org/foundingDate> "1998-01-12T00:00:00Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<https://facultadinformatica-linkeddata.github.io/Curso2025-2026/HandsOn/Group03/id/station/mad-air-17> <http://schema.org/name> "Villaverde" .
+<https://facultadinformatica-linkeddata.github.io/Curso2025-2026/HandsOn/Group03/id/station/mad-air-17> <http://schema.org/streetAddress> "C/ Juan Peñalver" .
+<https://facultadinformatica-linkeddata.github.io/Curso2025-2026/HandsOn/Group03/id/station/mad-air-17> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/Place> .
+<https://facultadinformatica-linkeddata.github.io/Curso2025-2026/HandsOn/Group03/id/station/mad-air-17> <http://www.w3.org/2000/01/rdf-schema#label> "Villaverde"@es .
+<https://facultadinformatica-linkeddata.github.io/Curso2025-2026/HandsOn/Group03/id/station/mad-air-17> <http://www.w3.org/2003/01/geo/wgs84_pos#lat> "40.347147"^^<http://www.w3.org/2001/XMLSchema#decimal> .
+<https://facultadinformatica-linkeddata.github.io/Curso2025-2026/HandsOn/Group03/id/station/mad-air-17> <http://www.w3.org/2003/01/geo/wgs84_pos#long> "-3.7133167"^^<http://www.w3.org/2001/XMLSchema#decimal> .
+<https://facultadinformatica-linkeddata.github.io/Curso2025-2026/HandsOn/Group03/id/station/mad-air-18> <http://purl.org/dc/terms/identifier> "18" .
+<https://facultadinformatica-linkeddata.github.io/Curso2025-2026/HandsOn/Group03/id/station/mad-air-18> <http://schema.org/foundingDate> "2001-03-31T00:00:00Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<https://facultadinformatica-linkeddata.github.io/Curso2025-2026/HandsOn/Group03/id/station/mad-air-18> <http://schema.org/name> "Farolillo" .
+<https://facultadinformatica-linkeddata.github.io/Curso2025-2026/HandsOn/Group03/id/station/mad-air-18> <http://schema.org/streetAddress> "C/ Farolillo - C/ Ervigio" .
+<https://facultadinformatica-linkeddata.github.io/Curso2025-2026/HandsOn/Group03/id/station/mad-air-18> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/Place> .
+<https://facultadinformatica-linkeddata.github.io/Curso2025-2026/HandsOn/Group03/id/station/mad-air-18> <http://www.w3.org/2000/01/rdf-schema#label> "Farolillo"@es .
+<https://facultadinformatica-linkeddata.github.io/Curso2025-2026/HandsOn/Group03/id/station/mad-air-18> <http://www.w3.org/2003/01/geo/wgs84_pos#lat> "40.3947825"^^<http://www.w3.org/2001/XMLSchema#decimal> .
+<https://facultadinformatica-linkeddata.github.io/Curso2025-2026/HandsOn/Group03/id/station/mad-air-18> <http://www.w3.org/2003/01/geo/wgs84_pos#long> "-3.7318356"^^<http://www.w3.org/2001/XMLSchema#decimal> .
+<https://facultadinformatica-linkeddata.github.io/Curso2025-2026/HandsOn/Group03/id/station/mad-air-24> <http://purl.org/dc/terms/identifier> "24" .
+<https://facultadinformatica-linkeddata.github.io/Curso2025-2026/HandsOn/Group03/id/station/mad-air-24> <http://schema.org/foundingDate> "1998-01-12T00:00:00Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<https://facultadinformatica-linkeddata.github.io/Curso2025-2026/HandsOn/Group03/id/station/mad-air-24> <http://schema.org/name> "Casa de Campo" .
+<https://facultadinformatica-linkeddata.github.io/Curso2025-2026/HandsOn/Group03/id/station/mad-air-24> <http://schema.org/streetAddress> "Casa de Campo  (Terminal del Teleférico)" .
+<https://facultadinformatica-linkeddata.github.io/Curso2025-2026/HandsOn/Group03/id/station/mad-air-24> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/Place> .
+<https://facultadinformatica-linkeddata.github.io/Curso2025-2026/HandsOn/Group03/id/station/mad-air-24> <http://www.w3.org/2000/01/rdf-schema#label> "Casa de Campo"@es .
+<https://facultadinformatica-linkeddata.github.io/Curso2025-2026/HandsOn/Group03/id/station/mad-air-24> <http://www.w3.org/2003/01/geo/wgs84_pos#lat> "40.4193577"^^<http://www.w3.org/2001/XMLSchema#decimal> .
+<https://facultadinformatica-linkeddata.github.io/Curso2025-2026/HandsOn/Group03/id/station/mad-air-24> <http://www.w3.org/2003/01/geo/wgs84_pos#long> "-3.7473445"^^<http://www.w3.org/2001/XMLSchema#decimal> .
+<https://facultadinformatica-linkeddata.github.io/Curso2025-2026/HandsOn/Group03/id/station/mad-air-27> <http://purl.org/dc/terms/identifier> "27" .
+<https://facultadinformatica-linkeddata.github.io/Curso2025-2026/HandsOn/Group03/id/station/mad-air-27> <http://schema.org/foundingDate> "2002-12-31T00:00:00Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<https://facultadinformatica-linkeddata.github.io/Curso2025-2026/HandsOn/Group03/id/station/mad-air-27> <http://schema.org/name> "Barajas Pueblo" .
+<https://facultadinformatica-linkeddata.github.io/Curso2025-2026/HandsOn/Group03/id/station/mad-air-27> <http://schema.org/streetAddress> "C/ Júpiter, 21" .
+<https://facultadinformatica-linkeddata.github.io/Curso2025-2026/HandsOn/Group03/id/station/mad-air-27> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/Place> .
+<https://facultadinformatica-linkeddata.github.io/Curso2025-2026/HandsOn/Group03/id/station/mad-air-27> <http://www.w3.org/2000/01/rdf-schema#label> "Barajas Pueblo"@es .
+<https://facultadinformatica-linkeddata.github.io/Curso2025-2026/HandsOn/Group03/id/station/mad-air-27> <http://www.w3.org/2003/01/geo/wgs84_pos#lat> "40.4769179"^^<http://www.w3.org/2001/XMLSchema#decimal> .
+<https://facultadinformatica-linkeddata.github.io/Curso2025-2026/HandsOn/Group03/id/station/mad-air-27> <http://www.w3.org/2003/01/geo/wgs84_pos#long> "-3.5800258"^^<http://www.w3.org/2001/XMLSchema#decimal> .
+<https://facultadinformatica-linkeddata.github.io/Curso2025-2026/HandsOn/Group03/id/station/mad-air-35> <http://purl.org/dc/terms/identifier> "35" .
+<https://facultadinformatica-linkeddata.github.io/Curso2025-2026/HandsOn/Group03/id/station/mad-air-35> <http://schema.org/foundingDate> "1999-01-11T00:00:00Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<https://facultadinformatica-linkeddata.github.io/Curso2025-2026/HandsOn/Group03/id/station/mad-air-35> <http://schema.org/name> "Plaza del Carmen" .
+<https://facultadinformatica-linkeddata.github.io/Curso2025-2026/HandsOn/Group03/id/station/mad-air-35> <http://schema.org/streetAddress> "Plaza del Carmen esq. Tres Cruces" .
+<https://facultadinformatica-linkeddata.github.io/Curso2025-2026/HandsOn/Group03/id/station/mad-air-35> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/Place> .
+<https://facultadinformatica-linkeddata.github.io/Curso2025-2026/HandsOn/Group03/id/station/mad-air-35> <http://www.w3.org/2000/01/rdf-schema#label> "Plaza del Carmen"@es .
+<https://facultadinformatica-linkeddata.github.io/Curso2025-2026/HandsOn/Group03/id/station/mad-air-35> <http://www.w3.org/2003/01/geo/wgs84_pos#lat> "40.4192091"^^<http://www.w3.org/2001/XMLSchema#decimal> .
+<https://facultadinformatica-linkeddata.github.io/Curso2025-2026/HandsOn/Group03/id/station/mad-air-35> <http://www.w3.org/2003/01/geo/wgs84_pos#long> "-3.7031662"^^<http://www.w3.org/2001/XMLSchema#decimal> .
+<https://facultadinformatica-linkeddata.github.io/Curso2025-2026/HandsOn/Group03/id/station/mad-air-36> <http://purl.org/dc/terms/identifier> "36" .
+<https://facultadinformatica-linkeddata.github.io/Curso2025-2026/HandsOn/Group03/id/station/mad-air-36> <http://schema.org/foundingDate> "1998-01-12T00:00:00Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<https://facultadinformatica-linkeddata.github.io/Curso2025-2026/HandsOn/Group03/id/station/mad-air-36> <http://schema.org/name> "Moratalaz" .
+<https://facultadinformatica-linkeddata.github.io/Curso2025-2026/HandsOn/Group03/id/station/mad-air-36> <http://schema.org/streetAddress> "Avda. Moratalaz  esq. Camino de los Vinateros" .
+<https://facultadinformatica-linkeddata.github.io/Curso2025-2026/HandsOn/Group03/id/station/mad-air-36> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/Place> .
+<https://facultadinformatica-linkeddata.github.io/Curso2025-2026/HandsOn/Group03/id/station/mad-air-36> <http://www.w3.org/2000/01/rdf-schema#label> "Moratalaz"@es .
+<https://facultadinformatica-linkeddata.github.io/Curso2025-2026/HandsOn/Group03/id/station/mad-air-36> <http://www.w3.org/2003/01/geo/wgs84_pos#lat> "40.4079517"^^<http://www.w3.org/2001/XMLSchema#decimal> .
+<https://facultadinformatica-linkeddata.github.io/Curso2025-2026/HandsOn/Group03/id/station/mad-air-36> <http://www.w3.org/2003/01/geo/wgs84_pos#long> "-3.6453104"^^<http://www.w3.org/2001/XMLSchema#decimal> .
+<https://facultadinformatica-linkeddata.github.io/Curso2025-2026/HandsOn/Group03/id/station/mad-air-38> <http://purl.org/dc/terms/identifier> "38" .
+<https://facultadinformatica-linkeddata.github.io/Curso2025-2026/HandsOn/Group03/id/station/mad-air-38> <http://schema.org/foundingDate> "1998-01-11T00:00:00Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<https://facultadinformatica-linkeddata.github.io/Curso2025-2026/HandsOn/Group03/id/station/mad-air-38> <http://schema.org/name> "Cuatro Caminos" .
+<https://facultadinformatica-linkeddata.github.io/Curso2025-2026/HandsOn/Group03/id/station/mad-air-38> <http://schema.org/streetAddress> "Avda. Pablo Iglesias esq. C/ Marqués de Lema" .
+<https://facultadinformatica-linkeddata.github.io/Curso2025-2026/HandsOn/Group03/id/station/mad-air-38> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/Place> .
+<https://facultadinformatica-linkeddata.github.io/Curso2025-2026/HandsOn/Group03/id/station/mad-air-38> <http://www.w3.org/2000/01/rdf-schema#label> "Cuatro Caminos"@es .
+<https://facultadinformatica-linkeddata.github.io/Curso2025-2026/HandsOn/Group03/id/station/mad-air-38> <http://www.w3.org/2003/01/geo/wgs84_pos#lat> "40.4455439"^^<http://www.w3.org/2001/XMLSchema#decimal> .
+<https://facultadinformatica-linkeddata.github.io/Curso2025-2026/HandsOn/Group03/id/station/mad-air-38> <http://www.w3.org/2003/01/geo/wgs84_pos#long> "-3.7071303"^^<http://www.w3.org/2001/XMLSchema#decimal> .
+<https://facultadinformatica-linkeddata.github.io/Curso2025-2026/HandsOn/Group03/id/station/mad-air-39> <http://purl.org/dc/terms/identifier> "39" .
+<https://facultadinformatica-linkeddata.github.io/Curso2025-2026/HandsOn/Group03/id/station/mad-air-39> <http://schema.org/foundingDate> "1998-01-05T00:00:00Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<https://facultadinformatica-linkeddata.github.io/Curso2025-2026/HandsOn/Group03/id/station/mad-air-39> <http://schema.org/name> "Barrio del Pilar" .
+<https://facultadinformatica-linkeddata.github.io/Curso2025-2026/HandsOn/Group03/id/station/mad-air-39> <http://schema.org/streetAddress> "Avda. Betanzos esq. C/  Monforte de Lemos" .
+<https://facultadinformatica-linkeddata.github.io/Curso2025-2026/HandsOn/Group03/id/station/mad-air-39> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/Place> .
+<https://facultadinformatica-linkeddata.github.io/Curso2025-2026/HandsOn/Group03/id/station/mad-air-39> <http://www.w3.org/2000/01/rdf-schema#label> "Barrio del Pilar"@es .
+<https://facultadinformatica-linkeddata.github.io/Curso2025-2026/HandsOn/Group03/id/station/mad-air-39> <http://www.w3.org/2003/01/geo/wgs84_pos#lat> "40.4782322"^^<http://www.w3.org/2001/XMLSchema#decimal> .
+<https://facultadinformatica-linkeddata.github.io/Curso2025-2026/HandsOn/Group03/id/station/mad-air-39> <http://www.w3.org/2003/01/geo/wgs84_pos#long> "-3.7115364"^^<http://www.w3.org/2001/XMLSchema#decimal> .
+<https://facultadinformatica-linkeddata.github.io/Curso2025-2026/HandsOn/Group03/id/station/mad-air-40> <http://purl.org/dc/terms/identifier> "40" .
+<https://facultadinformatica-linkeddata.github.io/Curso2025-2026/HandsOn/Group03/id/station/mad-air-40> <http://schema.org/foundingDate> "1999-09-30T00:00:00Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<https://facultadinformatica-linkeddata.github.io/Curso2025-2026/HandsOn/Group03/id/station/mad-air-40> <http://schema.org/name> "Vallecas" .
+<https://facultadinformatica-linkeddata.github.io/Curso2025-2026/HandsOn/Group03/id/station/mad-air-40> <http://schema.org/streetAddress> "C/ Arroyo del Olivar  esq. C/  Río Grande." .
+<https://facultadinformatica-linkeddata.github.io/Curso2025-2026/HandsOn/Group03/id/station/mad-air-40> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/Place> .
+<https://facultadinformatica-linkeddata.github.io/Curso2025-2026/HandsOn/Group03/id/station/mad-air-40> <http://www.w3.org/2000/01/rdf-schema#label> "Vallecas"@es .
+<https://facultadinformatica-linkeddata.github.io/Curso2025-2026/HandsOn/Group03/id/station/mad-air-40> <http://www.w3.org/2003/01/geo/wgs84_pos#lat> "40.3881478"^^<http://www.w3.org/2001/XMLSchema#decimal> .
+<https://facultadinformatica-linkeddata.github.io/Curso2025-2026/HandsOn/Group03/id/station/mad-air-40> <http://www.w3.org/2003/01/geo/wgs84_pos#long> "-3.6515286"^^<http://www.w3.org/2001/XMLSchema#decimal> .
+<https://facultadinformatica-linkeddata.github.io/Curso2025-2026/HandsOn/Group03/id/station/mad-air-47> <http://purl.org/dc/terms/identifier> "47" .
+<https://facultadinformatica-linkeddata.github.io/Curso2025-2026/HandsOn/Group03/id/station/mad-air-47> <http://schema.org/foundingDate> "2009-12-21T00:00:00Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<https://facultadinformatica-linkeddata.github.io/Curso2025-2026/HandsOn/Group03/id/station/mad-air-47> <http://schema.org/name> "Méndez Álvaro" .
+<https://facultadinformatica-linkeddata.github.io/Curso2025-2026/HandsOn/Group03/id/station/mad-air-47> <http://schema.org/streetAddress> "C/ Juan de Mariana / Plaza Amanecer Méndez Álvaro" .
+<https://facultadinformatica-linkeddata.github.io/Curso2025-2026/HandsOn/Group03/id/station/mad-air-47> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/Place> .
+<https://facultadinformatica-linkeddata.github.io/Curso2025-2026/HandsOn/Group03/id/station/mad-air-47> <http://www.w3.org/2000/01/rdf-schema#label> "Méndez Álvaro"@es .
+<https://facultadinformatica-linkeddata.github.io/Curso2025-2026/HandsOn/Group03/id/station/mad-air-47> <http://www.w3.org/2003/01/geo/wgs84_pos#lat> "40.3980991"^^<http://www.w3.org/2001/XMLSchema#decimal> .
+<https://facultadinformatica-linkeddata.github.io/Curso2025-2026/HandsOn/Group03/id/station/mad-air-47> <http://www.w3.org/2003/01/geo/wgs84_pos#long> "-3.6868138"^^<http://www.w3.org/2001/XMLSchema#decimal> .
+<https://facultadinformatica-linkeddata.github.io/Curso2025-2026/HandsOn/Group03/id/station/mad-air-48> <http://purl.org/dc/terms/identifier> "48" .
+<https://facultadinformatica-linkeddata.github.io/Curso2025-2026/HandsOn/Group03/id/station/mad-air-48> <http://schema.org/foundingDate> "2010-01-02T00:00:00Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<https://facultadinformatica-linkeddata.github.io/Curso2025-2026/HandsOn/Group03/id/station/mad-air-48> <http://schema.org/name> "Castellana" .
+<https://facultadinformatica-linkeddata.github.io/Curso2025-2026/HandsOn/Group03/id/station/mad-air-48> <http://schema.org/streetAddress> "C/ José Gutiérrez Abascal" .
+<https://facultadinformatica-linkeddata.github.io/Curso2025-2026/HandsOn/Group03/id/station/mad-air-48> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/Place> .
+<https://facultadinformatica-linkeddata.github.io/Curso2025-2026/HandsOn/Group03/id/station/mad-air-48> <http://www.w3.org/2000/01/rdf-schema#label> "Castellana"@es .
+<https://facultadinformatica-linkeddata.github.io/Curso2025-2026/HandsOn/Group03/id/station/mad-air-48> <http://www.w3.org/2003/01/geo/wgs84_pos#lat> "40.4398904"^^<http://www.w3.org/2001/XMLSchema#decimal> .
+<https://facultadinformatica-linkeddata.github.io/Curso2025-2026/HandsOn/Group03/id/station/mad-air-48> <http://www.w3.org/2003/01/geo/wgs84_pos#long> "-3.6903729"^^<http://www.w3.org/2001/XMLSchema#decimal> .
+<https://facultadinformatica-linkeddata.github.io/Curso2025-2026/HandsOn/Group03/id/station/mad-air-49> <http://purl.org/dc/terms/identifier> "49" .
+<https://facultadinformatica-linkeddata.github.io/Curso2025-2026/HandsOn/Group03/id/station/mad-air-49> <http://schema.org/foundingDate> "2010-01-01T00:00:00Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<https://facultadinformatica-linkeddata.github.io/Curso2025-2026/HandsOn/Group03/id/station/mad-air-49> <http://schema.org/name> "Parque del Retiro" .
+<https://facultadinformatica-linkeddata.github.io/Curso2025-2026/HandsOn/Group03/id/station/mad-air-49> <http://schema.org/streetAddress> "Paseo Venezuela- Palacio de Velázquez" .
+<https://facultadinformatica-linkeddata.github.io/Curso2025-2026/HandsOn/Group03/id/station/mad-air-49> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/Place> .
+<https://facultadinformatica-linkeddata.github.io/Curso2025-2026/HandsOn/Group03/id/station/mad-air-49> <http://www.w3.org/2000/01/rdf-schema#label> "Parque del Retiro"@es .
+<https://facultadinformatica-linkeddata.github.io/Curso2025-2026/HandsOn/Group03/id/station/mad-air-49> <http://www.w3.org/2003/01/geo/wgs84_pos#lat> "40.4144444"^^<http://www.w3.org/2001/XMLSchema#decimal> .
+<https://facultadinformatica-linkeddata.github.io/Curso2025-2026/HandsOn/Group03/id/station/mad-air-49> <http://www.w3.org/2003/01/geo/wgs84_pos#long> "-3.6824999"^^<http://www.w3.org/2001/XMLSchema#decimal> .
+<https://facultadinformatica-linkeddata.github.io/Curso2025-2026/HandsOn/Group03/id/station/mad-air-50> <http://purl.org/dc/terms/identifier> "50" .
+<https://facultadinformatica-linkeddata.github.io/Curso2025-2026/HandsOn/Group03/id/station/mad-air-50> <http://schema.org/foundingDate> "2010-01-02T00:00:00Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<https://facultadinformatica-linkeddata.github.io/Curso2025-2026/HandsOn/Group03/id/station/mad-air-50> <http://schema.org/name> "Plaza Castilla" .
+<https://facultadinformatica-linkeddata.github.io/Curso2025-2026/HandsOn/Group03/id/station/mad-air-50> <http://schema.org/streetAddress> "Plaza Castilla (Canal)" .
+<https://facultadinformatica-linkeddata.github.io/Curso2025-2026/HandsOn/Group03/id/station/mad-air-50> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/Place> .
+<https://facultadinformatica-linkeddata.github.io/Curso2025-2026/HandsOn/Group03/id/station/mad-air-50> <http://www.w3.org/2000/01/rdf-schema#label> "Plaza Castilla"@es .
+<https://facultadinformatica-linkeddata.github.io/Curso2025-2026/HandsOn/Group03/id/station/mad-air-50> <http://www.w3.org/2003/01/geo/wgs84_pos#lat> "40.4655841"^^<http://www.w3.org/2001/XMLSchema#decimal> .
+<https://facultadinformatica-linkeddata.github.io/Curso2025-2026/HandsOn/Group03/id/station/mad-air-50> <http://www.w3.org/2003/01/geo/wgs84_pos#long> "-3.6887449"^^<http://www.w3.org/2001/XMLSchema#decimal> .
+<https://facultadinformatica-linkeddata.github.io/Curso2025-2026/HandsOn/Group03/id/station/mad-air-54> <http://purl.org/dc/terms/identifier> "54" .
+<https://facultadinformatica-linkeddata.github.io/Curso2025-2026/HandsOn/Group03/id/station/mad-air-54> <http://schema.org/foundingDate> "2009-11-12T00:00:00Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<https://facultadinformatica-linkeddata.github.io/Curso2025-2026/HandsOn/Group03/id/station/mad-air-54> <http://schema.org/name> "Ensanche de Vallecas" .
+<https://facultadinformatica-linkeddata.github.io/Curso2025-2026/HandsOn/Group03/id/station/mad-air-54> <http://schema.org/streetAddress> "Avda. La Gavia / Avda. Las Suertes" .
+<https://facultadinformatica-linkeddata.github.io/Curso2025-2026/HandsOn/Group03/id/station/mad-air-54> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/Place> .
+<https://facultadinformatica-linkeddata.github.io/Curso2025-2026/HandsOn/Group03/id/station/mad-air-54> <http://www.w3.org/2000/01/rdf-schema#label> "Ensanche de Vallecas"@es .
+<https://facultadinformatica-linkeddata.github.io/Curso2025-2026/HandsOn/Group03/id/station/mad-air-54> <http://www.w3.org/2003/01/geo/wgs84_pos#lat> "40.3730118"^^<http://www.w3.org/2001/XMLSchema#decimal> .
+<https://facultadinformatica-linkeddata.github.io/Curso2025-2026/HandsOn/Group03/id/station/mad-air-54> <http://www.w3.org/2003/01/geo/wgs84_pos#long> "-3.6121394"^^<http://www.w3.org/2001/XMLSchema#decimal> .
+<https://facultadinformatica-linkeddata.github.io/Curso2025-2026/HandsOn/Group03/id/station/mad-air-55> <http://purl.org/dc/terms/identifier> "55" .
+<https://facultadinformatica-linkeddata.github.io/Curso2025-2026/HandsOn/Group03/id/station/mad-air-55> <http://schema.org/foundingDate> "2010-01-20T00:00:00Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<https://facultadinformatica-linkeddata.github.io/Curso2025-2026/HandsOn/Group03/id/station/mad-air-55> <http://schema.org/name> "Urb. Embajada" .
+<https://facultadinformatica-linkeddata.github.io/Curso2025-2026/HandsOn/Group03/id/station/mad-air-55> <http://schema.org/streetAddress> "C/ Riaño (Barajas)" .
+<https://facultadinformatica-linkeddata.github.io/Curso2025-2026/HandsOn/Group03/id/station/mad-air-55> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/Place> .
+<https://facultadinformatica-linkeddata.github.io/Curso2025-2026/HandsOn/Group03/id/station/mad-air-55> <http://www.w3.org/2000/01/rdf-schema#label> "Urb. Embajada"@es .
+<https://facultadinformatica-linkeddata.github.io/Curso2025-2026/HandsOn/Group03/id/station/mad-air-55> <http://www.w3.org/2003/01/geo/wgs84_pos#lat> "40.4623628"^^<http://www.w3.org/2001/XMLSchema#decimal> .
+<https://facultadinformatica-linkeddata.github.io/Curso2025-2026/HandsOn/Group03/id/station/mad-air-55> <http://www.w3.org/2003/01/geo/wgs84_pos#long> "-3.5805649"^^<http://www.w3.org/2001/XMLSchema#decimal> .
+<https://facultadinformatica-linkeddata.github.io/Curso2025-2026/HandsOn/Group03/id/station/mad-air-56> <http://purl.org/dc/terms/identifier> "56" .
+<https://facultadinformatica-linkeddata.github.io/Curso2025-2026/HandsOn/Group03/id/station/mad-air-56> <http://schema.org/foundingDate> "2010-01-18T00:00:00Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<https://facultadinformatica-linkeddata.github.io/Curso2025-2026/HandsOn/Group03/id/station/mad-air-56> <http://schema.org/name> "Plaza Elíptica" .
+<https://facultadinformatica-linkeddata.github.io/Curso2025-2026/HandsOn/Group03/id/station/mad-air-56> <http://schema.org/streetAddress> "Plaza Elíptica - Avda. Oporto" .
+<https://facultadinformatica-linkeddata.github.io/Curso2025-2026/HandsOn/Group03/id/station/mad-air-56> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/Place> .
+<https://facultadinformatica-linkeddata.github.io/Curso2025-2026/HandsOn/Group03/id/station/mad-air-56> <http://www.w3.org/2000/01/rdf-schema#label> "Plaza Elíptica"@es .
+<https://facultadinformatica-linkeddata.github.io/Curso2025-2026/HandsOn/Group03/id/station/mad-air-56> <http://www.w3.org/2003/01/geo/wgs84_pos#lat> "40.3850336"^^<http://www.w3.org/2001/XMLSchema#decimal> .
+<https://facultadinformatica-linkeddata.github.io/Curso2025-2026/HandsOn/Group03/id/station/mad-air-56> <http://www.w3.org/2003/01/geo/wgs84_pos#long> "-3.7187679"^^<http://www.w3.org/2001/XMLSchema#decimal> .
+<https://facultadinformatica-linkeddata.github.io/Curso2025-2026/HandsOn/Group03/id/station/mad-air-57> <http://purl.org/dc/terms/identifier> "57" .
+<https://facultadinformatica-linkeddata.github.io/Curso2025-2026/HandsOn/Group03/id/station/mad-air-57> <http://schema.org/foundingDate> "2009-11-23T00:00:00Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<https://facultadinformatica-linkeddata.github.io/Curso2025-2026/HandsOn/Group03/id/station/mad-air-57> <http://schema.org/name> "Sanchinarro" .
+<https://facultadinformatica-linkeddata.github.io/Curso2025-2026/HandsOn/Group03/id/station/mad-air-57> <http://schema.org/streetAddress> "C/ Princesa de Éboli esq. C/ María Tudor" .
+<https://facultadinformatica-linkeddata.github.io/Curso2025-2026/HandsOn/Group03/id/station/mad-air-57> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/Place> .
+<https://facultadinformatica-linkeddata.github.io/Curso2025-2026/HandsOn/Group03/id/station/mad-air-57> <http://www.w3.org/2000/01/rdf-schema#label> "Sanchinarro"@es .
+<https://facultadinformatica-linkeddata.github.io/Curso2025-2026/HandsOn/Group03/id/station/mad-air-57> <http://www.w3.org/2003/01/geo/wgs84_pos#lat> "40.4942012"^^<http://www.w3.org/2001/XMLSchema#decimal> .
+<https://facultadinformatica-linkeddata.github.io/Curso2025-2026/HandsOn/Group03/id/station/mad-air-57> <http://www.w3.org/2003/01/geo/wgs84_pos#long> "-3.6605173"^^<http://www.w3.org/2001/XMLSchema#decimal> .
+<https://facultadinformatica-linkeddata.github.io/Curso2025-2026/HandsOn/Group03/id/station/mad-air-58> <http://purl.org/dc/terms/identifier> "58" .
+<https://facultadinformatica-linkeddata.github.io/Curso2025-2026/HandsOn/Group03/id/station/mad-air-58> <http://schema.org/foundingDate> "2009-01-12T00:00:00Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<https://facultadinformatica-linkeddata.github.io/Curso2025-2026/HandsOn/Group03/id/station/mad-air-58> <http://schema.org/name> "El Pardo" .
+<https://facultadinformatica-linkeddata.github.io/Curso2025-2026/HandsOn/Group03/id/station/mad-air-58> <http://schema.org/streetAddress> "Avda. La Guardia" .
+<https://facultadinformatica-linkeddata.github.io/Curso2025-2026/HandsOn/Group03/id/station/mad-air-58> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/Place> .
+<https://facultadinformatica-linkeddata.github.io/Curso2025-2026/HandsOn/Group03/id/station/mad-air-58> <http://www.w3.org/2000/01/rdf-schema#label> "El Pardo"@es .
+<https://facultadinformatica-linkeddata.github.io/Curso2025-2026/HandsOn/Group03/id/station/mad-air-58> <http://www.w3.org/2003/01/geo/wgs84_pos#lat> "40.5180701"^^<http://www.w3.org/2001/XMLSchema#decimal> .
+<https://facultadinformatica-linkeddata.github.io/Curso2025-2026/HandsOn/Group03/id/station/mad-air-58> <http://www.w3.org/2003/01/geo/wgs84_pos#long> "-3.7746101"^^<http://www.w3.org/2001/XMLSchema#decimal> .
+<https://facultadinformatica-linkeddata.github.io/Curso2025-2026/HandsOn/Group03/id/station/mad-air-59> <http://purl.org/dc/terms/identifier> "59" .
+<https://facultadinformatica-linkeddata.github.io/Curso2025-2026/HandsOn/Group03/id/station/mad-air-59> <http://schema.org/foundingDate> "2009-12-14T00:00:00Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<https://facultadinformatica-linkeddata.github.io/Curso2025-2026/HandsOn/Group03/id/station/mad-air-59> <http://schema.org/name> "Juan Carlos I" .
+<https://facultadinformatica-linkeddata.github.io/Curso2025-2026/HandsOn/Group03/id/station/mad-air-59> <http://schema.org/streetAddress> "Parque Juan Carlos I (frente oficinas mantenimiento)" .
+<https://facultadinformatica-linkeddata.github.io/Curso2025-2026/HandsOn/Group03/id/station/mad-air-59> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/Place> .
+<https://facultadinformatica-linkeddata.github.io/Curso2025-2026/HandsOn/Group03/id/station/mad-air-59> <http://www.w3.org/2000/01/rdf-schema#label> "Juan Carlos I"@es .
+<https://facultadinformatica-linkeddata.github.io/Curso2025-2026/HandsOn/Group03/id/station/mad-air-59> <http://www.w3.org/2003/01/geo/wgs84_pos#lat> "40.465144"^^<http://www.w3.org/2001/XMLSchema#decimal> .
+<https://facultadinformatica-linkeddata.github.io/Curso2025-2026/HandsOn/Group03/id/station/mad-air-59> <http://www.w3.org/2003/01/geo/wgs84_pos#long> "-3.609031"^^<http://www.w3.org/2001/XMLSchema#decimal> .
+<https://facultadinformatica-linkeddata.github.io/Curso2025-2026/HandsOn/Group03/id/station/mad-air-60> <http://purl.org/dc/terms/identifier> "60" .
+<https://facultadinformatica-linkeddata.github.io/Curso2025-2026/HandsOn/Group03/id/station/mad-air-60> <http://schema.org/foundingDate> "2010-08-02T00:00:00Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<https://facultadinformatica-linkeddata.github.io/Curso2025-2026/HandsOn/Group03/id/station/mad-air-60> <http://schema.org/name> "Tres Olivos" .
+<https://facultadinformatica-linkeddata.github.io/Curso2025-2026/HandsOn/Group03/id/station/mad-air-60> <http://schema.org/streetAddress> "Plaza Tres Olivos" .
+<https://facultadinformatica-linkeddata.github.io/Curso2025-2026/HandsOn/Group03/id/station/mad-air-60> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/Place> .
+<https://facultadinformatica-linkeddata.github.io/Curso2025-2026/HandsOn/Group03/id/station/mad-air-60> <http://www.w3.org/2000/01/rdf-schema#label> "Tres Olivos"@es .
+<https://facultadinformatica-linkeddata.github.io/Curso2025-2026/HandsOn/Group03/id/station/mad-air-60> <http://www.w3.org/2003/01/geo/wgs84_pos#lat> "40.5005477"^^<http://www.w3.org/2001/XMLSchema#decimal> .
+<https://facultadinformatica-linkeddata.github.io/Curso2025-2026/HandsOn/Group03/id/station/mad-air-60> <http://www.w3.org/2003/01/geo/wgs84_pos#long> "-3.6897308"^^<http://www.w3.org/2001/XMLSchema#decimal> .

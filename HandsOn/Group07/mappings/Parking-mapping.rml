@@ -1,0 +1,114 @@
+@prefix rr: <http://www.w3.org/ns/r2rml#> .
+@prefix rml: <http://semweb.mmlab.be/ns/rml#> .
+@prefix ql: <http://semweb.mmlab.be/ns/ql#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix mm: <http://movemadrid.org/def/base#> .
+@prefix schema: <https://schema.org/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+
+<#ParkingMapping>
+    rml:logicalSource [
+        rml:source "Public-Parking-Facilities.csv";
+        rml:referenceFormulation ql:CSV;
+        rml:iterator "//*"
+    ].
+
+<#ParkingTriplesMap>
+    rr:subjectMap [
+        rr:template "http://movemadrid.org/def/base#CarParking/{PK}";
+        rr:class mm:CarParking
+    ];
+    
+    rr:predicateObjectMap [
+        rr:predicate schema:name;
+        rr:objectMap [ rml:reference "NOMBRE" ]
+    ];
+    
+    rr:predicateObjectMap [
+        rr:predicate mm:carParkingDescription;
+        rr:objectMap [ rml:reference "DESCRIPCION" ]
+    ];
+    
+    rr:predicateObjectMap [
+        rr:predicate mm:carParkingAddressNumber;
+        rr:objectMap [ rml:reference "NUM" ]
+    ];
+    
+    rr:predicateObjectMap [
+        rr:predicate schema:latitude;
+        rr:objectMap [ 
+            rml:reference "LATITUD";
+            rr:datatype xsd:decimal
+        ]
+    ];
+    
+    rr:predicateObjectMap [
+        rr:predicate schema:longitude;
+        rr:objectMap [ 
+            rml:reference "LONGITUD";
+            rr:datatype xsd:decimal
+        ]
+    ];
+    
+    rr:predicateObjectMap [
+        rr:predicate mm:carParkingPhone;
+        rr:objectMap [ rml:reference "TELEFONO" ]
+    ];
+    
+    rr:predicateObjectMap [
+        rr:predicate mm:carParkingEmail;
+        rr:objectMap [ rml:reference "EMAIL" ]
+    ];
+    
+    rr:predicateObjectMap [
+        rr:predicate mm:carParkingLink;
+        rr:objectMap [ 
+            rml:reference "CONTENT-URL";
+            rr:termType rr:IRI
+        ]
+    ];
+    
+    rr:predicateObjectMap [
+        rr:predicate mm:inDistrict;
+        rr:objectMap [
+            rr:template "http://movemadrid.org/def/base#District/{COD-DISTRITO}";
+            rr:class mm:District
+        ]
+    ];
+    
+    rr:predicateObjectMap [
+        rr:predicate mm:hasBarrio;
+        rr:objectMap [
+            rr:template "http://movemadrid.org/def/base#Barrio/{COD-BARRIO}";
+            rr:class mm:Barrio
+        ]
+    ].
+
+<#DistrictTriplesMap>
+    rr:subjectMap [
+        rr:template "http://movemadrid.org/def/base#District/{COD-DISTRITO}";
+        rr:class mm:District
+    ];
+    
+    rr:predicateObjectMap [
+        rr:predicate schema:name;
+        rr:objectMap [ rml:reference "DISTRITO" ]
+    ].
+
+<#BarrioTriplesMap>
+    rr:subjectMap [
+        rr:template "http://movemadrid.org/def/base#Barrio/{COD-BARRIO}";
+        rr:class mm:Barrio
+    ];
+    
+    rr:predicateObjectMap [
+        rr:predicate schema:name;
+        rr:objectMap [ rml:reference "BARRIO" ]
+    ];
+    
+    rr:predicateObjectMap [
+        rr:predicate mm:barrioPostalCode;
+        rr:objectMap [ rml:reference "CODIGO-POSTAL" ]
+    ].

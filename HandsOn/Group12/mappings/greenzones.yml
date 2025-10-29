@@ -1,0 +1,22 @@
+prefixes:
+  gz: "http://linkeddata.greenzonesmadrid.org/ontology/gz#"
+
+sources:
+  zones:
+    access: "data/zonas-verdes-updated.csv"
+    referenceFormulation: csv
+
+mappings:
+  greenzone:
+    sources: zones
+    s: $(ZoneURI)
+    po:
+      - [ a, gz:GreenZone ]
+      - [ gz:district, $(Distrito) ]
+      - [ gz:subepigrafe, $(Subepigrafe) ]
+      - [ gz:apartado, $(Apartado) ]
+      - [ gz:fileNumber, $(FileNumber) ]
+      - [ gz:propertyNature, $(PropertyNature) ]
+      - [ gz:situationTarget, $(SituationTarget) ]
+      - [ gz:destination, $(Destination) ]
+      - [ gz:plot, $(Plot) ]

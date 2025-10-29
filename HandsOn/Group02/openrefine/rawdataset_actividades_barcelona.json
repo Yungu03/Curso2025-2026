@@ -26859,27 +26859,16 @@
       "mode": "row-based"
     },
     "baseColumnName": "Organizadores",
-    "expression": "grel:if(cell.recon.matched, \"https://www.wikidata.org/wiki/\" + cell.recon.match.id, value)",
+    "expression": "grel:if(cell.recon.matched, \"https://www.wikidata.org/wiki/\" + cell.recon.match.id, \"\")",
     "onError": "set-to-blank",
-    "newColumnName": "Organizadores3",
+    "newColumnName": "URL Organizadores",
     "columnInsertIndex": 6,
-    "description": "Crear la columna Organizadores3 en el índice 6 basada en la columna Organizadores usando la expresión grel:if(cell.recon.matched, \"https://www.wikidata.org/wiki/\" + cell.recon.match.id, value)"
-  },
-  {
-    "op": "core/column-removal",
-    "columnName": "Organizadores",
-    "description": "Eliminar columna Organizadores"
+    "description": "Crear la columna URL Organizadores en el índice 6 basada en la columna Organizadores usando la expresión grel:if(cell.recon.matched, \"https://www.wikidata.org/wiki/\" + cell.recon.match.id, \"\")"
   },
   {
     "op": "core/column-removal",
     "columnName": "Organizadores2",
     "description": "Eliminar columna Organizadores2"
-  },
-  {
-    "op": "core/column-rename",
-    "oldColumnName": "Organizadores3",
-    "newColumnName": "Organizadores",
-    "description": "Renombra la columna Organizadores3 a Organizadores"
   },
   {
     "op": "core/column-addition",
@@ -26888,22 +26877,11 @@
       "mode": "row-based"
     },
     "baseColumnName": "Nombre del sitio",
-    "expression": "grel:if(cell.recon.matched, \"https://www.wikidata.org/wiki/\" + cell.recon.match.id, value)",
+    "expression": "grel:if(cell.recon.matched, \"https://www.wikidata.org/wiki/\" + cell.recon.match.id, \"\")",
     "onError": "set-to-blank",
-    "newColumnName": "aaa",
-    "columnInsertIndex": 9,
-    "description": "Crear la columna aaa en el índice 9 basada en la columna Nombre del sitio usando la expresión grel:if(cell.recon.matched, \"https://www.wikidata.org/wiki/\" + cell.recon.match.id, value)"
-  },
-  {
-    "op": "core/column-removal",
-    "columnName": "Nombre del sitio",
-    "description": "Eliminar columna Nombre del sitio"
-  },
-  {
-    "op": "core/column-rename",
-    "oldColumnName": "aaa",
-    "newColumnName": "Nombre del sitio",
-    "description": "Renombra la columna aaa a Nombre del sitio"
+    "newColumnName": "URL Sitio",
+    "columnInsertIndex": 10,
+    "description": "Crear la columna URL Sitio en el índice 10 basada en la columna Nombre del sitio usando la expresión grel:if(cell.recon.matched, \"https://www.wikidata.org/wiki/\" + cell.recon.match.id, \"\")"
   },
   {
     "op": "core/column-addition",
@@ -26912,22 +26890,11 @@
       "mode": "row-based"
     },
     "baseColumnName": "Nombre del municipio",
-    "expression": "grel:if(cell.recon.matched, \"https://www.wikidata.org/wiki/\" + cell.recon.match.id, value)",
+    "expression": "grel:if(cell.recon.matched, \"https://www.wikidata.org/wiki/\" + cell.recon.match.id, \"\")",
     "onError": "set-to-blank",
-    "newColumnName": "Nombre del Municipio2",
-    "columnInsertIndex": 11,
-    "description": "Crear la columna Nombre del Municipio2 en el índice 11 basada en la columna Nombre del municipio usando la expresión grel:if(cell.recon.matched, \"https://www.wikidata.org/wiki/\" + cell.recon.match.id, value)"
-  },
-  {
-    "op": "core/column-removal",
-    "columnName": "Nombre del municipio",
-    "description": "Eliminar columna Nombre del municipio"
-  },
-  {
-    "op": "core/column-rename",
-    "oldColumnName": "Nombre del Municipio2",
-    "newColumnName": "Nombre del Municipio",
-    "description": "Renombra la columna Nombre del Municipio2 a Nombre del Municipio"
+    "newColumnName": "URL Municipio",
+    "columnInsertIndex": 13,
+    "description": "Crear la columna URL Municipio en el índice 13 basada en la columna Nombre del municipio usando la expresión grel:if(cell.recon.matched, \"https://www.wikidata.org/wiki/\" + cell.recon.match.id, \"\")"
   },
   {
     "op": "core/column-addition",
@@ -26936,21 +26903,10 @@
       "mode": "row-based"
     },
     "baseColumnName": "Comarca",
-    "expression": "grel:if(cell.recon.matched, \"https://www.wikidata.org/wiki/\" + cell.recon.match.id, value)",
+    "expression": "grel:if(cell.recon.matched, \"https://www.wikidata.org/wiki/\" + cell.recon.match.id, \"\")",
     "onError": "set-to-blank",
-    "newColumnName": "Comarca2",
-    "columnInsertIndex": 16,
-    "description": "Crear la columna Comarca2 en el índice 16 basada en la columna Comarca usando la expresión grel:if(cell.recon.matched, \"https://www.wikidata.org/wiki/\" + cell.recon.match.id, value)"
-  },
-  {
-    "op": "core/column-removal",
-    "columnName": "Comarca",
-    "description": "Eliminar columna Comarca"
-  },
-  {
-    "op": "core/column-rename",
-    "oldColumnName": "Comarca2",
-    "newColumnName": "Comarca",
-    "description": "Renombra la columna Comarca2 a Comarca"
+    "newColumnName": "URL Comarca",
+    "columnInsertIndex": 19,
+    "description": "Crear la columna URL Comarca en el índice 19 basada en la columna Comarca usando la expresión grel:if(cell.recon.matched, \"https://www.wikidata.org/wiki/\" + cell.recon.match.id, \"\")"
   }
 ]

@@ -1,0 +1,73 @@
+PREFIX ns: <http://data.example.org/madridMuseos#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+
+# Query 1: Total number of museums
+SELECT (COUNT(?museum) AS ?totalMuseums)
+WHERE {
+    ?museum rdf:type ns:Museum .
+}
+
+# Query 2: List all museums with their labels and addresses
+SELECT ?museum ?label ?address
+WHERE {
+    ?museum rdf:type ns:Museum ;
+    ns:label ?label ;
+    ns:address ?address .
+}
+ORDER BY ?label
+
+# Query 3: Check for museums missing an email
+SELECT ?museum ?label
+WHERE {
+    ?museum rdf:type ns:Museum ;
+    ns:label ?label .
+    OPTIONAL { ?museum ns:email ?email }
+    FILTER (?email = "nan")
+}
+
+# Query 4: Verify all museums have a neighbourhood link
+SELECT ?museum ?label
+WHERE {
+    ?museum rdf:type ns:Museum ;
+    ns:label ?label .
+    FILTER NOT EXISTS { ?museum ns:hasNeighbourhood ?neighbourhood }
+}
+
+# Query 5: Count museums per district
+SELECT ?district (COUNT(?museum) AS ?count)
+WHERE {
+    ?museum rdf:type ns:Museum ;
+    ns:hasNeighbourhood ?neighbourhood .
+    ?neighbourhood ns:hasDistrict ?district .
+}
+GROUP BY ?district
+ORDER BY DESC(?count)
+
+# Query 6: Check for duplicate museum labels
+SELECT ?label (COUNT(?museum) AS ?count)
+WHERE {
+    ?museum rdf:type ns:Museum ;
+    ns:label ?label .
+}
+GROUP BY ?label
+HAVING (?count > 1)
+
+# Query 7: List museums with their accessibility
+SELECT ?museum ?label ?accessibility
+WHERE {
+    ?museum rdf:type ns:Museum ;
+    ns:label ?label ;
+    ns:accessibility ?accessibility .
+}
+ORDER BY ?label
+
+# Query 8: Verify coordinate consistency (xCoordinate and yCoordinate should be integers)
+SELECT ?museum ?label ?xCoord ?yCoord
+WHERE {
+    ?museum rdf:type ns:Museum ;
+    ns:label ?label ;
+    ns:xCoordinate ?xCoord ;
+    ns:yCoordinate ?yCoord .
+  FILTER (!BOUND(STRDT(?xCoord, xsd:integer)) || !BOUND(STRDT(?yCoord, xsd:integer)))
+}

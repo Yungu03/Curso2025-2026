@@ -1,0 +1,37 @@
+PREFIX ex: <http://group17.project/madrid-parks/ontology/>
+PREFIX web: <http://group17.project/madrid-parks/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+# 1️⃣ Comprobar número total de observaciones
+SELECT (COUNT(DISTINCT ?tc) AS ?numTreeCounts)
+WHERE {
+  ?tc a ex:TreeCount .
+}
+
+# 2️⃣ Mostrar especies y parques con más árboles
+SELECT ?park ?species (xsd:integer(?n) AS ?num)
+WHERE {
+  ?tc a ex:TreeCount ;
+      ex:inPark ?park ;
+      ex:ofSpecies ?species ;
+      ex:numberOfTrees ?n .
+}
+ORDER BY DESC(?num)
+LIMIT 20
+
+# 3️⃣ Total de árboles por parque
+SELECT ?park (SUM(xsd:integer(?n)) AS ?total)
+WHERE {
+  ?tc a ex:TreeCount ;
+      ex:inPark ?park ;
+      ex:numberOfTrees ?n .
+}
+GROUP BY ?park
+ORDER BY DESC(?total)
+
+# 4️⃣ Verificar tipos de datos
+SELECT ?tc ?n
+WHERE {
+  ?tc ex:numberOfTrees ?n .
+  FILTER (datatype(?n) != xsd:integer)
+}

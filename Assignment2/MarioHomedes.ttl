@@ -1,0 +1,19 @@
+@prefix ex: <http://example.org/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+# Definiciones de los recursos
+ex:ClassRoom03 a ex:ClassRoom ;
+    ex:contains ex:Sensor347, ex:Table322 .
+
+ex:Sensor347 a ex:Sensor ;
+    ex:hasMeasurement ex:Measurement8432 .
+
+ex:Measurement8432 a ex:Measurement ;
+    ex:hasTemperature "29"^^xsd:integer ; # El valor de la temperatura es un entero
+    ex:atTime "2022-09-12T12:01:01Z"^^xsd:dateTime . # Asumimos 'Z' para indicar UTC o un formato ISO completo
+
+ex:Table322 a ex:Table ;
+    ex:hasOwner ex:ETSIInformaticos .
+
+ex:ETSIInformaticos a ex:Owner ;
+    ex:hasName "ETSI Informáticos" .

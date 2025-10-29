@@ -1,0 +1,67 @@
+PREFIX ex: <http://group19.linkeddata.es/resource/>
+PREFIX ont: <http://group19.linkeddata.es/def/transport#>
+PREFIX schema: <http://schema.org/>
+PREFIX wgs: <http://www.w3.org/2003/01/geo/wgs84_pos#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+################################################################################
+# Q1. Conteo total de triples (verifica que hay datos)
+################################################################################
+SELECT (COUNT(?s) AS ?totalTriples)
+WHERE { ?s ?p ?o . }
+
+################################################################################
+# Q2. Número de estaciones BiciMAD y aparcamientos
+################################################################################
+SELECT (COUNT(?bs) AS ?bikeStations) (COUNT(?pk) AS ?parkings)
+WHERE {
+  { SELECT ?bs WHERE { ?bs a ont:BikeStation . } }
+  { SELECT ?pk WHERE { ?pk a ont:ParkingFacility . } }
+}
+
+################################################################################
+# Q3. Estaciones BiciMAD con anclajes disponibles
+################################################################################
+SELECT ?station ?name ?availableDocks
+WHERE {
+  ?station a ont:BikeStation ;
+           schema:name ?name ;
+           ont:availableDocks ?availableDocks .
+  FILTER(xsd:integer(?availableDocks) > 0)
+}
+ORDER BY DESC(xsd:integer(?availableDocks))
+LIMIT 20
+
+################################################################################
+# Q4. Estaciones BiciMAD y su aparcamiento cercano (si existe)
+################################################################################
+SELECT ?station ?name ?parking
+WHERE {
+  ?station a ont:BikeStation ;
+           schema:name ?name .
+  OPTIONAL { ?station ont:nearbyParking ?parking . }
+}
+LIMIT 20
+
+################################################################################
+# Q5. Intensidad de movilidad en Enero 2024 en el primer cinturón
+################################################################################
+SELECT ?mobility ?zone ?intensity
+WHERE {
+  ?mobility a ont:MobilityIntensity ;
+            ont:year 2024 ;
+            ont:month "Enero" ;
+            ont:zone ?zone ;
+            ont:intensity ?intensity .
+  FILTER(CONTAINS(LCASE(STR(?zone)), "1er"))
+}
+ORDER BY DESC(xsd:integer(?intensity))
+
+################################################################################
+# Q6. Aparcamientos a menos de 300m de una estación BiciMAD
+################################################################################
+SELECT ?station ?parking
+WHERE {
+  ?station a ont:BikeStation ;
+           ont:nearbyParking ?parking .
+}

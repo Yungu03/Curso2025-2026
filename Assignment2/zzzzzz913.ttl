@@ -1,0 +1,21 @@
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+
+### INDIVIDUAL2 zzzzzz913
+
+res:ClassRoom03 a :ClassRoom ;
+    :contains res:Sensor347 ;
+    :contains res:Table322 .
+
+res:Sensor347 a :Sensor ;
+    :hasMeasurement res:Measurement8432 .
+
+res:Measurement8432 a :Measurement ;
+    :hasTemperature "29"^^xsd:integer ;
+    :atTime "2022-09-12T12:01:12"^^xsd:dateTime .
+
+res:Table322 a :Table ;
+    :hasOwner res:ETSIInformaticos .
+
+res:ETSIInformaticos a :Organization ;
+    :hasName "ETSI Informáticos" .

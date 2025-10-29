@@ -1,30 +1,25 @@
-# Hands-on assignment 3 – Self-assessment
+# Hands-on assignment 3 – Self assessment
 
 ## Checklist
 
-**The “openrefine” directory:**
-- [✔️] Contains three JSON files with all the cleaning and transformation operations:
-  - `history_Accidentalidad.json`
-  - `history_radares.json`
-  - `history_poblacion.json`
-- [✔️] The operations include trimming spaces, converting text to title case, normalizing accented characters, converting text to numbers or dates, and removing duplicates.
-- [✔️] All transformations can be reproduced in OpenRefine to obtain the same cleaned datasets.
+**Every resource described in the CSV file:**
 
-**The “csv” directory:**
-- [✔️] Contains the updated and cleaned CSV files:
-  - `2025-Accidentalidad-update.csv`
-  - `RADARES-FIJOS-vDTT-update.csv`
-  - `poblacion-1-enero-update.csv`
-- [✔️] All files come from official open data of the **Madrid City Council (Datos Abiertos Madrid)**.
-- [✔️] Duplicated rows and inconsistent formats were fixed.
-- [✔️] Text columns such as `distrito`, `sexo`, and `tipo_accidente` were standardized.
-- [✔️] Dates were converted to consistent formats (ISO or `dd/MM/yyyy`).
-- [✔️] Numeric columns were converted from text when needed.
+- [✔️] Has a unique identifier in a column (not an auto-increased integer)
+- [✔️] Is related to a class in the ontology
 
-**The “selfAssessmentHandsOn3.md” file:**
-- [✔️] Describes the cleaning and transformation process performed in OpenRefine.
-- [✔️] Mentions that all datasets are now ready for RDF generation.
-- [✔️] Confirms that all deliverables (JSON + CSV + MD) are included.
+**Every class in the ontology:**
+
+- [✔️] Is related to a resource described in the CSV file
+
+**Every column in the CSV file:**
+
+- [✔️] Is trimmed
+- [✔️] Is properly encoded (e.g., dates, booleans)
+- [✔️] Is related to a property in the ontology
+
+**Every property in the ontology:**
+
+- [✔️] Is related to a column in the CSV file
 
 ## Comments on the self-assessment
 We worked with three open datasets from the Madrid City Council portal:  

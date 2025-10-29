@@ -1,0 +1,58 @@
+prefixes:
+  ex: "http://group19.linkeddata.es/resource/"
+  ont: "http://group19.linkeddata.es/def/transport#"
+  schema: "http://schema.org/"
+  wgs: "http://www.w3.org/2003/01/geo/wgs84_pos#"
+  xsd: "http://www.w3.org/2001/XMLSchema#"
+
+mappings:
+  parkings:
+    sources:
+      - ["202625-0-aparcamientos-publicos-updated.csv", csv]
+    s: "http://group19.linkeddata.es/resource/parking/{id}"
+    po:
+      - [a, ont:ParkingFacility]
+      - [schema:name, $(name)]
+      - [schema:openingHours, $(openingHours)]
+      - p: wgs:lat
+        o: $(latitud)
+        datatype: xsd:float
+      - p: wgs:long
+        o: $(longitude)
+        datatype: xsd:float
+
+  bikestations:
+    sources:
+      - ["bikestationbicimad_csv-updated.csv", csv]
+    s: "http://group19.linkeddata.es/resource/bikestation/{id}"
+    po:
+      - [a, ont:BikeStation]
+      - [schema:name, $(name)]
+      - [schema:address, $(address)]
+      - p: schema:capacity
+        o: $(totalDocks)
+        datatype: xsd:integer
+      - p: ont:availableDocks
+        o: $(availableDocks)
+        datatype: xsd:integer
+      - p: wgs:lat
+        o: $(latitude)
+        datatype: xsd:float
+      - p: wgs:long
+        o: $(longitude)
+        datatype: xsd:float
+
+  mobility:
+    sources:
+      - ["I-M-D-LABORABLES-2024-2025-updated.csv", csv]
+    s: "http://group19.linkeddata.es/resource/mobility/{year}/{month}/{zone}"
+    po:
+      - [a, ont:MobilityIntensity]
+      - p: ont:year
+        o: $(year)
+        datatype: xsd:integer
+      - [ont:month, $(month)]
+      - [ont:zone, $(zone)]
+      - p: ont:intensity
+        o: $(intensity)
+        datatype: xsd:integer

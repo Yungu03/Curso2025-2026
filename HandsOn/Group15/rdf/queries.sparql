@@ -1,0 +1,19 @@
+
+# Count triples
+SELECT (COUNT(*) AS ?n) WHERE { ?s ?p ?o } ;
+
+# Number of Stops
+SELECT (COUNT(?s) AS ?stops) WHERE { ?s a <http://vocab.gtfs.org/terms#Stop> } ;
+
+# Number of Routes
+SELECT (COUNT(?r) AS ?routes) WHERE { ?r a <http://vocab.gtfs.org/terms#Route> } ;
+
+# Example join
+PREFIX schema: <http://schema.org/>
+PREFIX gtfs: <http://vocab.gtfs.org/terms#>
+SELECT ?route ?short ?stopName WHERE {
+  ?stop a gtfs:Stop ; schema:name ?stopName .
+  FILTER(CONTAINS(LCASE(?stopName), "plaza mayor"))
+  ?st a gtfs:StopTime ; gtfs:stop ?stop ; gtfs:route ?route .
+  OPTIONAL { ?route gtfs:shortName ?short }
+} LIMIT 20 ;

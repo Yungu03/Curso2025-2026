@@ -1,0 +1,153 @@
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX vocab: <http://example.org/vocab#>
+
+# ------------------------------------------------------------------
+# CONSULTA 1: CONTEO POR CLASE (Verificación)
+# ------------------------------------------------------------------
+SELECT ?clase (COUNT(?sujeto) AS ?instancias)
+WHERE {
+  ?sujeto a ?clase .
+  FILTER(?clase IN (vocab:MedicionAire, vocab:MedicionMeteorologica, vocab:EpisodioOzono))
+}
+GROUP BY ?clase
+
+# ------------------------------------------------------------------
+# CONSULTA 2: MUESTRA DE DATOS DE CALIDAD DEL AIRE (Verificación)
+# ------------------------------------------------------------------
+SELECT *
+WHERE {
+  ?medicion_aire a vocab:MedicionAire ;
+     vocab:provincia ?provincia ;
+     vocab:municipio ?municipio ;
+     vocab:estacion ?estacion ;
+     vocab:magnitud ?magnitud ;
+     vocab:puntoMuestreo ?punto_muestreo ;
+     vocab:fecha ?fecha ;
+     vocab:H01 ?h01 .
+}
+LIMIT 10
+
+# ------------------------------------------------------------------
+# CONSULTA 3: MUESTRA DE DATOS DE METEOROLOGÍA (Verificación)
+# ------------------------------------------------------------------
+SELECT *
+WHERE {
+  ?medicion_meteo a vocab:MedicionMeteorologica ;
+     vocab:provincia ?provincia ;
+     vocab:municipio ?municipio ;
+     vocab:estacion ?estacion ;
+     vocab:variable ?variable ;
+     vocab:fecha ?fecha ;
+     vocab:H01 ?h01 .
+}
+LIMIT 10
+
+# ------------------------------------------------------------------
+# CONSULTA 4: MUESTRA DE EPISODIOS DE OZONO (Verificación)
+# ------------------------------------------------------------------
+SELECT *
+WHERE {
+  ?episodio a vocab:EpisodioOzono ;
+     vocab:fechaInicio ?inicio ;
+     vocab:fechaFin ?fin ;
+     vocab:episodio ?tipo_episodio ;
+     vocab:medidaPoblacion ?medida .
+}
+ORDER BY ?inicio
+
+# ------------------------------------------------------------------
+# CONSULTA 5: VERIFICACIÓN DE TIPOS DE DATOS (Verificación)
+# ------------------------------------------------------------------
+SELECT DISTINCT ?tipo_de_fecha ?tipo_de_medicion_hora
+WHERE {
+  ?medicion a vocab:MedicionAire ;
+     vocab:fecha ?fecha ;
+     vocab:H01 ?medicion_h01 .
+  BIND(DATATYPE(?fecha) AS ?tipo_de_fecha)
+  BIND(DATATYPE(?medicion_h01) AS ?tipo_de_medicion_hora)
+}
+LIMIT 1
+
+# ------------------------------------------------------------------
+# CONSULTA 6: TOP 10 MEDICIONES MÁS ALTAS A MEDIODÍA (Análisis)
+# ------------------------------------------------------------------
+SELECT ?fecha ?estacion ?valor
+WHERE {
+  ?medicion a vocab:MedicionAire ;
+     vocab:magnitud "12" ;
+     vocab:fecha ?fecha ;
+     vocab:estacion ?estacion ;
+     vocab:H12 ?valor .
+}
+ORDER BY DESC(?valor)
+LIMIT 10
+
+# ------------------------------------------------------------------
+# CONSULTA 7: PROMEDIO POR ESTACIÓN (Análisis)
+# ------------------------------------------------------------------
+SELECT ?estacion (AVG(?valor_mediodia) AS ?promedio_mediodia)
+WHERE {
+  ?medicion a vocab:MedicionAire ;
+     vocab:estacion ?estacion ;
+     vocab:magnitud "10" ;
+     vocab:H12 ?valor_mediodia .
+}
+GROUP BY ?estacion
+ORDER BY DESC(?promedio_mediodia)
+
+# ------------------------------------------------------------------
+# CONSULTA 8: MEDICIONES DE AIRE DURANTE EPISODIO DE OZONO (Análisis)
+# ------------------------------------------------------------------
+SELECT ?episodio_tipo ?fecha_medicion ?estacion ?valor_medicion
+WHERE {
+  ?episodio a vocab:EpisodioOzono ;
+     vocab:fechaInicio ?inicio ;
+     vocab:fechaFin ?fin ;
+     vocab:episodio ?episodio_tipo .
+  
+  ?medicion a vocab:MedicionAire ;
+     vocab:magnitud "10" ;
+     vocab:fecha ?fecha_medicion ;
+     vocab:estacion ?estacion ;
+     vocab:H12 ?valor_medicion .
+     
+  FILTER(?fecha_medicion >= ?inicio && ?fecha_medicion <= ?fin)
+}
+ORDER BY ?fecha_medicion
+LIMIT 100
+
+# ------------------------------------------------------------------
+# CONSULTA 9: CORRELACIÓN AIRE-METEOROLOGÍA (Análisis)
+# ------------------------------------------------------------------
+SELECT ?fecha ?estacion ?valor_polucion ?valor_temperatura
+WHERE {
+  ?med_aire a vocab:MedicionAire ;
+     vocab:estacion ?estacion ;
+     vocab:fecha ?fecha ;
+     vocab:magnitud "10" ;
+     vocab:H12 ?valor_polucion .
+
+  ?med_meteo a vocab:MedicionMeteorologica ;
+     vocab:estacion ?estacion ;
+     vocab:fecha ?fecha ;
+     vocab:variable "80" ;
+     vocab:H12 ?valor_temperatura .
+}
+LIMIT 100
+
+# ------------------------------------------------------------------
+# CONSULTA 10: ¿QUÉ DÍAS SUPERARON UN UMBRAL? (Análisis)
+# ------------------------------------------------------------------
+SELECT ?fecha ?estacion ?valor_h14
+WHERE {
+  ?medicion a vocab:MedicionAire ;
+     vocab:magnitud "18" ;
+     vocab:fecha ?fecha ;
+     vocab:estacion ?estacion ;
+     vocab:H14 ?valor_h14 .
+  
+  FILTER(?valor_h14 > 2.0)
+}
+ORDER BY DESC(?valor_h14)

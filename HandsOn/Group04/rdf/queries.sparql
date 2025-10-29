@@ -1,0 +1,99 @@
+PREFIX rr: <http://www.w3.org/ns/r2rml#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX rev: <http://purl.org/stuff/rev#>
+PREFIX schema: <http://schema.org/>
+PREFIX dct: <http://purl.org/dc/terms/>
+PREFIX rml: <http://semweb.mmlab.be/ns/rml#>
+PREFIX ql: <http://semweb.mmlab.be/ns/ql#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX vocab: <http://example.org#>
+
+
+
+# 1) ¿hay al menos un recurso del tipo vocab:Centro?
+ASK {
+  ?c rdf:type vocab:Centro .
+}
+
+
+# 2) Mostrar 20 centros con su numero y email (si lo tienen)
+SELECT ?centro ?num ?email
+WHERE {
+  ?centro rdf:type vocab:Centro .
+  OPTIONAL { ?centro vocab:NUM ?num . }
+  OPTIONAL { ?centro vocab:EMAIL ?email . }
+}
+LIMIT 20
+
+
+# 2) Mostrar nombre y distrito por centro
+SELECT ?centro ?localidad ?distrito
+WHERE {
+  ?centro rdf:type vocab:Centro .
+  OPTIONAL { ?centro vocab:LOCALIDAD ?localidad . }
+  OPTIONAL { ?centro vocab:DISTRITO ?distrito . }
+}
+LIMIT 50
+
+
+# 4) Contar cuántos centros hay en total
+SELECT (COUNT(DISTINCT ?centro) AS ?numCentros)
+WHERE {
+  ?centro rdf:type vocab:Centro .
+}
+
+# 5) Contar los centros por distrito 
+SELECT ?distrito (COUNT(?centro) AS ?count)
+WHERE {
+  ?centro rdf:type vocab:Centro .
+  ?centro vocab:DISTRITO ?distrito .
+}
+GROUP BY ?distrito
+ORDER BY DESC(?count)
+LIMIT 50
+
+
+# 6) Mostrar centros que no tienen email
+SELECT ?centro ?num
+WHERE {
+  ?centro rdf:type vocab:Centro .
+  OPTIONAL { ?centro vocab:NUM ?num . }
+  FILTER NOT EXISTS { ?centro vocab:EMAIL ?e . }
+}
+LIMIT 50
+
+
+# 7) Verificar que latitud y longitud se encuentran en el dataset y estan en formato decimal
+SELECT ?centro ?num ?lat ?long
+WHERE {
+  ?centro rdf:type vocab:Centro .
+  OPTIONAL { ?centro vocab:NUM ?num . }
+  ?centro vocab:LATITUD ?lat .
+  ?centro vocab:LONGITUD ?long .
+  FILTER(datatype(?lat) = xsd:decimal || datatype(?lat) = xsd:double || datatype(?lat) = xsd:float)
+  FILTER(datatype(?long) = xsd:decimal || datatype(?long) = xsd:double || datatype(?long) = xsd:float)
+}
+LIMIT 50
+
+
+# 8) Buscar por un distrito en concreto (ejemplo: "Centro")
+# Cambiamos "Centro" por el nombre exacto que aparezca en tu CSV
+SELECT ?centro ?num ?localidad ?email
+WHERE {
+  ?centro rdf:type vocab:Centro .
+  ?centro vocab:DISTRITO "Centro" .
+  OPTIONAL { ?centro vocab:NUM ?num . }
+  OPTIONAL { ?centro vocab:LOCALIDAD ?localidad . }
+  OPTIONAL { ?centro vocab:EMAIL ?email . }
+}
+LIMIT 100
+
+
+# 9) Listado de todos los predicados usados por un ejemplo de recurso
+SELECT DISTINCT ?p
+WHERE {
+  <http://example.org/item/1> ?p ?o .
+}
+LIMIT 200

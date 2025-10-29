@@ -1,0 +1,109 @@
+# YML Mapping Rules for Barcelona Activities Ontology
+# Based on the provided ontology and CSV structure
+
+prefixes:
+  base: "http://data.barcelona.cat/actividades/"
+  att: "http://data.barcelona.cat/att/"
+  rel: "http://data.barcelona.cat/rel/"
+  url: "http://data.barcelona.cat/url/"
+  wd: "http://www.wikidata.org/wiki/"
+  wdt: "http://www.wikidata.org/prop/direct/"
+  xsd: "http://www.w3.org/2001/XMLSchema#"
+
+mappings:
+  actividad:
+    sources: 
+      - ['rawdataset_actividades_barcelona-updated.csv~csv']
+    s: http://data.barcelona.cat/actividades/Actividad/$(ID)
+    po:
+      - [a, base:Actividad]
+      - [a, wd:Q1656682]  # Wikidata equivalent: event
+      - [att:Titulo, $(Titulo), xsd:string]
+      - [att:Descripcion, $(Descripción), xsd:string]
+      - [att:FechaInicio, $(Fecha de Inicio), xsd:string]
+      - [att:fechaFin, $(Fecha de Finalizacion), xsd:string]
+      - [att:duracionH, $(Duracion (h)), xsd:decimal]
+      - [att:NumDias, $(Dias), xsd:integer]
+      - [att:Precio, $(Precio), xsd:decimal]
+      - [att:Aforo, $(Aforo), xsd:integer]
+      - [att:Inscripcion, $(Inscripcion), xsd:string]
+      - [att:Anuncio, $(Anuncio), xsd:string]
+      - [rel:typeOf, http://data.barcelona.cat/actividades/Categoria/$(Categoria_normalizada)]
+      - [rel:isHosted, http://data.barcelona.cat/url/Organizador/$(Organizadores_normalizado)]
+      - [rel:placed, http://data.barcelona.cat/url/Municipio/$(Nombre_del_municipio_normalizado)]
+      
+  categoria:
+    sources: 
+      - ['rawdataset_actividades_barcelona-updated.csv~csv']
+    s: http://data.barcelona.cat/actividades/Categoria/$(Categoria_normalizada)
+    po:
+      - [a, base:Categoria]
+      - [att:nombreCategoria, $(Categoria), xsd:string]
+      
+  organizador:
+    sources: 
+      - ['rawdataset_actividades_barcelona-updated.csv~csv']
+    s: http://data.barcelona.cat/url/Organizador/$(Organizadores_normalizado)
+    po:
+      - [a, url:Organizador]
+      
+  municipio:
+    sources: 
+      - ['rawdataset_actividades_barcelona-updated.csv~csv']
+    s: http://data.barcelona.cat/url/Municipio/$(Nombre_del_municipio_normalizado)
+    po:
+      - [a, url:Municipio]
+      - [rel:isContained, http://data.barcelona.cat/url/Comarca/$(Comarca_normalizada)]
+      
+  comarca:
+    sources: 
+      - ['rawdataset_actividades_barcelona-updated.csv~csv']
+    s: http://data.barcelona.cat/url/Comarca/$(Comarca_normalizada)
+    po:
+      - [a, url:Comarca]
+
+# Transformation functions for URI normalization
+functions:
+  Categoria_normalizada: |
+    function normalize(text) {
+      if (!text) return "Unknown";
+      return text
+        .toLowerCase()
+        .normalize('NFD').replace(/[\u0300-\u036f]/g, '') // Remove accents
+        .replace(/[^a-zA-Z0-9]/g, '_') // Replace special chars with underscore
+        .replace(/_+/g, '_') // Replace multiple underscores with single
+        .replace(/^_|_$/g, ''); // Remove leading/trailing underscores
+    }
+    
+  Organizadores_normalizado: |
+    function normalize(text) {
+      if (!text || text.trim() === "") return "Unknown";
+      return text
+        .toLowerCase()
+        .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+        .replace(/[^a-zA-Z0-9]/g, '_')
+        .replace(/_+/g, '_')
+        .replace(/^_|_$/g, '');
+    }
+    
+  Nombre_del_municipio_normalizado: |
+    function normalize(text) {
+      if (!text) return "Unknown";
+      return text
+        .toLowerCase()
+        .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+        .replace(/[^a-zA-Z0-9]/g, '_')
+        .replace(/_+/g, '_')
+        .replace(/^_|_$/g, '');
+    }
+    
+  Comarca_normalizada: |
+    function normalize(text) {
+      if (!text) return "Unknown";
+      return text
+        .toLowerCase()
+        .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+        .replace(/[^a-zA-Z0-9]/g, '_')
+        .replace(/_+/g, '_')
+        .replace(/^_|_$/g, '');
+    }

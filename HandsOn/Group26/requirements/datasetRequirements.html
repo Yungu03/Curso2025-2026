@@ -41,15 +41,16 @@
 
     <p><strong>Entities in the selected dataset that can be linked with other datasets:</strong></p>
   <ul>
-    <li><code>PROVINCIA</code>, <code>MUNICIPIO</code>, and <code>ESTACION</code> identify the monitoring stations and can be linked to geographical datasets or station metadata (e.g., coordinates, district names).</li>
-    <li><code>ANO</code>, <code>MES</code>, and <code>DIA</code> provide a temporal reference that allows linking with meteorological or traffic datasets collected on the same dates.</li>
+    <li><code>ESTACION</code> identifies the monitoring stations and can be linked to geographical datasets or station metadata (e.g., coordinates, district names).</li>
+    <li><code>MAGNITUD</code> identifies the pollutant being measured and can be linked to external vocabularies such as DBpedia or environmental thesauri.</li>
+    <li>The hourly columns (<code>H01–H24</code>) provide temporal granularity for a specific day’s measurements.</li>
   </ul>
 
     <p><strong>Entities in other datasets that can be linked to this dataset:</strong></p>
   <ul>
     <li>Air quality station metadata datasets (linked via <code>ESTACION</code> or <code>PUNTO_MUESTREO</code>).</li>
-    <li>Meteorological data (linked via <code>ANO</code>, <code>MES</code>, and <code>DIA</code>).</li>
-    <li>Traffic intensity datasets for Madrid (linked via <code>MUNICIPIO</code> and temporal fields).</li>
+    <li>Pollutant reference datasets such as DBpedia (linked via <code>MAGNITUD</code>).</li>
+    <li>Geospatial or urban environment datasets (linked via the geographic location of the monitoring points).</li>
   </ul>
 
   <h2>Requirement Evaluation</h2>

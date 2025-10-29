@@ -1,0 +1,41 @@
+prefixes:
+  rr: http://www.w3.org/ns/r2rml#
+  foaf: http://xmlns.com/foaf/0.1/
+  xsd: http://www.w3.org/2001/XMLSchema#
+  rdfs: http://www.w3.org/2000/01/rdf-schema#
+  rev: http://purl.org/stuff/rev#
+  schema: http://schema.org/
+  dct: http://purl.org/dc/terms/
+  rml: http://semweb.mmlab.be/ns/rml#
+  ql: http://semweb.mmlab.be/ns/ql#
+  rdf: http://www.w3.org/1999/02/22-rdf-syntax-ns#
+  vocab: http://example.org#
+
+sources:
+  myData:
+    access: "data/example/lugares-Wifi-gratuitos-Madrid-update.csv"
+    referenceFormulation: csv
+
+mappings:
+  triplesmap2:
+    sources:
+      - myData
+    s: http://example.org/item/$(NUM)
+    po:
+      - [a, vocab:Centro]
+      - [vocab:NUM, $(NUM), xsd:integer]
+      - [vocab:LOCALIDAD, $(LOCALIDAD)]
+      - [vocab:PROVINCIA, $(PROVINCIA)]
+      - [vocab:CODIGO_POSTAL, $(CODIGO-POSTAL)]
+      - [vocab:COD_BARRIO, $(COD-BARRIO)]
+      - [vocab:BARRIO, $(BARRIO)]
+      - [vocab:COD_DISTRITO, $(COD-DISTRITO)]
+      - [vocab:DISTRITO, $(DISTRITO)]
+      - [vocab:COORDENADA_X, $(COORDENADA-X), xsd:decimal]
+      - [vocab:COORDENADA_Y, $(COORDENADA-Y), xsd:decimal]
+      - [vocab:LATITUD, $(LATITUD), xsd:decimal]
+      - [vocab:LONGITUD, $(LONGITUD), xsd:decimal]
+      - [vocab:TELEFONO, $(TELEFONO)]
+      - [vocab:FAX, $(FAX)]
+      - [vocab:EMAIL, $(EMAIL)]
+      - [vocab:TIPO, $(TIPO)]

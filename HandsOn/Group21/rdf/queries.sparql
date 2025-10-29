@@ -1,0 +1,57 @@
+############################################################
+# Query 1 – Accidentes por distrito y positivos en alcohol #
+############################################################
+PREFIX schema: http://schema.org/
+PREFIX ex: http://example.org/traffic
+PREFIX xsd: http://www.w3.org/2001/XMLSchema
+
+SELECT ?districtName
+       (COUNT(?e) AS ?accidents)
+       (SUM(IF(?alBool, 1, 0)) AS ?positivesAlcohol)
+WHERE {
+  ?e a schema:Event ;
+     schema:areaServed ?d .
+  OPTIONAL { ?d schema:name ?districtName }
+
+  OPTIONAL { ?e ex:positiveAlcohol ?alcoholRaw }
+
+  # Normalizamos a booleano:
+  BIND(
+    IF(
+      DATATYPE(?alcoholRaw) = xsd:boolean,
+      ?alcoholRaw,
+      IF(
+        isLiteral(?alcoholRaw) && LCASE(STR(?alcoholRaw)) IN ("s","si","sí","true","1"),
+        true,
+        false
+      )
+    ) 
+  AS ?alBoolTmp)
+
+  # Si no hay dato, lo tratamos como false para que SUM(IF(...)) no falle:
+  BIND( COALESCE(?alBoolTmp, false) AS ?alBool )
+}
+GROUP BY ?districtName ?d
+ORDER BY DESC(?accidents)
+LIMIT 15
+
+
+#######################################################
+# Query 2 – Radares con límite ≥ 90 y coordenadas     #
+#######################################################
+PREFIX ex: <http://example.org/traffic#>
+PREFIX schema: <http://schema.org/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT ?camera ?name ?road (xsd:integer(?limit) AS ?limitInt) ?lat ?long
+WHERE {
+  ?camera a ex:SpeedCamera ;
+          schema:name ?name ;
+          ex:road ?road ;
+          ex:speedLimit ?limit ;
+          schema:latitude ?lat ;
+          schema:longitude ?long .
+  FILTER(xsd:integer(?limit) >= 90)
+}
+ORDER BY DESC(?limitInt)
+LIMIT 20
