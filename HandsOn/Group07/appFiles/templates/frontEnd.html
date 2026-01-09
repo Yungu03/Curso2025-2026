@@ -1,0 +1,1600 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MoveMadrid - Intelligent Mobility Application</title>
+
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+      background-color: #fafafa;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    .container {
+      display: flex;
+      height: 100vh;
+    }
+
+    /* Sidebar */
+    .sidebar {
+      width: 480px;
+      background: white;
+      border-right: 1px solid #ddd;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .filters {
+      padding: 20px;
+      background: #ffffff;
+      border-bottom: 1px solid #ddd;
+      max-height: 50vh;
+      overflow-y: auto;
+    }
+
+    .filter-group {
+      margin-bottom: 15px;
+    }
+
+    .filter-group label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+      color: #333;
+      font-size: 14px;
+    }
+
+    .filter-group select,
+    .filter-group input {
+      width: 100%;
+      padding: 10px 12px;
+      border: 2px solid #e1e5e9;
+      border-radius: 8px;
+      font-size: 14px;
+      background: white;
+      transition: border-color 0.3s;
+    }
+
+    .filter-group select:focus,
+    .filter-group input:focus {
+      border-color: #007bff;
+      outline: none;
+    }
+
+    .filter-row {
+      display: flex;
+      gap: 10px;
+    }
+
+    .filter-row .filter-group {
+      flex: 1;
+      margin-bottom: 0;
+    }
+
+    .filter-actions {
+      display: flex;
+      gap: 10px;
+      margin-top: 15px;
+    }
+
+    .filter-btn {
+      flex: 1;
+      padding: 12px;
+      border: none;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .filter-btn.primary {
+      background: #007bff;
+      color: white;
+    }
+
+    .filter-btn.primary:hover {
+      background: #0056b3;
+      transform: translateY(-1px);
+    }
+
+    .filter-btn.secondary {
+      background: #6c757d;
+      color: white;
+    }
+
+    .filter-btn.secondary:hover {
+      background: #545b62;
+      transform: translateY(-1px);
+    }
+
+    .events-header {
+      padding: 15px 20px;
+      background: #f8f9fa;
+      border-bottom: 1px solid #ddd;
+      font-weight: 600;
+      color: #333;
+      font-size: 16px;
+    }
+
+    .events-count {
+      font-size: 14px;
+      color: #666;
+      font-weight: normal;
+      margin-left: 8px;
+    }
+
+    .events-list {
+      flex: 1;
+      overflow-y: auto;
+      padding: 0;
+    }
+
+    .event-item {
+      padding: 18px 20px;
+      border-bottom: 1px solid #eee;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    .event-item:hover {
+      background-color: #f8f9fa;
+      transform: translateX(2px);
+    }
+
+    .event-item.active {
+      background-color: #e3f2fd;
+      border-left: 4px solid #007bff;
+    }
+
+    .event-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 10px;
+      line-height: 1.3;
+    }
+
+    .event-details {
+      font-size: 14px;
+      color: #555;
+      line-height: 1.5;
+    }
+
+    .event-date {
+      color: #007bff;
+      font-weight: 600;
+      margin-bottom: 6px;
+      font-size: 13px;
+    }
+
+    .event-location {
+      margin-bottom: 8px;
+      color: #666;
+    }
+
+    .event-type {
+      display: inline-block;
+      background: #007bff;
+      color: white;
+      padding: 4px 12px;
+      border-radius: 15px;
+      font-size: 12px;
+      font-weight: 600;
+      margin-top: 8px;
+    }
+
+    .event-free {
+      display: inline-block;
+      background: #28a745;
+      color: white;
+      padding: 4px 12px;
+      border-radius: 15px;
+      font-size: 12px;
+      font-weight: 600;
+      margin-left: 8px;
+    }
+
+    .event-paid {
+      display: inline-block;
+      background: #dc3545;
+      color: white;
+      padding: 4px 12px;
+      border-radius: 15px;
+      font-size: 12px;
+      font-weight: 600;
+      margin-left: 8px;
+    }
+
+    .no-events {
+      padding: 60px 20px;
+      text-align: center;
+      color: #666;
+      font-size: 16px;
+    }
+
+    /* Mapa */
+    .map-container {
+      flex: 1;
+      position: relative;
+    }
+
+    #map {
+      height: 100%;
+      width: 100%;
+    }
+
+    /* Mini Mapa */
+    .mini-map-container {
+      position: absolute;
+      bottom: 20px;
+      right: 20px;
+      width: 300px;
+      height: 200px;
+      z-index: 1000;
+      border: 2px solid #007bff;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+      background: white;
+      overflow: hidden;
+    }
+
+    #miniMap {
+      width: 100%;
+      height: 100%;
+    }
+
+    .mini-map-title {
+      position: absolute;
+      top: 5px;
+      left: 5px;
+      background: rgba(255,255,255,0.9);
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 12px;
+      font-weight: 600;
+      color: #333;
+      z-index: 1001;
+    }
+
+    .mini-map-legend {
+      position: absolute;
+      bottom: 5px;
+      left: 5px;
+      background: rgba(255,255,255,0.9);
+      padding: 5px 8px;
+      border-radius: 4px;
+      font-size: 10px;
+      color: #333;
+      z-index: 1001;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      margin: 2px 0;
+    }
+
+    .legend-color {
+      width: 12px;
+      height: 12px;
+      margin-right: 4px;
+      border: 1px solid #666;
+    }
+
+    /* --- Panel de Notificaciones Mejorado --- */
+    .notifications-container {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      display: flex;
+      align-items: flex-start;
+      z-index: 2000;
+    }
+
+    .notifications-panel {
+      width: 320px;
+      height: 420px;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+      display: flex;
+      flex-direction: column;
+      border: 1px solid #e1e5e9;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+
+    .notifications-panel.hidden {
+      transform: translateX(20px);
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .notifications-header {
+      padding: 15px;
+      background: #f8f9fa;
+      border-bottom: 1px solid #e1e5e9;
+      border-radius: 12px 12px 0 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .notifications-title {
+      font-weight: 600;
+      color: #333;
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .notifications-badge {
+      background: #dc3545;
+      color: white;
+      border-radius: 50%;
+      width: 20px;
+      height: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      font-weight: 600;
+    }
+
+    .collapse-btn {
+      background: #007bff;
+      border: none;
+      color: white;
+      width: 32px;
+      height: 32px;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-size: 14px;
+      margin-right: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    }
+
+    .collapse-btn:hover {
+      background: #0056b3;
+      transform: scale(1.05);
+    }
+
+    .collapse-btn.collapsed {
+      background: #6c757d;
+    }
+
+    .collapse-btn.collapsed:hover {
+      background: #545b62;
+    }
+
+    .notifications-filters {
+      padding: 12px 15px;
+      border-bottom: 1px solid #e1e5e9;
+      background: white;
+    }
+
+    .notification-filter-group {
+      margin-bottom: 8px;
+    }
+
+    .notification-filter-group label {
+      display: block;
+      margin-bottom: 4px;
+      font-weight: 600;
+      color: #333;
+      font-size: 12px;
+    }
+
+    .notification-filter-group select {
+      width: 100%;
+      padding: 6px 8px;
+      border: 1px solid #e1e5e9;
+      border-radius: 4px;
+      font-size: 12px;
+      background: white;
+    }
+
+    .notifications-content {
+      flex: 1;
+      overflow-y: auto;
+      padding: 0;
+      background: #f8f9fa;
+    }
+
+    .notification-item {
+      background: white;
+      margin: 8px;
+      padding: 12px;
+      border-radius: 8px;
+      border-left: 3px solid #007bff;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+      transition: all 0.2s ease;
+    }
+
+    .notification-item:hover {
+      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+    }
+
+    .notification-item.new {
+      border-left-color: #28a745;
+      background: #f8fff9;
+    }
+
+    .notification-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 6px;
+    }
+
+    .notification-title {
+      font-weight: 600;
+      color: #007bff;
+      font-size: 12px;
+      margin-bottom: 4px;
+    }
+
+    .notification-event {
+      font-weight: 600;
+      color: #333;
+      font-size: 13px;
+      line-height: 1.3;
+      margin-bottom: 6px;
+    }
+
+    .notification-close {
+      background: none;
+      border: none;
+      color: #6c757d;
+      cursor: pointer;
+      font-size: 14px;
+      padding: 2px;
+      width: 18px;
+      height: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      transition: all 0.2s ease;
+    }
+
+    .notification-close:hover {
+      background: #f8f9fa;
+      color: #dc3545;
+    }
+
+    .notification-details {
+      color: #666;
+      font-size: 11px;
+      line-height: 1.4;
+      margin-bottom: 4px;
+    }
+
+    .notification-detail {
+      margin-bottom: 2px;
+    }
+
+    .notification-tags {
+      display: flex;
+      gap: 6px;
+      margin-top: 6px;
+      flex-wrap: wrap;
+    }
+
+    .notification-tag {
+      background: #007bff;
+      color: white;
+      padding: 2px 6px;
+      border-radius: 10px;
+      font-size: 10px;
+      font-weight: 600;
+    }
+
+    .notification-tag.free {
+      background: #28a745;
+    }
+
+    .notification-tag.paid {
+      background: #dc3545;
+    }
+
+    .no-notifications {
+      text-align: center;
+      color: #666;
+      font-size: 13px;
+      padding: 40px 20px;
+      font-style: italic;
+    }
+
+    .notification-actions {
+      padding: 10px 15px;
+      border-top: 1px solid #e1e5e9;
+      display: flex;
+      gap: 8px;
+      background: white;
+      border-radius: 0 0 12px 12px;
+    }
+
+    .notification-action-btn {
+      flex: 1;
+      padding: 8px;
+      border: none;
+      border-radius: 4px;
+      font-size: 11px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .notification-action-btn.refresh {
+      background: #007bff;
+      color: white;
+    }
+
+    .notification-action-btn.refresh:hover {
+      background: #0056b3;
+    }
+
+    .notification-action-btn.clear {
+      background: #6c757d;
+      color: white;
+    }
+
+    .notification-action-btn.clear:hover {
+      background: #545b62;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .sidebar {
+        width: 100%;
+        height: 50%;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        z-index: 1000;
+      }
+      
+      .map-container {
+        height: 50%;
+      }
+      
+      .container {
+        flex-direction: column;
+      }
+      
+      .filters {
+        max-height: 40vh;
+      }
+
+      .mini-map-container {
+        width: 200px;
+        height: 150px;
+        bottom: 10px;
+        right: 10px;
+      }
+
+      .notifications-panel {
+        width: 280px;
+        height: 380px;
+      }
+
+      .notifications-container {
+        top: 10px;
+        right: 10px;
+      }
+    }
+
+    /* Iconos personalizados - SIN FONDOS */
+    .leaflet-marker-icon {
+      background: none !important;
+      border: none !important;
+    }
+
+    .event-icon {
+      background: none !important;
+      border: none !important;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    }
+
+    .event-icon.active {
+      filter: drop-shadow(0 0 8px rgba(255, 71, 87, 0.8));
+      animation: pulse 1.5s infinite;
+      transform: scale(1.1);
+    }
+
+    .car-parking-icon {
+      background: none !important;
+      border: none !important;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    }
+
+    .bike-parking-icon {
+      background: none !important;
+      border: none !important;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.15); }
+      100% { transform: scale(1); }
+    }
+
+    .barrio-highlight {
+      fill: rgba(255, 0, 0, 0.2) !important;
+      stroke: #ff0000 !important;
+      stroke-width: 3px !important;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <!-- Sidebar con lista de eventos -->
+    <div class="sidebar">
+      <div class="filters">
+        <div class="filter-group">
+          <label for="barrio">Filtrar por barrio:</label>
+          <select id="barrio">
+            <option value="">Todos los barrios</option>
+          </select>
+        </div>
+        
+        <div class="filter-row">
+          <div class="filter-group">
+            <label for="tipoEvento">Tipo de evento:</label>
+            <select id="tipoEvento">
+              <option value="">Todos los tipos</option>
+            </select>
+          </div>
+          
+          <div class="filter-group">
+            <label for="gratuito">Gratuito:</label>
+            <select id="gratuito">
+              <option value="">Todos</option>
+              <option value="true">Sí</option>
+              <option value="false">No</option>
+            </select>
+          </div>
+        </div>
+        
+        <div class="filter-group">
+          <label for="fechaFiltro">Eventos activos el:</label>
+          <input type="date" id="fechaFiltro">
+        </div>
+        
+        <div class="filter-actions">
+          <button class="filter-btn primary" onclick="aplicarFiltros()">Aplicar Filtros</button>
+          <button class="filter-btn secondary" onclick="limpiarFiltros()">Limpiar</button>
+        </div>
+      </div>
+      
+      <div class="events-header" id="eventsHeader">
+        Eventos disponibles <span class="events-count" id="eventsCount"></span>
+      </div>
+      
+      <div class="events-list" id="eventsList">
+        <div class="no-events">Aplicar filtros para ver eventos</div>
+      </div>
+    </div>
+
+    <!-- Mapa -->
+    <div class="map-container">
+      <div id="map"></div>
+      <!-- Mini Mapa -->
+      <div class="mini-map-container">
+        <div class="mini-map-title">Densidad de Eventos</div>
+        <div id="miniMap"></div>
+        <div class="mini-map-legend">
+          <div class="legend-item">
+            <div class="legend-color" style="background-color: #f7fbff"></div>
+            <span>0 eventos</span>
+          </div>
+          <div class="legend-item">
+            <div class="legend-color" style="background-color: #c6dbef"></div>
+            <span>1-2 eventos</span>
+          </div>
+          <div class="legend-item">
+            <div class="legend-color" style="background-color: #6baed6"></div>
+            <span>3-5 eventos</span>
+          </div>
+          <div class="legend-item">
+            <div class="legend-color" style="background-color: #2171b5"></div>
+            <span>6-10 eventos</span>
+          </div>
+          <div class="legend-item">
+            <div class="legend-color" style="background-color: #08306b"></div>
+            <span>10+ eventos</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Contenedor de Notificaciones Mejorado -->
+  <div class="notifications-container">
+    <button class="collapse-btn" id="collapseBtn" onclick="toggleNotificationsPanel()">
+      ◀
+    </button>
+    
+    <div class="notifications-panel" id="notificationsPanel">
+      <div class="notifications-header">
+        <div class="notifications-title">
+          Notificaciones
+          <span class="notifications-badge" id="notificationsBadge">0</span>
+        </div>
+      </div>
+      
+      <div class="notifications-filters">
+        <div class="notification-filter-group">
+          <label for="notificationBarrio">Notificar eventos del barrio:</label>
+          <select id="notificationBarrio">
+            <option value="">Todos los barrios</option>
+          </select>
+        </div>
+      </div>
+      
+      <div class="notifications-content" id="notificationsList">
+        <!-- Ejemplo de notificación para demostración -->
+        <div class="notification-item new" id="demoNotification">
+          <div class="notification-header">
+            <div>
+              <div class="notification-title">🎉 NUEVO EVENTO</div>
+              <div class="notification-event">Feria de Empleo Universitario</div>
+            </div>
+            <button class="notification-close" onclick="eliminarNotificacion('demo')">
+              ×
+            </button>
+          </div>
+          <div class="notification-details">
+            <div class="notification-detail"><strong>📍 Barrio:</strong> Universidad</div>
+            <div class="notification-detail"><strong>🏢 Instalación:</strong> Complejo Deportivo Universitario</div>
+            <div class="notification-detail"><strong>📅 Fecha:</strong> 15 dic. 2024</div>
+            <div class="notification-detail"><strong>⏰ Hora:</strong> 10:00 - 18:00</div>
+          </div>
+          <div class="notification-tags">
+            <span class="notification-tag">Feria de Empleo</span>
+            <span class="notification-tag free">Gratuito</span>
+          </div>
+        </div>
+        
+        <div class="no-notifications" id="emptyNotifications" style="display: none;">
+          No hay notificaciones activas
+        </div>
+      </div>
+      
+      <div class="notification-actions">
+        <button class="notification-action-btn refresh" onclick="verificarNuevosEventos()">
+          🔄 Actualizar
+        </button>
+        <button class="notification-action-btn clear" onclick="limpiarTodasNotificaciones()">
+          🗑️ Limpiar
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // --- Inicializar mapa principal ---
+    let map = L.map('map').setView([40.4168, -3.7038], 12);
+
+    // --- Capa base ---
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 19,
+      attribution: '© OpenStreetMap'
+    }).addTo(map);
+
+    // --- Variables ---
+    let barrioLayer, barriosData, selectedBarrioLayer = null;
+    let carMarkers = [], bikeMarkers = [];
+    let eventMarkers = [];
+    let currentEvents = [];
+    let miniMap, miniMapBarriosLayer;
+    let todosLosEventos = []; // Para almacenar todos los eventos
+
+    // --- Sistema de Notificaciones ---
+    let notificacionesEstado = {
+      notificacionesActivas: [],
+      intervaloVerificacion: null,
+      usuarioId: 'user_' + Math.random().toString(36).substr(2, 9),
+      barrioFiltro: '',
+      panelVisible: true
+    };
+
+    // --- Control del Panel de Notificaciones ---
+    function toggleNotificationsPanel() {
+      const panel = document.getElementById('notificationsPanel');
+      const collapseBtn = document.getElementById('collapseBtn');
+      
+      if (notificacionesEstado.panelVisible) {
+        // Ocultar panel
+        panel.classList.add('hidden');
+        collapseBtn.classList.add('collapsed');
+        collapseBtn.innerHTML = '🔔';
+        if (document.getElementById('notificationsBadge').textContent > 0) {
+          collapseBtn.innerHTML += '<div class="notifications-badge">' + 
+            document.getElementById('notificationsBadge').textContent + '</div>';
+        }
+        notificacionesEstado.panelVisible = false;
+      } else {
+        // Mostrar panel
+        panel.classList.remove('hidden');
+        collapseBtn.classList.remove('collapsed');
+        collapseBtn.innerHTML = '◀';
+        notificacionesEstado.panelVisible = true;
+      }
+    }
+
+    // --- Actualizar filtro de barrio para notificaciones ---
+    function actualizarFiltroBarrioNotificaciones() {
+      const select = document.getElementById('notificationBarrio');
+      notificacionesEstado.barrioFiltro = select.value;
+      verificarNuevosEventos();
+    }
+
+    // --- Verificar nuevos eventos ---
+    function verificarNuevosEventos() {
+      const url = `/nuevosEventos?usuario_id=${notificacionesEstado.usuarioId}&limpiar=true`;
+      
+      fetch(url)
+        .then(r => r.json())
+        .then(data => {
+          if (data.nuevos_eventos && data.nuevos_eventos.length > 0) {
+            // Filtrar por barrio seleccionado
+            let eventosFiltrados = data.nuevos_eventos;
+            if (notificacionesEstado.barrioFiltro) {
+              eventosFiltrados = eventosFiltrados.filter(evento => 
+                evento.barrio === notificacionesEstado.barrioFiltro
+              );
+            }
+            
+            if (eventosFiltrados.length > 0) {
+              agregarNuevasNotificaciones(eventosFiltrados);
+            }
+          }
+          
+          // Filtrar notificaciones activas por barrio
+          let notificacionesFiltradas = data.notificaciones_activas || [];
+          if (notificacionesEstado.barrioFiltro) {
+            notificacionesFiltradas = notificacionesFiltradas.filter(notif => 
+              notif.barrio === notificacionesEstado.barrioFiltro
+            );
+          }
+          
+          actualizarListaNotificaciones(notificacionesFiltradas);
+          actualizarBadgeNotificaciones(notificacionesFiltradas.length);
+        })
+        .catch(error => {
+          console.error('Error verificando nuevos eventos:', error);
+          // Para demo, simular que tenemos notificaciones
+          simularNotificacionesDemo();
+        });
+    }
+
+    // --- Simular notificaciones para demo ---
+    function simularNotificacionesDemo() {
+      const notificacionesDemo = [
+        {
+          event_uri: 'demo_1',
+          evento: 'Feria de Empleo Universitario',
+          barrio: 'Universidad',
+          instalacion: 'Complejo Deportivo Universitario',
+          fecha_inicio: '2024-12-15',
+          tipo_evento: 'Feria de Empleo',
+          gratuito: 'true',
+          esNueva: true
+        },
+        {
+          event_uri: 'demo_2', 
+          evento: 'Conferencia de Inteligencia Artificial',
+          barrio: 'Universidad',
+          instalacion: 'Facultad de Informática',
+          fecha_inicio: '2024-12-18',
+          tipo_evento: 'Conferencia Académica',
+          gratuito: 'false',
+          esNueva: false
+        }
+      ];
+      
+      actualizarListaNotificaciones(notificacionesDemo);
+      actualizarBadgeNotificaciones(notificacionesDemo.length);
+    }
+
+    // --- Agregar nuevas notificaciones ---
+    function agregarNuevasNotificaciones(nuevosEventos) {
+      nuevosEventos.forEach(evento => {
+        evento.esNueva = true;
+        notificacionesEstado.notificacionesActivas.unshift(evento);
+      });
+      mostrarNotificaciones();
+      
+      // Mostrar mensaje de éxito
+      mostrarMensajeTemporal(`Se agregaron ${nuevosEventos.length} nueva(s) notificación(es)`);
+    }
+
+    // --- Mostrar mensaje temporal ---
+    function mostrarMensajeTemporal(mensaje) {
+      const toast = document.createElement('div');
+      toast.style.cssText = `
+        position: fixed;
+        top: 100px;
+        right: 100px;
+        background: #28a745;
+        color: white;
+        padding: 12px 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        z-index: 3000;
+        font-weight: 600;
+        font-size: 14px;
+      `;
+      toast.textContent = mensaje;
+      
+      document.body.appendChild(toast);
+      
+      setTimeout(() => {
+        toast.remove();
+      }, 3000);
+    }
+
+    // --- Mostrar todas las notificaciones ---
+    function mostrarNotificaciones() {
+      const notificationsList = document.getElementById('notificationsList');
+      const emptyMsg = document.getElementById('emptyNotifications');
+      const demoNotification = document.getElementById('demoNotification');
+      
+      // Ocultar notificación demo si hay notificaciones reales
+      if (notificacionesEstado.notificacionesActivas.length > 0 && demoNotification) {
+        demoNotification.style.display = 'none';
+      }
+      
+      if (notificacionesEstado.notificacionesActivas.length === 0) {
+        if (emptyMsg) emptyMsg.style.display = 'block';
+        return;
+      }
+      
+      if (emptyMsg) emptyMsg.style.display = 'none';
+      
+      notificationsList.innerHTML = notificacionesEstado.notificacionesActivas.map((notif, index) => {
+        const esNueva = notif.esNueva;
+        const claseNotificacion = esNueva ? 'notification-item new' : 'notification-item';
+        
+        return `
+          <div class="${claseNotificacion}" data-event-uri="${notif.event_uri}">
+            <div class="notification-header">
+              <div>
+                <div class="notification-title">🎉 NUEVO EVENTO</div>
+                <div class="notification-event">${notif.evento}</div>
+              </div>
+              <button class="notification-close" onclick="eliminarNotificacion('${notif.event_uri}')">
+                ×
+              </button>
+            </div>
+            <div class="notification-details">
+              <div class="notification-detail"><strong>📍 Barrio:</strong> ${notif.barrio}</div>
+              <div class="notification-detail"><strong>🏢 Instalación:</strong> ${notif.instalacion || 'No especificada'}</div>
+              <div class="notification-detail"><strong>📅 Fecha:</strong> ${formatearFecha(notif.fecha_inicio)}</div>
+            </div>
+            <div class="notification-tags">
+              <span class="notification-tag">${notif.tipo_evento}</span>
+              <span class="notification-tag ${notif.gratuito === 'true' ? 'free' : 'paid'}">
+                ${notif.gratuito === 'true' ? 'Gratuito' : 'De pago'}
+              </span>
+            </div>
+          </div>
+        `;
+      }).join('');
+      
+      // Remover flag de "nueva" después de mostrar
+      notificacionesEstado.notificacionesActivas.forEach(notif => delete notif.esNueva);
+    }
+
+    // --- Limpiar todas las notificaciones ---
+    function limpiarTodasNotificaciones() {
+      if (notificacionesEstado.notificacionesActivas.length === 0) {
+        mostrarMensajeTemporal('No hay notificaciones para limpiar');
+        return;
+      }
+      
+      if (confirm('¿Estás seguro de que quieres eliminar todas las notificaciones?')) {
+        fetch(`/limpiarNotificaciones?usuario_id=${notificacionesEstado.usuarioId}`, { method: 'POST' })
+          .then(() => {
+            notificacionesEstado.notificacionesActivas = [];
+            mostrarNotificaciones();
+            actualizarBadgeNotificaciones(0);
+            mostrarMensajeTemporal('Todas las notificaciones han sido eliminadas');
+          })
+          .catch(error => {
+            console.error('Error limpiando notificaciones:', error);
+            // Para demo, limpiar las notificaciones localmente
+            notificacionesEstado.notificacionesActivas = [];
+            mostrarNotificaciones();
+            actualizarBadgeNotificaciones(0);
+            mostrarMensajeTemporal('Todas las notificaciones han sido eliminadas');
+          });
+      }
+    }
+
+    // --- Eliminar notificación individual ---
+    function eliminarNotificacion(eventUri) {
+      if (eventUri === 'demo') {
+        // Eliminar notificación demo
+        document.getElementById('demoNotification').remove();
+        const emptyMsg = document.getElementById('emptyNotifications');
+        if (emptyMsg) emptyMsg.style.display = 'block';
+        actualizarBadgeNotificaciones(0);
+        mostrarMensajeTemporal('Notificación eliminada');
+        return;
+      }
+      
+      fetch('/eliminarNotificacion', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ event_uri: eventUri })
+      })
+      .then(() => {
+        notificacionesEstado.notificacionesActivas = notificacionesEstado.notificacionesActivas.filter(
+          notif => notif.event_uri !== eventUri
+        );
+        mostrarNotificaciones();
+        actualizarBadgeNotificaciones(notificacionesEstado.notificacionesActivas.length);
+        mostrarMensajeTemporal('Notificación eliminada');
+      })
+      .catch(error => {
+        console.error('Error eliminando notificación:', error);
+        mostrarMensajeTemporal('Error al eliminar la notificación');
+      });
+    }
+
+    // --- Actualizar lista de notificaciones ---
+    function actualizarListaNotificaciones(notificaciones) {
+      notificacionesEstado.notificacionesActivas = notificaciones;
+      mostrarNotificaciones();
+    }
+
+    // --- Actualizar badge de notificaciones ---
+    function actualizarBadgeNotificaciones(total) {
+      const badge = document.getElementById('notificationsBadge');
+      const collapseBtn = document.getElementById('collapseBtn');
+      
+      badge.textContent = total;
+      
+      if (total > 0) {
+        badge.style.display = 'flex';
+        // Actualizar badge en el botón de colapso si está en modo colapsado
+        if (!notificacionesEstado.panelVisible) {
+          const existingBadge = collapseBtn.querySelector('.notifications-badge');
+          if (existingBadge) {
+            existingBadge.textContent = total;
+          } else {
+            collapseBtn.innerHTML += '<div class="notifications-badge">' + total + '</div>';
+          }
+        }
+      } else {
+        badge.style.display = 'none';
+        // Remover badge del botón de colapso
+        const existingBadge = collapseBtn.querySelector('.notifications-badge');
+        if (existingBadge) {
+          existingBadge.remove();
+        }
+      }
+    }
+
+    // --- Formatear fecha ---
+    function formatearFecha(fechaString) {
+      if (!fechaString) return 'No especificada';
+      const fecha = new Date(fechaString);
+      return fecha.toLocaleDateString('es-ES', {
+        year: 'numeric',
+        month: 'short',
+        day: 'numeric'
+      });
+    }
+
+    // --- Inicializar sistema de notificaciones ---
+    function inicializarNotificaciones() {
+      // Verificar cada 30 segundos
+      notificacionesEstado.intervaloVerificacion = setInterval(verificarNuevosEventos, 30000);
+      
+      // Primera verificación
+      setTimeout(verificarNuevosEventos, 2000);
+    }
+
+    // --- Función para calcular densidad por barrio ---
+    function calcularDensidadPorBarrio(eventos) {
+      const eventosPorBarrio = {};
+      
+      // Contar eventos por barrio
+      eventos.forEach(evento => {
+        if (evento.barrio) {
+          eventosPorBarrio[evento.barrio] = (eventosPorBarrio[evento.barrio] || 0) + 1;
+        }
+      });
+      
+      return eventosPorBarrio;
+    }
+
+    // --- Función para obtener color según densidad ---
+    function getColorPorDensidad(cantidad) {
+      return cantidad === 0 ? '#f7fbff' :
+             cantidad <= 2 ? '#c6dbef' :
+             cantidad <= 5 ? '#6baed6' :
+             cantidad <= 10 ? '#2171b5' :
+             '#08306b';
+    }
+
+    // --- Inicializar Mini Mapa ---
+    function inicializarMiniMapa() {
+      miniMap = L.map('miniMap', {
+        attributionControl: false,
+        zoomControl: false,
+        dragging: false,
+        scrollWheelZoom: false,
+        doubleClickZoom: false,
+        boxZoom: false,
+        keyboard: false,
+        touchZoom: false
+      }).setView([40.4168, -3.7038], 10);
+
+      // Capa base simplificada para el minimapa
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 13,
+        minZoom: 10
+      }).addTo(miniMap);
+    }
+
+    // --- Cargar todos los eventos para el heat map inicial ---
+    function cargarEventosParaHeatMap() {
+      fetch('/events')
+        .then(r => r.json())
+        .then(eventos => {
+          todosLosEventos = eventos;
+          actualizarMiniMapaConDensidad(eventos);
+        })
+        .catch(error => console.error('Error cargando eventos para heat map:', error));
+    }
+
+    // --- Actualizar Mini Mapa con densidad ---
+    function actualizarMiniMapaConDensidad(eventos) {
+      // Calcular densidad por barrio
+      const densidadPorBarrio = calcularDensidadPorBarrio(eventos);
+      
+      // Limpiar capa anterior del minimapa
+      if (miniMapBarriosLayer) {
+        miniMap.removeLayer(miniMapBarriosLayer);
+      }
+
+      // Crear nueva capa con colores según densidad
+      if (barriosData) {
+        miniMapBarriosLayer = L.geoJSON(barriosData, {
+          style: function(feature) {
+            const nombreBarrio = feature.properties.NOMBRE;
+            const cantidadEventos = densidadPorBarrio[nombreBarrio] || 0;
+            
+            return {
+              fillColor: getColorPorDensidad(cantidadEventos),
+              weight: 1,
+              opacity: 0.8,
+              color: 'white',
+              fillOpacity: 0.7
+            };
+          },
+          onEachFeature: function(feature, layer) {
+            const nombreBarrio = feature.properties.NOMBRE;
+            const cantidadEventos = densidadPorBarrio[nombreBarrio] || 0;
+            
+            layer.bindTooltip(`
+              <div style="font-size: 12px;">
+                <strong>${nombreBarrio}</strong><br>
+                Eventos: ${cantidadEventos}
+              </div>
+            `);
+          }
+        }).addTo(miniMap);
+      }
+    }
+
+    // --- Configurar fecha por defecto (hoy + 30 días) ---
+    function configurarFechaPorDefecto() {
+      const hoy = new Date();
+      const fechaFutura = new Date();
+      fechaFutura.setDate(hoy.getDate() + 30);
+      
+      const fechaFiltro = document.getElementById('fechaFiltro');
+      fechaFiltro.valueAsDate = fechaFutura;
+    }
+
+    // --- Iconos personalizados con imágenes PNG - SIN FONDOS ---
+    function createEventIcon(isActive = false) {
+        return L.icon({
+            iconUrl: '/static/icons/event' + (isActive ? '-active' : '') + '.png',
+            iconSize: [27, 31],
+            iconAnchor: [16, 16],
+            popupAnchor: [0, -16],
+            className: isActive ? 'event-icon active' : 'event-icon'
+        });
+    }
+
+    function createCarParkingIcon() {
+        return L.icon({
+            iconUrl: '/static/icons/car-parking.png',
+            iconSize: [15, 20],
+            iconAnchor: [14, 14],
+            popupAnchor: [0, -14],
+            className: 'car-parking-icon'
+        });
+    }
+
+    function createBikeParkingIcon() {
+        return L.icon({
+            iconUrl: '/static/icons/bike-parking.png',
+            iconSize: [15, 22],
+            iconAnchor: [13, 13],
+            popupAnchor: [0, -13],
+            className: 'bike-parking-icon'
+        });
+    }
+
+    // --- Cargar datos iniciales ---
+    function cargarDatosIniciales() {
+      // Inicializar minimapa
+      inicializarMiniMapa();
+
+      // Cargar eventos para el heat map inicial
+      cargarEventosParaHeatMap();
+
+      // Cargar barrios
+      fetch('/barrios')
+        .then(res => res.json())
+        .then(barrios => {
+          const select = document.getElementById('barrio');
+          const notificationSelect = document.getElementById('notificationBarrio');
+          
+          barrios.sort((a, b) => a.localeCompare(b));
+          barrios.forEach(b => {
+            const opt = document.createElement('option');
+            opt.value = b;
+            opt.textContent = b;
+            select.appendChild(opt);
+            
+            const notificationOpt = document.createElement('option');
+            notificationOpt.value = b;
+            notificationOpt.textContent = b;
+            notificationSelect.appendChild(notificationOpt);
+          });
+
+          // Configurar evento para el filtro de notificaciones
+          notificationSelect.addEventListener('change', actualizarFiltroBarrioNotificaciones);
+        })
+        .catch(error => console.error('Error cargando barrios:', error));
+
+      // Cargar tipos de evento
+      fetch('/tiposEvento')
+        .then(res => res.json())
+        .then(tipos => {
+          const tipoEventoSelect = document.getElementById('tipoEvento');
+          tipos.forEach(tipo => {
+            const option = document.createElement('option');
+            option.value = tipo;
+            option.textContent = tipo;
+            tipoEventoSelect.appendChild(option);
+          });
+        })
+        .catch(error => console.error('Error cargando tipos de evento:', error));
+
+      // Cargar geojson para límites de barrios
+      fetch('/static/barrios.geojson')
+        .then(res => res.json())
+        .then(data => {
+          barriosData = data;
+          barrioLayer = L.geoJSON(barriosData, {
+            style: { 
+              color: '#555', 
+              weight: 1, 
+              fillOpacity: 0.1,
+              fillColor: '#f8f9fa'
+            },
+            onEachFeature: (feature, layer) => {
+              layer.bindPopup(`
+                <div style="min-width: 200px;">
+                  <strong>Barrio:</strong> ${feature.properties.NOMBRE}<br>
+                  <strong>Distrito:</strong> ${feature.properties.NOMDIS}
+                </div>
+              `);
+            }
+          }).addTo(map);
+        })
+        .catch(error => console.error('Error cargando GeoJSON:', error));
+
+      // Inicializar sistema de notificaciones
+      inicializarNotificaciones();
+
+      // Aplicar filtros por defecto
+      aplicarFiltros();
+    }
+
+    // --- Funciones para mostrar eventos en la sidebar ---
+    function mostrarEventosEnSidebar(eventos) {
+      const eventsList = document.getElementById('eventsList');
+      const eventsHeader = document.getElementById('eventsHeader');
+      const eventsCount = document.getElementById('eventsCount');
+      
+      currentEvents = eventos;
+      
+      eventsHeader.innerHTML = `Eventos disponibles <span class="events-count">(${eventos.length} eventos)</span>`;
+      
+      if (eventos.length === 0) {
+        eventsList.innerHTML = '<div class="no-events">No hay eventos que coincidan con los filtros</div>';
+        return;
+      }
+
+      eventsList.innerHTML = eventos.map((evento, index) => `
+        <div class="event-item" data-index="${index}" onclick="seleccionarEvento(${index})">
+          <div class="event-title">${evento.evento}</div>
+          <div class="event-details">
+            <div class="event-date">${formatearFecha(evento.fecha)}${evento.fin_evento ? ' - ' + formatearFecha(evento.fin_evento) : ''}</div>
+            <div class="event-location">
+              <strong>Lugar:</strong> ${evento.instalacion}<br>
+              <strong>Ubicación:</strong> ${evento.barrio} • ${evento.distrito}
+            </div>
+            ${evento.descripcion ? `<div style="margin-top: 8px; font-style: italic;">${evento.descripcion}</div>` : ''}
+            <div style="margin-top: 10px;">
+              <span class="event-type">${evento.tipo_evento_formateado}</span>
+              ${evento.evento_gratuito === 'true' ? 
+                '<span class="event-free">Gratuito</span>' : 
+                '<span class="event-paid">De pago</span>'
+              }
+            </div>
+            ${evento.link_evento ? `<a href="${evento.link_evento}" target="_blank" style="display: inline-block; margin-top: 10px; color: #007bff; text-decoration: none; font-weight: 500;">Más información →</a>` : ''}
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function formatearFecha(fechaString) {
+      if (!fechaString) return '';
+      const fecha = new Date(fechaString);
+      return fecha.toLocaleDateString('es-ES', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+      });
+    }
+
+    function seleccionarEvento(index) {
+      // Remover clase active de todos los items
+      document.querySelectorAll('.event-item').forEach(item => {
+        item.classList.remove('active');
+      });
+      
+      // Añadir clase active al item seleccionado
+      const selectedItem = document.querySelector(`.event-item[data-index="${index}"]`);
+      selectedItem.classList.add('active');
+      
+      // Scroll al elemento seleccionado
+      selectedItem.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      
+      const evento = currentEvents[index];
+      
+      // Resaltar marcador en el mapa y centrar vista
+      eventMarkers.forEach(marker => {
+        if (marker.eventIndex === index) {
+          marker.setIcon(createEventIcon(true));
+          // Centrar el mapa en el evento con zoom cercano
+          map.setView(marker.getLatLng(), 16, {
+            animate: true,
+            duration: 1
+          });
+          // Abrir popup del marcador
+          marker.openPopup();
+        } else {
+          marker.setIcon(createEventIcon(false));
+        }
+      });
+    }
+
+    // --- Aplicar filtros (llamada al backend) ---
+    function aplicarFiltros() {
+      const barrio = document.getElementById('barrio').value;
+      const tipoEvento = document.getElementById('tipoEvento').value;
+      const gratuito = document.getElementById('gratuito').value;
+      const fechaFiltro = document.getElementById('fechaFiltro').value;
+      
+      // Construir URL con parámetros
+      let url = '/events?';
+      const params = [];
+      if (barrio) params.push(`barrio=${encodeURIComponent(barrio)}`);
+      if (tipoEvento) params.push(`tipoEvento=${encodeURIComponent(tipoEvento)}`);
+      if (gratuito) params.push(`gratuito=${encodeURIComponent(gratuito)}`);
+      if (fechaFiltro) params.push(`fechaFiltro=${encodeURIComponent(fechaFiltro)}`);
+      
+      url += params.join('&');
+      
+      // Limpiar marcadores anteriores
+      eventMarkers.forEach(marker => map.removeLayer(marker));
+      eventMarkers = [];
+      
+      [carMarkers, bikeMarkers].forEach(arr => {
+        arr.forEach(m => map.removeLayer(m.marker));
+      });
+      carMarkers = [];
+      bikeMarkers = [];
+
+      // Remover highlight anterior del barrio
+      if (selectedBarrioLayer) {
+        selectedBarrioLayer.setStyle({
+          fillColor: '#f8f9fa',
+          color: '#555',
+          weight: 1,
+          fillOpacity: 0.1
+        });
+        selectedBarrioLayer = null;
+      }
+
+      // Cargar eventos filtrados
+      fetch(url)
+        .then(r => r.json())
+        .then(eventos => {
+          console.log(`Eventos cargados: ${eventos.length}`);
+          mostrarEventosEnSidebar(eventos);
+          
+          // Actualizar minimapa con densidad de los eventos filtrados
+          actualizarMiniMapaConDensidad(eventos);
+          
+          // Añadir marcadores al mapa
+          eventos.forEach((evento, index) => {
+            if(evento.eventLat && evento.eventLong){
+              const marker = L.marker([parseFloat(evento.eventLat), parseFloat(evento.eventLong)], {
+                icon: createEventIcon(false)
+              })
+              .bindPopup(`
+                <div style="max-width: 300px;">
+                  <strong style="color: #ff6b6b; font-size: 16px;">${evento.evento}</strong><br>
+                  <em style="color: #007bff;">${formatearFecha(evento.fecha)}</em><br>
+                  <strong>Lugar:</strong> ${evento.instalacion}<br>
+                  <strong>Barrio:</strong> ${evento.barrio}<br>
+                  <strong>Tipo:</strong> ${evento.tipo_evento_formateado}<br>
+                  ${evento.evento_gratuito === 'true' ? '<strong style="color: #28a745;">✓ Evento gratuito</strong><br>' : '<strong style="color: #dc3545;">● Evento de pago</strong><br>'}
+                  ${evento.descripcion ? `<p style="margin: 8px 0; font-style: italic;">${evento.descripcion}</p>` : ''}
+                  ${evento.link_evento ? `<a href="${evento.link_evento}" target="_blank" style="color: #007bff;">Más información</a>` : ''}
+                </div>
+              `)
+              .addTo(map);
+              
+              marker.eventIndex = index;
+              eventMarkers.push(marker);
+              
+              // Al hacer clic en el marcador, seleccionar el evento en la sidebar
+              marker.on('click', () => {
+                seleccionarEvento(index);
+              });
+            }
+          });
+
+          // SOLO cargar parkings si hay un barrio específico seleccionado
+          if (barrio) {
+            Promise.all([
+              fetch(`/carParkings?barrio=${encodeURIComponent(barrio)}`).then(r => r.json()),
+              fetch(`/bicycleParkings?barrio=${encodeURIComponent(barrio)}`).then(r => r.json())
+            ]).then(([carData, bikeData]) => {
+              cargarCarParkings(carData);
+              cargarBikeParkings(bikeData);
+            });
+          }
+
+          // Resaltar barrio en geojson y hacer zoom SOLO si hay barrio seleccionado
+          if(barrio && barrioLayer){
+            let barrioEncontrado = false;
+            barrioLayer.eachLayer(layer => {
+              const nombreBarrio = layer.feature.properties.NOMBRE.toLowerCase();
+              const barrioSeleccionado = barrio.toLowerCase();
+              
+              if(nombreBarrio.includes(barrioSeleccionado) || barrioSeleccionado.includes(nombreBarrio)) {
+                // Resaltar barrio
+                layer.setStyle({
+                  fillColor: '#ff0000',
+                  color: '#ff0000',
+                  weight: 3,
+                  fillOpacity: 0.2
+                });
+                selectedBarrioLayer = layer;
+                
+                // Hacer zoom al barrio
+                map.fitBounds(layer.getBounds(), {
+                  padding: [20, 20],
+                  animate: true,
+                  duration: 1
+                });
+                barrioEncontrado = true;
+              }
+            });
+          } else {
+            // Vista por defecto si no hay barrio seleccionado
+            map.setView([40.4168, -3.7038], 12);
+          }
+        })
+        .catch(error => console.error('Error cargando eventos:', error));
+    }
+
+    function limpiarFiltros() {
+      document.getElementById('barrio').value = '';
+      document.getElementById('tipoEvento').value = '';
+      document.getElementById('gratuito').value = '';
+      configurarFechaPorDefecto();
+      aplicarFiltros();
+    }
+
+    function cargarCarParkings(data) {
+      if (!data) return;
+      
+      data.forEach(p => {
+        if(p.lat && p.lng){
+          const m = L.marker([parseFloat(p.lat), parseFloat(p.lng)], {
+            icon: createCarParkingIcon()
+          })
+          .bindPopup(`
+            <div style="max-width: 250px;">
+              <strong style="color: #3742fa;">🚗 Parking Coche</strong><br>
+              <strong>${p.nombre}</strong><br>
+              ${p.descripcion ? `<p>${p.descripcion}</p>` : ''}
+              <strong>Barrio:</strong> ${p.barrio}<br>
+              ${p.url ? `<a href="${p.url}" target="_blank" style="color: #3742fa;">Ver detalles</a>` : ''}
+            </div>
+          `)
+          .addTo(map);
+          carMarkers.push({marker: m, barrio: p.barrio});
+        }
+      });
+    }
+
+    function cargarBikeParkings(data) {
+      if (!data) return;
+      
+      data.forEach(p => {
+        if(p.lat && p.lng){
+          const m = L.marker([parseFloat(p.lat), parseFloat(p.lng)], {
+            icon: createBikeParkingIcon()
+          })
+          .bindPopup(`
+            <div style="max-width: 200px;">
+              <strong style="color: #2ed573;">🚲 Parking Bici</strong><br>
+              <strong>Barrio:</strong> ${p.barrio}
+            </div>
+          `)
+          .addTo(map);
+          bikeMarkers.push({marker: m, barrio: p.barrio});
+        }
+      });
+    }
+
+    // --- Inicializar aplicación ---
+    window.addEventListener('load', function() {
+      configurarFechaPorDefecto();
+      cargarDatosIniciales();
+    });
+
+  </script>
+
+</body>
+</html>
